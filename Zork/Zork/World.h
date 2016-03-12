@@ -3,9 +3,11 @@
 
 class World{
 public:
+	Rooms *room=nullptr;
+	Exits *exit=nullptr;
 	void createworld();
-
-
+	World();
+	~World();
 
 
 
