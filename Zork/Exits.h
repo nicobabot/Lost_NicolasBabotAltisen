@@ -9,4 +9,8 @@ public:
 	int changeroomwest;
 	int changeroomsouth;
 	int changeroomeast;
+	
+
+public:
+
 };
