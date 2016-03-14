@@ -21,10 +21,13 @@
     <ClCompile Include="World.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Rooms.cpp">
+    <ClCompile Include="Room.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Exits.cpp">
+    <ClCompile Include="Exit.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +35,13 @@
     <ClInclude Include="World.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
-    <ClInclude Include="Rooms.h">
+    <ClInclude Include="Room.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
-    <ClInclude Include="Exits.h">
+    <ClInclude Include="Exit.h">
+      <Filter>Archivos de código fuente</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
   </ItemGroup>
