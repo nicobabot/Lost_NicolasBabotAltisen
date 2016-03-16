@@ -13,11 +13,9 @@ public:
 public:
 	World();
 	void movement();
-	int command();
-	void help();
-	void open();
-	void look(const char*, const int);
-	void createworld();
+	void help()const;
+	void look(const char*, const int)const;
+	void createworld()const;
 	~World();
 };
 #endif

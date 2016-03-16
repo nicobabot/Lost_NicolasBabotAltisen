@@ -14,7 +14,7 @@ World::~World(){
 	delete player;//free memory
 }
 
-void World::createworld(){
+void World::createworld()const{
 
 	strcpy_s(room[0].name, "Entrance of the city");
 	strcpy_s(room[0].description, "You are in the entrance of the city and you have to find your house.");
@@ -494,13 +494,13 @@ void World::movement(){
 		}while (quit == 0);
 		}
 
-		void World::help(){
+		void World::help()const{
 
 			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and int his directions\n There is only a door you have to open and close that now you can but in nexts Zorks you will need a key\n");
 
 
 		}
-		void World::look(const char *looks, const int numroom){
+		void World::look(const char *looks, const int numroom)const{
 			int exitnum=0;//count
 			if ((strcmp(looks, "look") == 0)){//if the user only says look
 				printf("%s\n", room[numroom].description);
