@@ -4,17 +4,10 @@
 #include<string.h>
 int main(){
 	World world;
-	int fpos = 0;
 	world.createworld();
-	do{
-		world.movement();
-	} while (1);
+	world.movement();
 	system("pause");
 	return 0;
-
-
-
-
 }
 
 

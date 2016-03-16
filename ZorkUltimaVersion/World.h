@@ -4,24 +4,20 @@
 #include"Room.h"
 #include"Exit.h"
 #include"Player.h"
-//enum command{ NORTH, WEST, SOUTH, EAST, QUIT, GO, TAKE, LOOK, OPEN, CLOSE, HELP };
 class World{
 public:
-
-	int fpos=0;
-	int fpos2 = 0;
-	int count = 0;
+	int quit = 0;
 	Player *player = nullptr;
 	Room *room = nullptr;
 	Exit *exit = nullptr;
+public:
+	World();
 	void movement();
 	int command();
-	World();
-	
+	void help();
+	void open();
+	void look(const char*, const int);
 	void createworld();
 	~World();
-	
-
-
 };
 #endif
