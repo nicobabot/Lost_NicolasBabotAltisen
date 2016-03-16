@@ -10,7 +10,9 @@ Lost is an imitation of the game zork
 You are lost in the city and you have to find your new house.
 
 
-You can move arround the map using ONLY lowercase.\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.
+You can move arround the map using ONLY lowercase.
+
+You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.
 
 
 There is only a door you have to open and close that now you can but in nexts Zorks you will need a key
