@@ -17,3 +17,13 @@ There will be doors in the map you can open and close some them using open and t
 
 
 You can look what is in the room you are and int his directions
+
+
+Nicolas Babot, Bachelor's Degree in Video Game Design and Development of CITM Terrassa, Spain.
+
+My github: https://github.com/nicobabot
+
+
+
+
+CITM Terrassa 2015-2016
