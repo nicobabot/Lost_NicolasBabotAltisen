@@ -453,6 +453,9 @@ void World::movement(){
 												exit[exitnum].open = false;
 												printf("the door is closed\n");
 											}
+											if ((strcmp(doorstate, "close west") != 0)){//look if the user says open north to close
+												
+											}
 											if (player->playerposit == (room + 8)){//if the user arrive to the final
 												printf("Congratulations you win!");
 												return;
