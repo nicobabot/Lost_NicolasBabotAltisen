@@ -13,7 +13,7 @@ You are lost in the city and you have to find your new house.
 You can move arround the map using ONLY lowercase.\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.
 
 
-There will be doors in the map you can open and close some them using open and to close use the word close.
+There is only a door you have to open and close that now you can but in nexts Zorks you will need a key
 
 
 You can look what is in the room you are and int his directions
