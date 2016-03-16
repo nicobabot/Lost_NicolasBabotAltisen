@@ -4,8 +4,11 @@
 #include<string.h>
 int main(){
 	World world;
+	int fpos = 0;
 	world.createworld();
-	world.command();
+	do{
+		world.movement();
+	} while (1);
 	system("pause");
 	return 0;
 

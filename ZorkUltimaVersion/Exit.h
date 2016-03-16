@@ -1,7 +1,6 @@
 #ifndef _EXIT_
 #define _EXIT_
-#define NONE -1
-enum direct{ NORTH = 0, WEST, SOUTH, EAST };
+enum command{ NORTH, WEST, SOUTH, EAST, QUIT, GO, TAKE, LOOK, OPEN, CLOSE, HELP };
 class Exit{
 public:
 	char name[30];
@@ -9,7 +8,7 @@ public:
 	Room *origin;
 	Room *destiny;
 	bool open = false;
-	direct orientation;
+	command orientation;
 
 
 
