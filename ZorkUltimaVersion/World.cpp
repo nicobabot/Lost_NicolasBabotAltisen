@@ -228,10 +228,17 @@ void World::movement(){
 	int roompos = 0;//position of the room in the array
 	char doorstate[30];//look if door is open or closed
 	char option[25];//option to do
+	printf("---------------------------------------------------------------------------");
+	printf(" \tLOST\n ");
+	printf("---------------------------------------------------------------------------");
+	printf(" \tTHE GAME\n ");
+	printf("----------------------------------------------------------------------------\n");
 	player->playerposit = &room[roompos];
 	help();
+	printf("----------------------------------------------------------------------------\n");
 	printf("%s\n", room[roompos].name);//start name
 	printf("%s\n", room[roompos].description);//start descriptions
+	
 	do{
 		printf("What do you want to do?");
 		gets_s(option);
@@ -489,7 +496,7 @@ void World::movement(){
 
 		void World::help(){
 
-			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and int his directions\n There is only a door you have to open and close that now you can but in nexts Zorks you will need a key");
+			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and int his directions\n There is only a door you have to open and close that now you can but in nexts Zorks you will need a key\n");
 
 
 		}
