@@ -44,5 +44,8 @@
     <ClInclude Include="Player.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
+    <ClInclude Include="Identity.h">
+      <Filter>Archivos de código fuente</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

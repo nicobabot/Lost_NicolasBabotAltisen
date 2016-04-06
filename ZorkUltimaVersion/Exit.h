@@ -1,14 +1,13 @@
 #ifndef _EXIT_
 #define _EXIT_
+#include"Identity.h"
 enum command{ NORTH, WEST, SOUTH, EAST};
-class Exit{
+class Exit: public Identity{
 public:
-	char name[30];
-	char descrip[300];
 	Room *origin;
 	Room *destiny;
 	bool door = false;
-	bool open = false;
+	bool closed = false;
 	command orientation;
 	
 

@@ -1,9 +1,9 @@
 #ifndef _ROOM_
 #define _ROOM_
-class Room{
+#include"Identity.h"
+class Room: public Identity{
 public:
-	char name[30];
-	char description[300];
+
 
 
 
