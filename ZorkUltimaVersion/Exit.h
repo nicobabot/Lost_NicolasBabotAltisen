@@ -1,8 +1,8 @@
 #ifndef _EXIT_
 #define _EXIT_
-#include"Identity.h"
+#include"Entity.h"
 enum command{ NORTH, WEST, SOUTH, EAST};
-class Exit: public Identity{
+class Exit : public Entity{
 public:
 	Room *origin;
 	Room *destiny;

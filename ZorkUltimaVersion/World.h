@@ -1,7 +1,7 @@
 #ifndef _WORLD_
 #define _WORLD_
 #define _CRT_SECURE_NO_WARNINGS
-#include"Identity.h"
+#include"Entity.h"
 #include"Room.h"
 #include"Exit.h"
 #include"Player.h"
@@ -13,15 +13,15 @@ public:
 	Player *player = nullptr;
 	Room *room = nullptr;
 	Exit *exit = nullptr;
+	mystring *direction = nullptr;
 public:
 	World();
 	void movement();
 	void help()const;
-	void look(const char*, int)const;
+	void look(const mystring*, int)const;
 	void createworld()const;
-	void doors(int, char*);
-	void Open(char*);
-	void Close(char*);
+	void Open(mystring*);
+	void Close(mystring*);
 	~World();
 };
 #endif

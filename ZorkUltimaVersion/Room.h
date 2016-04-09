@@ -1,7 +1,7 @@
 #ifndef _ROOM_
 #define _ROOM_
-#include"Identity.h"
-class Room: public Identity{
+#include"Entity.h"
+class Room : public Entity{
 public:
 
 
