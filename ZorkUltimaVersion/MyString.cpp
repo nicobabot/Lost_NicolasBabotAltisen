@@ -4,7 +4,8 @@ const char* mystring::C_Str() const{//to print buffer in main
 	return buffer;
 }
 mystring::mystring(){
-
+	maxcapacity = 1;
+	buffer = new char[maxcapacity];
 }
 
 mystring::mystring(const char* STR){
@@ -45,7 +46,7 @@ bool mystring::operator !=(const char* otherstring) const{
 
 void mystring::operator =(const mystring& otherclas){
 	int lent = (strlen(otherclas.buffer) + 1);
-	if (maxcapacity > lent){
+	if (maxcapacity < lent){
 		delete[]buffer;
 		maxcapacity = lent;
 		buffer = new char[maxcapacity];
@@ -62,6 +63,7 @@ void mystring::operator =(const char* otherstring){
 	}
 	strcpy_s(buffer, maxcapacity, otherstring);
 }
+
 
 void mystring::operator +=(const mystring& otherclas){
 	int lent = (strlen(otherclas.buffer) + lenght() + 1);
@@ -98,6 +100,19 @@ mystring  mystring::operator+(const mystring &otherclas)
 void  mystring::clear()
 {
 	buffer[0] = '\0';
+}
+
+void mystring::set()
+{
+	char otherstring[50];
+	gets_s(otherstring,50);
+	int lent = strlen(otherstring)+1;
+	if (maxcapacity < lent){
+		delete[]buffer;
+		maxcapacity = lent;
+		buffer = new char[maxcapacity];
+	}
+	strcpy_s(buffer, maxcapacity, otherstring);
 }
 
 mystring::~mystring(){

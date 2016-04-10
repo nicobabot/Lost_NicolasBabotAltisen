@@ -5,6 +5,8 @@
 #include"Room.h"
 #include"Exit.h"
 #include"Player.h"
+#include"item.h"
+#include"Inventory.h"
 #define ROOMNUM 9
 #define EXITNUM 38
 class World{
@@ -14,6 +16,8 @@ public:
 	Room *room = nullptr;
 	Exit *exit = nullptr;
 	mystring *direction = nullptr;
+	inventory *invent = nullptr;
+	Item *items = nullptr;
 public:
 	World();
 	void movement();
@@ -22,6 +26,8 @@ public:
 	void createworld()const;
 	void Open(mystring*);
 	void Close(mystring*);
+	void createitems();
+	void pick(mystring*);
 	~World();
 };
 #endif

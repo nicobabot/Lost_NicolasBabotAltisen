@@ -3,16 +3,22 @@
 #include"World.h"
 #include<string.h>
 #include"MyString.h"
+
 World::World(){
 	player = new Player;//player
 	room = new Room[ROOMNUM];//9 rooms
 	exit = new Exit[EXITNUM];//33 exits
-	direction = new mystring[30];
+	direction = new mystring;
+	items = new Item[6];
+	invent = new inventory;
 }
 World::~World(){
 	delete[] room;//free memory
 	delete[] exit;//free memory
 	delete player;//free memory
+	delete direction;
+	delete[] items;
+	delete invent;
 }
 
 void World::createworld()const{
@@ -269,14 +275,12 @@ void World::movement(){
 		player->playerposit = &room[roompos];
 		printf("Where do you want to go?\n");
 		fflush(stdin);
-		gets_s(direction1);
-		*direction = direction1;
+		direction->set();
 
 		fflush(stdin);
 		if (*direction == "go"){
 			printf("Which direction?");
-			gets_s(direction1);
-			*direction = direction1;
+			direction->set();
 			fflush(stdin);
 		}
 		system("cls");
@@ -429,8 +433,7 @@ void World::movement(){
 		if (*direction == "open" || *direction == "open north" || *direction == "open east" || *direction == "open west" || *direction == "open south"){
 			if (*direction == "open"){
 				printf("Which direction?\n");
-				gets_s(direction1);
-				*direction = direction1;
+				direction->set();
 			}
 			Open(direction);
 		}
@@ -438,13 +441,15 @@ void World::movement(){
 		if (*direction == "close" || *direction == "close north" || *direction == "close east" || *direction == "close west" || *direction == "close south"){
 			if (*direction == "close"){
 				printf("Which direction?\n");
-				gets_s(direction1);
-				*direction = direction1;
+				direction->set();
 			}
 			Close(direction);
 		}
 
-
+		if (*direction == "pick" || *direction == "pick ladder" || *direction == "pick wrench" || *direction == "pick money" || *direction == "pick ticket" || *direction == "pick key" || *direction == "pick map"){
+			
+			pick(direction);
+		}
 
 	} while (*direction != "q");
 }

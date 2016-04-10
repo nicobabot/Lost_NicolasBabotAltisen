@@ -7,7 +7,7 @@
 class mystring{
 private:
 	char *buffer = nullptr;
-	unsigned int maxcapacity;
+	unsigned int maxcapacity=0;
 public:
 	const char* C_Str() const;
 	mystring();
@@ -22,7 +22,10 @@ public:
 	void operator =(const char* otherstring);
 	void operator +=(const mystring& otherclas);
 	mystring operator+(const mystring &otherclas);
+	bool SameLenght(const mystring& str);
+	bool IsSmaller(const mystring& str);
 	void clear();
+	void set();
 	~mystring();
 };
 #endif
