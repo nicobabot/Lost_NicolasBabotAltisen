@@ -9,8 +9,10 @@ public:
 	Room *itempos=nullptr;
 	bool inventory = false;
 	bool equipped = false;
-	int maxequiped=3;
+	int maxinventory=3;
+	int maxequipped = 1;
 	int maximum = 0;
+	int nequip = 0;
 public:
 	Item();
 	//void createitems();

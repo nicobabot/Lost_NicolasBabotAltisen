@@ -24,10 +24,11 @@ public:
 	void createworld()const;
 	void Open(mystring*);
 	void Close(mystring*);
-	void createitems();
 	void pick(mystring*);
 	void inventory();
 	void drop(mystring*);
+	void equip(mystring*);
+	void unequip(mystring*);
 	~World();
 };
 #endif
