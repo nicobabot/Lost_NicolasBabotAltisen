@@ -65,7 +65,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Exit.cpp" />
-    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyString.cpp" />
@@ -76,7 +75,6 @@
   <ItemGroup>
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Inventory.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Player.h" />

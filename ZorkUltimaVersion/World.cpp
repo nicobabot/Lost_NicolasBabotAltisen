@@ -10,7 +10,7 @@ World::World(){
 	exit = new Exit[EXITNUM];//33 exits
 	direction = new mystring;
 	items = new Item[6];
-	invent = new inventory;
+
 }
 World::~World(){
 	delete[] room;//free memory
@@ -18,7 +18,6 @@ World::~World(){
 	delete player;//free memory
 	delete direction;
 	delete[] items;
-	delete invent;
 }
 
 void World::createworld()const{
@@ -449,6 +448,15 @@ void World::movement(){
 		if (*direction == "pick" || *direction == "pick ladder" || *direction == "pick wrench" || *direction == "pick money" || *direction == "pick ticket" || *direction == "pick key" || *direction == "pick map"){
 			
 			pick(direction);
+		}
+
+		if (*direction == "inventory" || *direction == "look inventory"){
+			inventory();
+		}
+
+		if (*direction == "drop" || *direction == "drop ladder" || *direction == "drop wrench" || *direction == "drop money" || *direction == "drop ticket" || *direction == "drop key" || *direction == "drop map"){
+
+			drop(direction);
 		}
 
 	} while (*direction != "q");

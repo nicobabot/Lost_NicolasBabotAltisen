@@ -2,14 +2,15 @@
 #define _ITEM_
 #include"Entity.h"
 #include"Room.h"
+#define NUM_ITEM 6
+enum Items{LADDER=0, WRENCH, MONEY, TICKET, KEY, MAP};
 class Item: public Entity{
 public:
-	Room *ladder;
-	Room *wrench;
-	Room *money;
-	Room *ticket;
-	Room *key;
-	Room *map;
+	Room *itempos=nullptr;
+	bool inventory = false;
+	bool equipped = false;
+	int maxequiped=3;
+	int maximum = 0;
 public:
 	Item();
 	//void createitems();

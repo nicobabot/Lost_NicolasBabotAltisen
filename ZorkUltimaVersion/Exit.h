@@ -1,7 +1,7 @@
 #ifndef _EXIT_
 #define _EXIT_
 #include"Entity.h"
-enum command{ NORTH, WEST, SOUTH, EAST};
+enum command{ NORTH=0, WEST, SOUTH, EAST};
 class Exit : public Entity{
 public:
 	Room *origin;

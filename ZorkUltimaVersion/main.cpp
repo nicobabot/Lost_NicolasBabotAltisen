@@ -5,6 +5,7 @@
 int main(){
 	World world;
 	world.createworld();
+	world.createitems();
 	world.movement();
 	system("pause");
 	return 0;
