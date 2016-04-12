@@ -157,7 +157,7 @@ void World::createworld()const{
 	exit[19].destiny = &room[3];
 	//--------------------------------------------------------------------
 	room[5].name="Cinema";
-	room[5].descrip="If you buy my ticket i will tell you where is the house 3 where you cand find the key to enter to your house.";
+	room[5].descrip="If you buy my ticket i will tell you where is the house 3 where you cand find the key to enter to your house.\n";
 	//--------------------------------------------------------------------
 	exit[20].descrip="There's a wall";
 	exit[20].origin = &room[5];
@@ -211,7 +211,7 @@ void World::createworld()const{
 	
 	//--------------------------------------------------------------------
 	room[7].name="House 3";
-	room[7].descrip="Its seems that there is something important...";
+	room[7].descrip="Its seems that there is something important...\n";
 	//--------------------------------------------------------------------
 	exit[28].name="Residencial Street";
 	exit[28].descrip="In the east there is the goal";
@@ -297,7 +297,9 @@ void World::movement(){
 	char direction1[30];
 	help();
 	do{
+		actual();
 		player->playerposit = &room[roompos];
+		itemsroom();
 		printf("Where do you want to go?\n");
 		fflush(stdin);
 		direction->set();
@@ -1265,3 +1267,40 @@ void World::movement(){
 			}
 		}
 
+		void World::actual(){
+
+			if (items[LADDER].inventory == true){
+				items[LADDER].itempos = player->playerposit;
+			}
+			if (items[WRENCH].inventory == true){
+				items[WRENCH].itempos = player->playerposit;
+			}
+			if (items[MONEY].inventory == true){
+				items[MONEY].itempos = player->playerposit;
+			}
+			if (items[TICKET].inventory == true){
+				items[TICKET].itempos = player->playerposit;
+			}
+			if (items[KEY].inventory == true){
+				items[KEY].itempos = player->playerposit;
+			}
+			if (items[MAP].inventory == true){
+				items[MAP].itempos = player->playerposit;
+			}
+		}
+
+		void World::itemsroom(){
+			int j = 0, i = 0;
+			for (j = 0; j < NUM_ITEM; j++){//see if in the room there are objects
+				if ((items[j].itempos == player->playerposit) && items[j].inventory == false){
+					i++;
+				}
+			}
+			if (i != 0){//if ther are, write their names
+				for (j = 0; j < NUM_ITEM; j++){
+					if ((items[j].itempos == player->playerposit) && items[j].inventory == false){
+						printf("\nIn this room there is: %s\n", items[j].name);
+					}
+				}
+			}
+		}

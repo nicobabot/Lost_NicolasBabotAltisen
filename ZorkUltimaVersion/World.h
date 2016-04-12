@@ -29,6 +29,8 @@ public:
 	void drop(mystring*);
 	void equip(mystring*);
 	void unequip(mystring*);
+	void actual();
+	void itemsroom();
 	~World();
 };
 #endif
