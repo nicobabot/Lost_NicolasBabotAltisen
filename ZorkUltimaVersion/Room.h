@@ -3,7 +3,9 @@
 #include"Entity.h"
 class Room : public Entity{
 public:
-
+	
+	
+	Room(char *str1, char *str2);
 
 
 

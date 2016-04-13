@@ -14,7 +14,7 @@ public:
 	int maximum = 0;
 	int nequip = 0;
 public:
-	Item();
+	Item(char* name, char* description, Room* position, bool invent, bool equiped);
 	//void createitems();
 	~Item();
 

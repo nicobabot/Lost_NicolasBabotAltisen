@@ -13,7 +13,6 @@ mystring::mystring(const char* STR){
 	maxcapacity = len;
 	buffer = new char[len];//+1 because '\0'
 	strcpy_s(buffer, len, STR);
-	printf("La clase sting %s se esta construyendo\n", buffer);
 }
 
 mystring::mystring(const mystring& otherclas) : buffer(otherclas.buffer){
@@ -117,5 +116,4 @@ void mystring::set()
 
 mystring::~mystring(){
 	delete[] buffer;
-	printf("La clase string se ha constuido destruye\n");
 }
