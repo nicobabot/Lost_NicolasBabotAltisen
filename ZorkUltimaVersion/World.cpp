@@ -177,31 +177,36 @@ void World::movement(){
 	int i = 0, j = 0;
 	int x = 0;
 	//Vector<Player*> player;
-	char direction1[30];
+	/*char direction1[50];
+	gets_s(direction1, 50);
+	//printf("%s", direction1);
+	mystring command;
+
+	Vector<mystring> option = command.Tokenize(" ", direction1);
+	for (uint t = 0; t < option.size(); t++){
+		printf("%s\n", option[t].C_Str());
+	}*/
+
 	help();
-	for (i = 0; i < ROOMNUM; i++){
-		printf("%s\n", room[i]->name.C_Str());
-	}
-	//for (i = 0; i < EXITNUM; i++){
-		printf("%s\n", exit[0]->destiny->name.C_Str());
+	
 	//}
 		
 	
 	do{
 		player->playerposit = room[roompos];
+		actual();
+	//	itemsroom();
 		printf("Where do you want to go?\n");
-		fflush(stdin);
-		direction->set();
+		char direction1[50];
+		gets_s(direction1, 50);
+		mystring command;
 
-		fflush(stdin);
-		if (*direction == "go"){
-			printf("Which direction?");
-			direction->set();
-			fflush(stdin);
-		}
+		Vector<mystring> option = command.Tokenize(" ", direction1);
+
+	
 		system("cls");
 		//-------------------------------------------------------------------------------------------------------------North
-		if (*direction == "n" || *direction == "north" || *direction == "go north"){
+		if (option[0] == "go" && option[1] == "north" || option[0] == "go" && option[1] == "n" || option[0] == "n" || option[0] == "north"){
 			for (i = 0; i < EXITNUM; i++){
 				if (player->playerposit == exit[i]->origin && exit[i]->orientation == NORTH){
 					if (exit[i]->origin == exit[i]->destiny){
@@ -237,7 +242,7 @@ void World::movement(){
 			}
 		}
 		//----------------------------------------------------------------------------------------------------------------West
-		if (*direction == "w" || *direction == "west" || *direction == "go west"){
+		if (option[0] == "go" && option[1] == "west" || option[0] == "go" && option[1] == "w" || option[0] == "w" || option[0] == "west"){
 			for (i = 0; i < EXITNUM; i++){
 				if (player->playerposit == exit[i]->origin && exit[i]->orientation == WEST){
 					if (exit[i]->origin == exit[i]->destiny){
@@ -271,7 +276,8 @@ void World::movement(){
 			}
 		}
 		//----------------------------------------------------------------------------------------------------------------South
-		if (*direction == "s" || *direction == "south" || *direction == "go south"){
+		if (option[0] == "go" && option[1] == "south" || option[0] == "go" && option[1] == "s" || option[0] == "s" || option[0] == "south")
+			{
 			for (i = 0; i < EXITNUM; i++){
 				if (player->playerposit == exit[i]->origin && exit[i]->orientation == SOUTH){
 					if (exit[i]->origin == exit[i]->destiny){
@@ -305,7 +311,7 @@ void World::movement(){
 			}
 		}
 		//-----------------------------------------------------------------------------------------------------------------East
-		if (*direction == "e" || *direction == "east" || *direction == "go east")
+		if (option[0] == "go" && option[1] == "east" || option[0] == "go" && option[1] == "e" || option[0] == "e" || option[0] == "east")
 		{
 			for (i = 0; i < EXITNUM; i++)
 			{
@@ -347,51 +353,43 @@ void World::movement(){
 				}
 			}
 		}
-		if (*direction == "h" || *direction == "help"){
+		if (option[0] == "h" || option[0] == "help"){
 			help();
 		}
 
-		/*if (*direction == "look" || *direction == "look north" || *direction == "look east" || *direction == "look west" || *direction == "look south"){
-			look(direction, roompos);
-		}*/
-
-
-		if (*direction == "open" || *direction == "open north" || *direction == "open east" || *direction == "open west" || *direction == "open south"){
-			if (*direction == "open"){
-				printf("Which direction?\n");
-				direction->set();
-			}
-			Open(direction);
+		if (option[0] == "look" && option[1] == "north" || option[0] == "look" && option[1] == "east" || option[0] == "look" && option[1] == "west" || option[0] == "look" && option[1] == "south"){
+			look(option, roompos);
 		}
 
-		if (*direction == "close" || *direction == "close north" || *direction == "close east" || *direction == "close west" || *direction == "close south"){
-			if (*direction == "close"){
-				printf("Which direction?\n");
-				direction->set();
-			}
-			Close(direction);
+
+		if (option[0] == "open" && option[1] == "north" || option[0] == "open" && option[1] == "east" || option[0] == "open" && option[1] == "west" || option[0] == "open" && option[1] == "south"){
+			Open(option);
 		}
 
-		if (*direction == "pick" || *direction == "pick ladder" || *direction == "pick wrench" || *direction == "pick money" || *direction == "pick ticket" || *direction == "pick key" || *direction == "pick map"){
+		if (option[0] == "close" && option[1] == "north" || option[0] == "close" && option[1] == "east" || option[0] == "close" && option[1] == "west" || option[0] == "close" && option[1] == "south"){
+			Close(option);
+		}
+
+		if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map"){
 			
-			pick(direction);
+			pick(option);
 		}
 
-		if (*direction == "inventory" || *direction == "look inventory"){
+		if (option[0] == "inventory" || option[0] == "look" && option[1] == "inventory"){
 			inventory();
 		}
 
-		if (*direction == "drop" || *direction == "drop ladder" || *direction == "drop wrench" || *direction == "drop money" || *direction == "drop ticket" || *direction == "drop key" || *direction == "drop map"){
+		if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map"){
 
-			drop(direction);
+			drop(option);
 		}
 
-		if (*direction == "equip" || *direction == "equip ladder" || *direction == "equip wrench" || *direction == "equip money" || *direction == "equip ticket" || *direction == "equip key" || *direction == "equip map"){
+		if (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map"){
 
 			equip(direction);
 		}
 
-		if (*direction == "unequip" || *direction == "unequip ladder" || *direction == "unequip wrench" || *direction == "unequip money" || *direction == "unequip ticket" || *direction == "unequip key" || *direction == "unequip map"){
+		if (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map"){
 
 			unequip(direction);
 		}
@@ -407,13 +405,10 @@ void World::movement(){
 
 		}
 		
-		void World::look(const mystring *looks, int numroom){
+		void World::look(Vector<mystring>& options, int numroom){
 			int exitnum=0;//count
-			if (*looks=="look"){//if the user only says look
-				printf("%s\n", room[numroom]->descrip.C_Str());
-			}
 
-			if (*looks=="look north"){//if the user says look north
+			if (options[0] == "look" && options[1] == "north"){//if the user says look north
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
 					if (exit[exitnum]->orientation == NORTH)//exits with north orientation
@@ -426,7 +421,7 @@ void World::movement(){
 					}
 				}
 			}
-			if (*looks == "look west"){//if the user says look west
+			if (options[0] == "look" && options[1] == "west"){//if the user says look west
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
 					if (exit[exitnum]->orientation == WEST)//exits with west orientation
@@ -440,7 +435,7 @@ void World::movement(){
 				//printf("%s\n", exit[numexit].descrip);
 			}
 
-			if (*looks == "look south"){//if the user says look south
+			if (options[0] == "look" && options[1] == "south"){//if the user says look south
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
 					if (exit[exitnum]->orientation == SOUTH)//exits with south orientation
@@ -453,7 +448,7 @@ void World::movement(){
 				}
 			}
 
-			if (*looks == "look east"){//if the user says look east
+			if (options[0] == "look" && options[1] == "east"){//if the user says look east
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
 					if (exit[exitnum]->orientation == EAST)//exits with east orientation
@@ -471,11 +466,11 @@ void World::movement(){
 
 		
 
-		void World::Open(mystring *direction)
+		void World::Open(Vector<mystring>& options)
 		{
 
 			int i, j;
-			if (*direction == "open north" || *direction == "open n" || *direction == "north")
+			if (options[0] == "open" && options[1] == "north" || options[0] == "open" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -508,7 +503,7 @@ void World::movement(){
 			}
 
 
-			if (*direction == "open west" || *direction == "w" || *direction == "west")
+			if (options[0] == "open" && options[1] == "west" || options[0] == "open" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -541,7 +536,7 @@ void World::movement(){
 			}
 
 
-			if (*direction == "open east" || *direction == "open e" || *direction == "east")
+			if (options[0] == "open" && options[1] == "east" || options[0] == "open" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -574,7 +569,7 @@ void World::movement(){
 			}
 
 
-			if (*direction == "open south" || *direction == "open s" || *direction == "south")
+			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -607,11 +602,11 @@ void World::movement(){
 			}
 		}
 
-		void World::Close(mystring* direction)
+		void World::Close(Vector<mystring>& options)
 		{
 
 			int i, j;
-			if (*direction == "close north" || *direction == "close n" || *direction == "north")
+			if (options[0] == "close" && options[1] == "north" || options[0] == "close" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -643,7 +638,7 @@ void World::movement(){
 				}
 			}
 
-			if (*direction == "close west" || *direction == "close w" || *direction == "west")
+			if (options[0] == "close" && options[1] == "west" || options[0] == "close" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -676,7 +671,7 @@ void World::movement(){
 			}
 
 
-			if (*direction == "close east" || *direction == "close e" || *direction == "east")
+			if (options[0] == "close" && options[1] == "east" || options[0] == "close" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -709,7 +704,7 @@ void World::movement(){
 			}
 
 
-			if (*direction == "close south" || *direction == "close s" || *direction == "south")
+			if (options[0] == "close" && options[1] == "south" || options[0] == "close" && options[1] == "s" || options[0] == "s" || options[0] == "south")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin->name == player->playerposit->name){
@@ -742,13 +737,23 @@ void World::movement(){
 			}
 		}
 
-		void World::pick(mystring* string){
+		void World::pick(Vector<mystring>& options){
 			int maximum = 0;
-			if (*string == "pick"){
-				printf("what do you want to pick?\n");
-				string->set();
+			for (int i = 0; i < NUM_ITEM; i++){
+				if (items[i]->name == options[2] && items[i]->inventory == false && items[i]->equipped == false){
+					items[i]->inventory = true;
+					printf("%s\n %s\n", items[LADDER]->name.C_Str(), items[LADDER]->descrip.C_Str());
+					items[i]->maximum++;
+					break;
+				}
 			}
-			if (*string == "pick ladder" || *string == "ladder"){
+
+
+
+
+
+			/*
+			if (options[0] == "pick" && options[1] == "ladder"){
 				if (items[LADDER]->itempos != player->playerposit){
 					printf("This object isn't in this room\n");
 				}
@@ -873,7 +878,7 @@ void World::movement(){
 						}
 					}
 				}
-			}
+			}*/
 		}
 
 		void World::inventory(){
@@ -887,9 +892,33 @@ void World::movement(){
 
 		}
 
-		void World::drop(mystring *string){
+		void World::drop(Vector<mystring>& options){
 
 			int maximum = 0;
+
+			for (int i = 0; i < NUM_ITEM; i++){
+				if (items[i]->name == options[1] && items[i]->inventory == false && items[i]->equipped == false){
+					items[i]->inventory = true;
+					printf("%s\n %s\n", items[LADDER]->name.C_Str(), items[LADDER]->descrip.C_Str());
+					items[i]->maximum++;
+					break;
+				}
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+			/*
+
 			if (*string == "drop"){
 				printf("what do you want to drop?\n");
 				string->set();
@@ -963,7 +992,7 @@ void World::movement(){
 					printf("You don't have this item in the inventary");
 				}
 
-			}
+			}*/
 		}
 
 		void World::equip(mystring *string){
@@ -1168,4 +1197,40 @@ void World::movement(){
 			}
 		}
 
-		
+		void World::actual(){
+
+			if (items[LADDER]->inventory == true){
+				items[LADDER]->itempos = player->playerposit;
+			}
+			if (items[WRENCH]->inventory == true){
+				items[WRENCH]->itempos = player->playerposit;
+			}
+			if (items[MONEY]->inventory == true){
+				items[MONEY]->itempos = player->playerposit;
+			}
+			if (items[TICKET]->inventory == true){
+				items[TICKET]->itempos = player->playerposit;
+			}
+			if (items[KEY]->inventory == true){
+				items[KEY]->itempos = player->playerposit;
+			}
+			if (items[MAP]->inventory == true){
+				items[MAP]->itempos = player->playerposit;
+			}
+		}
+	
+		void World::itemsroom(){
+			int j = 0, i = 0;
+			for (j = 0; j < NUM_ITEM; j++){//see if in the room there are objects
+				if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false){
+					i++;
+				}
+			}
+			if (i != 0){//if ther are, write their names
+				for (j = 0; j < NUM_ITEM; j++){
+					if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false){
+						printf("\nIn this room there is: %s\n", items[j]->name);
+					}
+				}
+			}
+		}

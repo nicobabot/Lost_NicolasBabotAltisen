@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include"Vector.h"
 class mystring{
 private:
 	char *buffer = nullptr;
@@ -26,6 +27,7 @@ public:
 	bool IsSmaller(const mystring& str);
 	void clear();
 	void set();
+	Vector<mystring> Tokenize(const char *parameters, char* option);
 	~mystring();
 };
 #endif

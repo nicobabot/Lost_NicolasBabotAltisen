@@ -22,15 +22,17 @@ public:
 	World();
 	void movement();
 	void help()const;
-	void look(const mystring*, int);
+	void look(Vector<mystring>&, int);
 	void createworld();
-	void Open(mystring*);
-	void Close(mystring*);
-	void pick(mystring*);
+	void Open(Vector<mystring>&);
+	void Close(Vector<mystring>&);
+	void pick(Vector<mystring>&);
 	void inventory();
-	void drop(mystring*);
+	void drop(Vector<mystring>&);
 	void equip(mystring*);
 	void unequip(mystring*);
+	void actual();
+	void itemsroom();
 	~World();
 };
 #endif

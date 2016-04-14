@@ -15,7 +15,7 @@ mystring::mystring(const char* STR){
 	strcpy_s(buffer, len, STR);
 }
 
-mystring::mystring(const mystring& otherclas) : buffer(otherclas.buffer){
+mystring::mystring(const mystring& otherclas){
 	int len = (strlen(otherclas.buffer)) + 1;
 	maxcapacity = len;
 	buffer = new char[len];//+1 because '\0'
@@ -112,6 +112,23 @@ void mystring::set()
 		buffer = new char[maxcapacity];
 	}
 	strcpy_s(buffer, maxcapacity, otherstring);
+}
+
+Vector<mystring> mystring::Tokenize(const char *parameters, char* option){
+	
+	uint len = strlen(option) + 1;
+	Vector<mystring> stringvector;
+	char *finalstring, *other, *repeat;
+	finalstring = new char[len];
+	strcpy_s(finalstring, len, option);
+
+	other=strtok_s(finalstring, parameters, &repeat);
+	while (other != NULL){
+		stringvector.pushback(other);
+		other = strtok_s(NULL, parameters, &repeat);
+	}
+	delete[] finalstring;
+	return stringvector;
 }
 
 mystring::~mystring(){

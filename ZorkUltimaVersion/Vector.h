@@ -68,7 +68,7 @@ public:
 		return true;
 	}
 
-	TYPE size(){
+	uint size(){
 		return num_elements;
 	}
 
