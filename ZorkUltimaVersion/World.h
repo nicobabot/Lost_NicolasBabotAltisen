@@ -8,7 +8,7 @@
 #include"Vector.h"
 #include"item.h"
 #define ROOMNUM 9
-#define EXITNUM 32
+#define EXITNUM 35
 class World{
 public:
 	
@@ -29,9 +29,9 @@ public:
 	void pick(Vector<mystring>&);
 	void inventory();
 	void drop(Vector<mystring>&);
-	void equip(mystring*);
-	void unequip(mystring*);
-	void actual();
+	void equip(Vector<mystring>& options);
+	void unequip(Vector<mystring>& options);
+	void update();
 	void itemsroom();
 	~World();
 };

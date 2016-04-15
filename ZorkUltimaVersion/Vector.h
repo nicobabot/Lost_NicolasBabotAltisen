@@ -1,6 +1,7 @@
 #ifndef _VECTOR_
 #define _VECTOR_
 #include<stdio.h>
+#include<assert.h>
 typedef unsigned int uint;
 template<class TYPE>
 class Vector{
@@ -15,6 +16,12 @@ public:
 	Vector(){
 		buffer = new TYPE[capacity];
 	}
+
+	Vector(uint size){
+		capacity = size;
+		buffer = new TYPE[capacity];
+	}
+
 	Vector(const Vector& otherclas){
 		capacity = otherclas.capacity;
 		num_elements = otherclas.num_elements;
@@ -55,8 +62,18 @@ public:
 		num_elements++;
 	}
 
-	TYPE operator[](int index){
+	TYPE operator[](uint index)const{
+		assert(index < num_elements);
 		return buffer[index];
+	}
+
+	TYPE operator[](uint index){
+		assert(index < num_elements);
+		return buffer[index];
+	}
+
+	void clean(){
+		num_elements = 0;
 	}
 
 	bool empty(){
@@ -76,7 +93,19 @@ public:
 		return capacity;
 	}
 
+	bool pop_back(TYPE& value){
+		if (num_elements > 0){
+			num_elements--;
+			value = buffer[num_elements];
+			return true;
+		}
+		return false;
+	}
 
+	void shrink_to_fit(){
+		capacity = num_elements;
+		buffer = new TYPE[capacity];
+	}
 
 	~Vector(){
 		delete[]buffer;

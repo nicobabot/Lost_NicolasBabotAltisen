@@ -143,32 +143,32 @@ void World::createworld(){
 	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[8], room[8], false, false));
 	//exit 34
 	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[8], room[8], false, false));
-	//exit 32
+	//exit 35
 	exit.pushback(new Exit("Residencial Street", "In the west there's house 3", WEST, room[8], room[7], true, true));
 
 	//ITEMS---------------------------------------------
 	//item 1
-	items.pushback(new Item("Ladder", "A ladder that you can use it to pass walls", room[1], false, false));
+	items.pushback(new Item("ladder", "A ladder that you can use it to pass walls", room[1], false, false));
 
 	//-------
 	//item 2
-	items.pushback(new Item("Wrench", "You can use the wrench to fight if you have problems", room[3], false, false));
+	items.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", room[3], false, false));
 	
 	//-------
 	//item 3
-	items.pushback(new Item("Money", "With this money you can buy somthing", room[4], false, false));
+	items.pushback(new Item("money", "With this money you can buy somthing", room[4], false, false));
 	
 	//-------
 	//item 4
-	items.pushback(new Item("Ticket", "If you have this ticket means that you have some information about house 3", room[5], false, false));
+	items.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", room[5], false, false));
 
 	//-------
 	//item 5
-	items.pushback(new Item("Key", "With this key you can enter to your house!!", room[7], false, false));
+	items.pushback(new Item("key", "With this key you can enter to your house!!", room[7], false, false));
 	
 	//-------
 	//item 6
-	items.pushback(new Item("Map", "With this special feature if you press you can see the map of the city", room[2], false, false));
+	items.pushback(new Item("map", "With this special feature if you press you can see the map of the city", room[2], false, false));
 	
 }
 
@@ -194,8 +194,8 @@ void World::movement(){
 	
 	do{
 		player->playerposit = room[roompos];
-		actual();
-	//	itemsroom();
+		update();
+		itemsroom();
 		printf("Where do you want to go?\n");
 		char direction1[50];
 		gets_s(direction1, 50);
@@ -369,29 +369,30 @@ void World::movement(){
 		if (option[0] == "close" && option[1] == "north" || option[0] == "close" && option[1] == "east" || option[0] == "close" && option[1] == "west" || option[0] == "close" && option[1] == "south"){
 			Close(option);
 		}
-
-		if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map"){
-			
-			pick(option);
-		}
-
 		if (option[0] == "inventory" || option[0] == "look" && option[1] == "inventory"){
 			inventory();
 		}
+		if (option.size() > 1){
+			if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map"){
 
-		if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map"){
+				pick(option);
+			}
 
-			drop(option);
-		}
 
-		if (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map"){
+			if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map"){
 
-			equip(direction);
-		}
+				drop(option);
+			}
 
-		if (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map"){
+			if (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map"){
 
-			unequip(direction);
+				equip(option);
+			}
+
+			if (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map"){
+
+				unequip(option);
+			}
 		}
 
 	} while (*direction != "q");
@@ -549,7 +550,7 @@ void World::movement(){
 											if (exit[j]->destiny->name == exit[i]->origin->name){
 												exit[j]->closed = false;
 												printf("The door is opened.\n");
-												return;
+												break;
 											}
 										}
 									}
@@ -739,146 +740,20 @@ void World::movement(){
 
 		void World::pick(Vector<mystring>& options){
 			int maximum = 0;
-			for (int i = 0; i < NUM_ITEM; i++){
-				if (items[i]->name == options[2] && items[i]->inventory == false && items[i]->equipped == false){
-					items[i]->inventory = true;
-					printf("%s\n %s\n", items[LADDER]->name.C_Str(), items[LADDER]->descrip.C_Str());
-					items[i]->maximum++;
-					break;
+			if (options.size() > 1){
+				for (int i = 0; i < NUM_ITEM; i++){
+					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false){
+						items[i]->inventory = true;
+						printf("%s\n %s\n", items[i]->name.C_Str(), items[i]->descrip.C_Str());
+						//items[i]->maximum++;
+						break;
+					}
+				/*if (items[i]->itempos != player->playerposit){
+					printf("This item isn't here");
+				}*/
 				}
 			}
 
-
-
-
-
-			/*
-			if (options[0] == "pick" && options[1] == "ladder"){
-				if (items[LADDER]->itempos != player->playerposit){
-					printf("This object isn't in this room\n");
-				}
-				if (items[LADDER]->itempos == player->playerposit){
-					if (items[LADDER]->inventory == false && items[LADDER]->maximum<items[LADDER]->maxinventory){
-						items[LADDER]->inventory = true;
-						printf("%s\n %s\n", items[LADDER]->name.C_Str(), items[LADDER]->descrip.C_Str());
-						items[LADDER]->maximum++;
-					}
-					else{
-						if (items[LADDER]->maximum == 3){
-							printf("You have full inventory, you should drop some object\n");
-						}
-						if (items[LADDER]->inventory == true){
-							printf("You already have it in your inventory\n");
-						}
-					}
-				}
-
-			}
-			if (*string == "pick wrench" || *string == "wrench"){
-				if (items[WRENCH]->itempos != player->playerposit){
-					printf("This object isn't in this room\n");
-				}
-				if (items[WRENCH]->itempos == player->playerposit){
-					if (items[WRENCH]->inventory == false && items[WRENCH]->maximum<items[WRENCH]->maxinventory){
-						items[WRENCH]->inventory = true;
-						printf("%s\n %s\n", items[WRENCH]->name.C_Str(), items[WRENCH]->descrip.C_Str());
-						items[WRENCH]->maximum++;
-					}
-					else{
-						if (items[WRENCH]->maximum == 3){
-							printf("You have full inventory, you should drop some object\n");
-						}
-						if (items[WRENCH]->inventory == true){
-							printf("You already have it in your inventory\n");
-						}
-					}
-				}
-			}
-			if (*string == "pick money" || *string == "money"){
-				if (items[MONEY]->itempos != player->playerposit){
-					printf("This object isn't in this room\n");
-				}
-				if (items[MONEY]->itempos == player->playerposit){
-					if (items[MONEY]->inventory == false && items[MONEY]->maximum<items[MONEY]->maxinventory){
-						items[MONEY]->inventory = true;
-						printf("%s\n %s\n", items[MONEY]->name.C_Str(), items[MONEY]->descrip.C_Str());
-						items[MONEY]->maximum++;
-					}
-					else{
-						if (items[MONEY]->maximum == 3){
-							printf("You have full inventory, you should drop some object\n");
-						}
-						if (items[MONEY]->inventory == true){
-							printf("You already have it in your inventory\n");
-						}
-					}
-				}
-			}
-
-			if (*string == "pick ticket" || *string == "ticket"){
-				if (items[TICKET]->itempos != player->playerposit){
-					printf("This object isn't in this room\n");
-				}
-				if (items[TICKET]->itempos == player->playerposit){
-					if (items[TICKET]->inventory == false && items[TICKET]->maximum<items[TICKET]->maxinventory){
-						items[TICKET]->inventory = true;
-						printf("%s\n %s\n", items[TICKET]->name.C_Str(), items[TICKET]->descrip.C_Str());
-						items[TICKET]->maximum++;
-					}
-					else{
-						if (items[TICKET]->maximum == 3){
-							printf("You have full inventory, you should drop some object\n");
-						}
-						if (items[TICKET]->inventory == true){
-							printf("You already have it in your inventory\n");
-						}
-					}
-				}
-			}
-
-
-			if (*string == "pick key" || *string == "key"){
-				if (items[KEY]->itempos != player->playerposit){
-					printf("This object isn't in this room\n");
-				}
-				if (items[KEY]->itempos == player->playerposit){
-					if (items[KEY]->inventory == false && items[KEY]->maximum<items[KEY]->maxinventory){
-						items[KEY]->inventory = true;
-						printf("%s\n %s\n", items[KEY]->name.C_Str(), items[KEY]->descrip.C_Str());
-						items[KEY]->maximum++;
-					}
-					else{
-						if (items[KEY]->maximum == 3){
-							printf("You have full inventory, you should drop some object\n");
-						}
-						if (items[KEY]->inventory == true){
-							printf("You already have it in your inventory\n");
-						}
-					}
-				}
-			}
-
-
-			if (*string == "pick map" || *string == "map"){
-				if (items[MAP]->itempos != player->playerposit){
-					printf("This object isn't in this room\n");
-				}
-				if (items[MAP]->itempos == player->playerposit){
-					if (items[MAP]->inventory == false && items[MAP]->maximum<items[MAP]->maxinventory){
-						items[MAP]->inventory = true;
-						printf("%s\n %s\n", items[MAP]->name.C_Str(), items[MAP]->descrip.C_Str());
-						items[MAP]->maximum++;
-					}
-					else{
-						if (items[MAP]->maximum == 3){
-							printf("You have full inventory, you should drop some object\n");
-						}
-						if (items[MAP]->inventory == true){
-							printf("You already have it in your inventory\n");
-						}
-					}
-				}
-			}*/
 		}
 
 		void World::inventory(){
@@ -895,338 +770,74 @@ void World::movement(){
 		void World::drop(Vector<mystring>& options){
 
 			int maximum = 0;
+		if (options.size() > 1){
+				for (int i = 0; i < NUM_ITEM; i++){
+					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == true){
+						items[i]->inventory = false;
+						printf("You have droped %s\n", items[i]->name.C_Str());
+						//items[i]->maximum++;
+						break;
+					}
+				/*if (items[i]->itempos != player->playerposit){
+					printf("This item isn't here");
+				}*/
+				}
+			}
+		}
 
+		void World::equip(Vector<mystring>& options){
+
+			if (options.size() > 1){
+				for (int i = 0; i < NUM_ITEM; i++){
+					if (items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
+						items[i]->equipped = true;
+						printf("You have equiped %s\n", items[i]->name.C_Str());
+						//items[i]->maximum++;
+						break;
+					}
+				/*if (items[i]->inventory != true){
+					printf("You don't have this item in the inventary");
+				}*/
+				}
+			}
+		}		
+
+		void World::unequip(Vector<mystring>& options){
+			
+			if (options.size() > 1){
+				for (int i = 0; i < NUM_ITEM; i++){
+					if (items[i]->equipped == true /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
+						items[i]->equipped = false;
+						printf("You have unequiped %s\n", items[i]->name.C_Str());
+						//items[i]->maximum++;
+						break;
+					}
+				
+				/*if (items[i]->inventory != true){
+					printf("You don't have this item in the inventary");
+				}*/
+				}
+			}
+		}
+
+		
+
+		void World::update(){
 			for (int i = 0; i < NUM_ITEM; i++){
-				if (items[i]->name == options[1] && items[i]->inventory == false && items[i]->equipped == false){
-					items[i]->inventory = true;
-					printf("%s\n %s\n", items[LADDER]->name.C_Str(), items[LADDER]->descrip.C_Str());
-					items[i]->maximum++;
-					break;
+				if (items[i]->inventory == true){
+					items[i]->itempos = player->playerposit;
 				}
-			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-			/*
-
-			if (*string == "drop"){
-				printf("what do you want to drop?\n");
-				string->set();
-			}
-			if (*string == "drop ladder" || *string == "ladder"){
-				if (items[LADDER]->inventory == true){
-					items[LADDER]->inventory = false;
-					items[LADDER]->itempos = player->playerposit;
-					printf("You have dropped the %s", items[LADDER]->name.C_Str());
-					items[LADDER]->maximum--;
-				}
-				else{
-					printf("You don't have this item in the inventary");
-				}
-			}
-
-			if (*string == "drop wrench" || *string == "wrench"){
-				if (items[WRENCH]->inventory == true){
-					items[WRENCH]->inventory = false;
-					items[WRENCH]->itempos = player->playerposit;
-					printf("You have dropped the %s", items[WRENCH]->name.C_Str());
-					items[WRENCH]->maximum--;
-				}
-				else{
-					printf("You don't have this item in the inventary");
-				}
-			}
-
-			if (*string == "drop money" || *string == "money"){
-				if (items[MONEY]->inventory == true){
-					items[MONEY]->inventory = false;
-					items[MONEY]->itempos = player->playerposit;
-					printf("You have dropped the %s", items[MONEY]->name.C_Str());
-					items[MONEY]->maximum--;
-				}
-				else{
-					printf("You don't have this item in the inventary");
-				}
-			}
-			if (*string == "drop ticket" || *string == "ticket"){
-				if (items[TICKET]->inventory == true){
-					items[TICKET]->inventory = false;
-					items[TICKET]->itempos = player->playerposit;
-					printf("You have dropped the %s", items[TICKET]->name.C_Str());
-					items[TICKET]->maximum--;
-				}
-				else{
-					printf("You don't have this item in the inventary");
-				}
-			}
-
-			if (*string == "drop key" || *string == "key"){
-				if (items[KEY]->inventory == true){
-					items[KEY]->inventory = false;
-					items[KEY]->itempos = player->playerposit;
-					printf("You have dropped the %s", items[KEY]->name.C_Str());
-					items[KEY]->maximum--;
-				}
-				else{
-					printf("You don't have this item in the inventary");
-				}
-			}
-			if (*string == "drop map" || *string == "map"){
-				if (items[MAP]->inventory == true){
-					items[MAP]->inventory = false;
-					items[MAP]->itempos = player->playerposit;
-					printf("You have dropped the %s", items[MAP]->name.C_Str());
-					items[MAP]->maximum--;
-				}
-				else{
-					printf("You don't have this item in the inventary");
-				}
-
-			}*/
-		}
-
-		void World::equip(mystring *string){
-
-			if (*string == "equip"){
-				printf("what do you want to equip?\n");
-				string->set();
-			}
-
-			if (*string == "equip ladder" || *string == "ladder"){
-
-				if (items[LADDER]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-
-				if (items[LADDER]->equipped == true || items[LADDER]->nequip >= items[LADDER]->maxequipped){
-					printf("You already have one object equipped");
-				}
-
-				if (items[LADDER]->equipped == false && items[LADDER]->nequip < items[LADDER]->maxequipped && items[LADDER]->inventory == true){
-					items[LADDER]->equipped = true;
-					items[LADDER]->nequip++;
-					printf("You have equiped the %s", items[LADDER]->name.C_Str());
-				}
-			}
-			if (*string == "equip wrench" || *string == "wrench"){
-
-				if (items[WRENCH]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-
-				if (items[WRENCH]->equipped == true || items[WRENCH]->nequip >= items[WRENCH]->maxequipped){
-					printf("You already have one object equipped");
-				}
-
-				if (items[WRENCH]->equipped == false && items[WRENCH]->nequip < items[WRENCH]->maxequipped && items[WRENCH]->inventory == true){
-					items[WRENCH]->equipped = true;
-					items[WRENCH]->nequip++;
-					printf("You have equiped the %s", items[WRENCH]->name.C_Str());
-				}
-			}
-
-			if (*string == "equip money" || *string == "money"){
-
-				if (items[MONEY]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[MONEY]->equipped == true || items[MONEY]->nequip >= items[MONEY]->maxequipped){
-					printf("You already have one object equipped");
-				}
-				if (items[MONEY]->equipped == false && items[MONEY]->nequip < items[MONEY]->maxequipped && items[MONEY]->inventory == true){
-					items[MONEY]->equipped = true;
-					items[MONEY]->nequip++;
-					printf("You have equiped the %s", items[MONEY]->name.C_Str());
-				}
-			}
-
-
-			if (*string == "equip ticket" || *string == "ticket"){
-
-				if (items[TICKET]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[TICKET]->equipped == true || items[TICKET]->nequip >= items[TICKET]->maxequipped){
-					printf("You already have one object equipped");
-				}
-				if (items[TICKET]->equipped == false && items[TICKET]->nequip < items[TICKET]->maxequipped && items[TICKET]->inventory == true){
-					items[TICKET]->equipped = true;
-					items[TICKET]->nequip++;
-					printf("You have equiped the %s", items[TICKET]->name.C_Str());
-				}
-			}
-
-
-			if (*string == "equip key" || *string == "key"){
-
-				if (items[KEY]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[KEY]->equipped == true || items[KEY]->nequip >= items[KEY]->maxequipped){
-					printf("You already have one object equipped");
-				}
-				if (items[KEY]->equipped == false && items[KEY]->nequip < items[KEY]->maxequipped && items[KEY]->inventory == true){
-					items[KEY]->equipped = true;
-					items[KEY]->nequip++;
-					printf("You have equiped the %s", items[KEY]->name.C_Str());
-				}
-			}
-
-
-			if (*string == "equip map" || *string == "map"){
-
-				if (items[MAP]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[MAP]->equipped == true || items[MAP]->nequip >= items[MAP]->maxequipped){
-					printf("You already have one object equipped");
-				}
-				if (items[MAP]->equipped == false && items[MAP]->nequip < items[MAP]->maxequipped && items[MAP]->inventory == true){
-					items[MAP]->equipped = true;
-					items[MAP]->nequip++;
-					printf("You have equiped the %s", items[MAP]->name.C_Str());
-				}
-			}
-
-		}
-
-		void World::unequip(mystring *string){
-			if (*string == "unequip"){
-				printf("what do you want to unequip?\n");
-				string->set();
-			}
-
-			if (*string == "unequip ladder" || *string == "ladder"){
-
-				if (items[LADDER]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[LADDER]->equipped == false || items[LADDER]->nequip == 0){
-					printf("You don't have any object equipped");
-				}
-				if (items[LADDER]->equipped == true && items[LADDER]->nequip >= items[LADDER]->maxequipped && items[LADDER]->inventory == true){
-					items[LADDER]->equipped = false;
-					items[LADDER]->nequip--;
-					printf("You have unequiped the %s", items[LADDER]->name.C_Str());
-				}
-			}
-
-			if (*string == "unequip wrench" || *string == "wrench"){
-
-				if (items[WRENCH]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[WRENCH]->equipped == false || items[WRENCH]->nequip == 0){
-					printf("You don't have any object equipped");
-				}
-				if (items[WRENCH]->equipped == true && items[WRENCH]->nequip >= items[WRENCH]->maxequipped && items[WRENCH]->inventory == true){
-					items[WRENCH]->equipped = false;
-					items[WRENCH]->nequip--;
-					printf("You have unequiped the %s", items[WRENCH]->name.C_Str());
-				}
-			}
-
-			if (*string == "unequip money" || *string == "money"){
-
-				if (items[MONEY]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[MONEY]->equipped == false || items[MONEY]->nequip == 0){
-					printf("You don't have any object equipped");
-				}
-				if (items[MONEY]->equipped == true && items[MONEY]->nequip >= items[MONEY]->maxequipped && items[MONEY]->inventory == true){
-					items[MONEY]->equipped = false;
-					items[MONEY]->nequip--;
-					printf("You have unequiped the %s", items[MONEY]->name.C_Str());
-				}
-			}
-
-			if (*string == "unequip ticket" || *string == "ticket"){
-
-				if (items[TICKET]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[TICKET]->equipped == false || items[TICKET]->nequip == 0){
-					printf("You don't have any object equipped");
-				}
-				if (items[TICKET]->equipped == true && items[TICKET]->nequip >= items[TICKET]->maxequipped && items[TICKET]->inventory == true){
-					items[TICKET]->equipped = false;
-					items[TICKET]->nequip--;
-					printf("You have unequiped the %s", items[TICKET]->name.C_Str());
-				}
-			}
-
-			if (*string == "unequip key" || *string == "key"){
-
-				if (items[KEY]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[KEY]->equipped == false || items[KEY]->nequip == 0){
-					printf("You don't have any object equipped");
-				}
-				if (items[KEY]->equipped == true && items[KEY]->nequip >= items[KEY]->maxequipped && items[KEY]->inventory == true){
-					items[KEY]->equipped = false;
-					items[KEY]->nequip--;
-					printf("You have unequiped the %s", items[KEY]->name.C_Str());
-				}
-			}
-
-			if (*string == "unequip map" || *string == "map"){
-
-				if (items[MAP]->inventory == false){
-					printf("You don't have this item in the inventary");
-				}
-				if (items[MAP]->equipped == false || items[MAP]->nequip == 0){
-					printf("You don't have any object equipped");
-				}
-				if (items[MAP]->equipped == true && items[MAP]->nequip >= items[MAP]->maxequipped && items[MAP]->inventory == true){
-					items[MAP]->equipped = false;
-					items[MAP]->nequip--;
-					printf("You have unequiped the %s", items[MAP]->name.C_Str());
-				}
-			}
-		}
-
-		void World::actual(){
-
-			if (items[LADDER]->inventory == true){
-				items[LADDER]->itempos = player->playerposit;
-			}
-			if (items[WRENCH]->inventory == true){
-				items[WRENCH]->itempos = player->playerposit;
-			}
-			if (items[MONEY]->inventory == true){
-				items[MONEY]->itempos = player->playerposit;
-			}
-			if (items[TICKET]->inventory == true){
-				items[TICKET]->itempos = player->playerposit;
-			}
-			if (items[KEY]->inventory == true){
-				items[KEY]->itempos = player->playerposit;
-			}
-			if (items[MAP]->inventory == true){
-				items[MAP]->itempos = player->playerposit;
 			}
 		}
 	
 		void World::itemsroom(){
 			int j = 0, i = 0;
-			for (j = 0; j < NUM_ITEM; j++){//see if in the room there are objects
+			for (j = 0; j < NUM_ITEM; j++){
 				if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false){
 					i++;
 				}
 			}
-			if (i != 0){//if ther are, write their names
+			if (i != 0){
 				for (j = 0; j < NUM_ITEM; j++){
 					if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false){
 						printf("\nIn this room there is: %s\n", items[j]->name);
