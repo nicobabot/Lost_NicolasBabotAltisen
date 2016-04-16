@@ -180,33 +180,24 @@ void World::movement(){
 	int roompos = 0;
 	int i = 0, j = 0;
 	int x = 0;
-	//Vector<Player*> player;
-	/*char direction1[50];
-	gets_s(direction1, 50);
-	//printf("%s", direction1);
-	mystring command;
 
-	Vector<mystring> option = command.Tokenize(" ", direction1);
-	for (uint t = 0; t < option.size(); t++){
-		printf("%s\n", option[t].C_Str());
-	}*/
-
-	help();
-	
-	//}
-		
+	help();	
 	
 	do{
 		player->playerposit = room[roompos];
 		update();
 		itemsroom();
+		if (player->playerposit == room[8]){
+			//system("pause");
+			return;
+		}
 		printf("Where do you want to go?\n");
 		char direction1[50];
 		gets_s(direction1, 50);
 		mystring command;
 
 		Vector<mystring> option = command.Tokenize(" ", direction1);
-
+		if (option.size() >= 1){
 	
 		system("cls");
 		//-------------------------------------------------------------------------------------------------------------North
@@ -297,7 +288,7 @@ void World::movement(){
 							else{
 								if (exit[i]->door == true && exit[i]->closed == true){
 									if (player->playerposit == room[2]){
-										printf("There's a wall you have to pas");
+										printf("There's a wall you have to pass");
 									}
 									else{
 										printf("There's a door");
@@ -381,13 +372,13 @@ void World::movement(){
 		if (option[0] == "inventory" || option[0] == "look" && option[1] == "inventory"){
 			inventory();
 		}
-		if (option.size() > 1){
+	
 			if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map" || option[0] == "pick" && option[1] == "box"){
 
 				pick(option);
 			}
 
-			if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "pick" && option[1] == "box"){
+			if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "drop" && option[1] == "box"){
 
 				drop(option);
 			}
@@ -411,6 +402,10 @@ void World::movement(){
 
 				get(option);
 			}
+			if (option[0] == "map" || option[0] == "m"){
+				map();
+			}
+
 		}
 
 	} while (*direction != "q");
@@ -562,6 +557,11 @@ void World::movement(){
 						if (exit[i]->orientation == EAST){
 							if (exit[i]->door == true){
 								if (exit[i]->closed == true){
+									if (player->playerposit == room[7] && items[KEY]->inventory != true){
+										printf("YOU CAN'T PASS");
+										break;
+									}
+									printf("The door is open\n");
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation == WEST && exit[j]->door == true){
@@ -761,13 +761,25 @@ void World::movement(){
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
 					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false){
+						if (options[1] == items[TICKET]->name){
+							if (items[MONEY]->inventory == false){
+								printf("You don't have money\n");
+								break;
+							}
+							else{
+								items[MONEY]->inventory == false;
+									printf("You have given the mony to have some information\n");
+									printf("If you go south you will find the park and near you will find House 3");
+							}
+						}
 						items[i]->inventory = true;
 						printf("%s\n %s\n", items[i]->name.C_Str(), items[i]->descrip.C_Str());
 						//items[i]->maximum++;
-						break;
+						return;
 					}
 				/*if (items[i]->itempos != player->playerposit){
 					printf("This item isn't here");
+					return;
 				}*/
 				}
 			}
@@ -794,26 +806,28 @@ void World::movement(){
 						items[i]->inventory = false;
 
 						printf("You have droped %s\n", items[i]->name.C_Str());
-						break;
+						return;;
 					}
-				/*if (items[i]->itempos != player->playerposit){
-					printf("This item isn't here");
+				/*if (items[i]->inventory == false){
+					printf("You don't have this item in the inventory");
+					return;
 				}*/
 				}
 			}
 		}
 
-		void World::equip(Vector<mystring>& options){
+		void World::equip(Vector<mystring>& options)const{
 
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
 					if (items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = true;
 						printf("You have equiped %s\n", items[i]->name.C_Str());
-						break;
+						return;
 					}
 				/*if (items[i]->inventory != true){
 					printf("You don't have this item in the inventary");
+					return;
 				}*/
 				}
 			}
@@ -827,11 +841,12 @@ void World::movement(){
 						items[i]->equipped = false;
 						printf("You have unequiped %s\n", items[i]->name.C_Str());
 						//items[i]->maximum++;
-						break;
+						return;;
 					}
 				
 				/*if (items[i]->inventory != true){
 					printf("You don't have this item in the inventary");
+					return;
 				}*/
 				}
 			}
@@ -868,22 +883,27 @@ void World::movement(){
 
 		void World::put(Vector<mystring>& options){
 			int maximum = 0;
-			if (options.size() > 1){
+
 				for (int i = 0; i < NUM_ITEM; i++){
+					if (options[1] == items[BOX]->name && items[BOX]->itempos == player->playerposit){
+						printf("You can't do this");
+						return;
+					}
+					/*if (items[i]->itempos != player->playerposit){
+						printf("This item isn't here");
+						return;
+					}*/
 					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
 						items[i]->inventory = false;
 						items[i]->inbox = true;
 						items[i]->itempos = items[BOX]->itempos;
 						printf("You have put %s into the box", items[i]->name.C_Str());
 						//items[i]->maximum++;
-						break;
+						return;
 					}
-					/*if (items[i]->itempos != player->playerposit){
-					printf("This item isn't here");
-					}*/
+						printf("This item isn't here");
+						
 				}
-			}
-
 		
 		}
 
@@ -891,15 +911,20 @@ void World::movement(){
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
+					if (options[1] == items[BOX]->name && items[BOX]->itempos == player->playerposit){
+						printf("You can't do this");
+						return;
+					}
 					if (options[1] == items[i]->name && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == true){
 						items[i]->inbox = false;
 						items[i]->inventory = true;
 						printf("You have get %s of the box", items[i]->name.C_Str());
 						//items[i]->maximum++;
-						break;
+						return;
 					}
 					/*if (items[i]->itempos != player->playerposit){
 					printf("This item isn't here");
+					return;
 					}*/
 				}
 			}
@@ -907,3 +932,33 @@ void World::movement(){
 
 		}
 
+		void World::map()const{
+
+
+			if (items[MAP]->inventory == true){
+				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177);
+				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                                          %c\n", 177, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
+				printf("%c%c ENTRANCE %c %c         %c %c        %c                                          %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
+				printf("%c%c  OF THE  %c%c%c HOUSE 1 %c%c%c SCHOOL %c                                          %c\n", 177, 186, 186, 196, 186, 186, 196, 186, 186, 177);
+				printf("%c%c   CITY   %c %c         %c %c        %c                                          %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
+				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                                          %c\n", 177, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
+				printf("%c                             %c                                               %c\n", 177, 179, 177);
+				printf("%c                        %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                      %c\n", 177, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
+				printf("%c                        %c         %c %c      %c %c        %c                      %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
+				printf("%c                        %c HOUSE 2 %c%c%c SHOP %c%c%c CINEMA %c                      %c\n", 177, 186, 186, 196, 186, 186, 196, 186, 186, 177);
+				printf("%c                        %c         %c %c      %c %c        %c                      %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
+				printf("%c                        %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                      %c\n", 177, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
+				printf("%c                                                 %c                           %c\n", 177, 179, 177);
+				printf("%c                                              %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c\n", 177, 201, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
+				printf("%c                                              %c      %c %c         %c %c        %c%c\n", 177, 186, 186, 186, 186, 186, 186, 177);
+				printf("%c                                              %c PARK %c%c%c HOUSE 3 %c%c%c FINISH %c%c\n", 177, 186, 186, 196, 186, 186, 196, 186, 186, 177);
+				printf("%c                                              %c      %c %c         %c %c        %c%c\n", 177, 186, 186, 186, 186, 186, 186, 177);
+				printf("%c                                              %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c\n", 177, 200, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
+				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177);
+
+			}
+
+			else{
+				printf("You can't do this");
+			}
+		}

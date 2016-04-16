@@ -29,12 +29,14 @@ public:
 	void pick(Vector<mystring>&);
 	void inventory();
 	void drop(Vector<mystring>&);
-	void equip(Vector<mystring>& options);
+	void equip(Vector<mystring>& options)const;
 	void unequip(Vector<mystring>& options);
 	void update();
 	void itemsroom();
 	void put(Vector<mystring>& options);
 	void get(Vector<mystring>& options);
+	void map()const;
+	//void passwall(Vector<mystring>&);
 	~World();
 };
 #endif
