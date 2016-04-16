@@ -29,7 +29,7 @@ void World::createworld(){
 	//room 1
 	room.pushback(new Room("House 1", "In this house there is only a woman tell you that near her house there's a school, and also she that she has a ladder. If you want to continue serching go out of the house."));
 	//room 2
-	room.pushback(new Room("School", "There's a girl and she want to talk with you."));
+	room.pushback(new Room("School", "There's a girl and she want to talk with you. Here you have a box."));
 	//room 3
 	room.pushback(new Room("House 2", "An old man explain information about the family of the house three.The family three controls the city and may have the key to unlock the doors that are next to his house. And the old man will offer to the boy a wrench and he will say : the streets are dangerous if a young boy goes alone."));
 	//room 4
@@ -76,7 +76,7 @@ void World::createworld(){
 	//exit 9
 	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[2], room[2], false, false));
 	//exit 10
-	exit.pushback(new Exit("Joan Oliver street", "In the south there is the house 2", SOUTH, room[2], room[3], false, false));
+	exit.pushback(new Exit("Joan Oliver street", "In the south there is the house 2", SOUTH, room[2], room[3], true, true));
 	//exit 11
 	exit.pushback(new Exit("Student Street", "In the west there is the house 1", WEST, room[2], room[1], false, false));
 	
@@ -85,7 +85,7 @@ void World::createworld(){
 	//exit 12
 	exit.pushback(new Exit("Verdi street", "In the east there is the shop", EAST, room[3], room[4], false, false));
 	//exit 13
-	exit.pushback(new Exit("Joan Oliver street", "In the north there is the school", NORTH, room[3], room[2], false, false));
+	exit.pushback(new Exit("Joan Oliver street", "In the north there is the school", NORTH, room[3], room[2], true, true));
 	//exit 14
 	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[3], room[3], false, false));
 	//exit 15
@@ -147,29 +147,33 @@ void World::createworld(){
 	exit.pushback(new Exit("Residencial Street", "In the west there's house 3", WEST, room[8], room[7], true, true));
 
 	//ITEMS---------------------------------------------
-	//item 1
-	items.pushback(new Item("ladder", "A ladder that you can use it to pass walls", room[1], false, false));
+	//item 0
+	items.pushback(new Item("ladder", "A ladder that you can use it to pass walls", room[1], false, false, false));
 
 	//-------
+	//item 1
+	items.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", room[3], false, false, false));
+	
+	//-------
 	//item 2
-	items.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", room[3], false, false));
+	items.pushback(new Item("money", "With this money you can buy somthing", room[4], false, false, false));
 	
 	//-------
 	//item 3
-	items.pushback(new Item("money", "With this money you can buy somthing", room[4], false, false));
-	
-	//-------
-	//item 4
-	items.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", room[5], false, false));
+	items.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", room[5], false, false, false));
 
 	//-------
+	//item 4
+	items.pushback(new Item("key", "With this key you can enter to your house!!", room[7], false, false, false));
+	
+	//-------
 	//item 5
-	items.pushback(new Item("key", "With this key you can enter to your house!!", room[7], false, false));
+	items.pushback(new Item("map", "With this special feature if you press you can see the map of the city", room[2], false, false, false));
 	
 	//-------
 	//item 6
-	items.pushback(new Item("map", "With this special feature if you press you can see the map of the city", room[2], false, false));
-	
+	items.pushback(new Item("box", "A box that you find in school and you can put and get things", room[2], false, false, false));
+
 }
 
 void World::movement(){
@@ -292,7 +296,12 @@ void World::movement(){
 							}
 							else{
 								if (exit[i]->door == true && exit[i]->closed == true){
-									printf("There's a door");
+									if (player->playerposit == room[2]){
+										printf("There's a wall you have to pas");
+									}
+									else{
+										printf("There's a door");
+									}
 									break;
 								}
 								else{
@@ -373,13 +382,12 @@ void World::movement(){
 			inventory();
 		}
 		if (option.size() > 1){
-			if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map"){
+			if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map" || option[0] == "pick" && option[1] == "box"){
 
 				pick(option);
 			}
 
-
-			if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map"){
+			if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "pick" && option[1] == "box"){
 
 				drop(option);
 			}
@@ -392,6 +400,16 @@ void World::movement(){
 			if (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map"){
 
 				unequip(option);
+			}
+
+			if (option[0] == "put" && option[1] == "ladder" || option[0] == "put" && option[1] == "wrench" || option[0] == "put" && option[1] == "money" || option[0] == "put" && option[1] == "ticket" || option[0] == "put" && option[1] == "key" || option[0] == "put" && option[1] == "map" || option[0] == "put" && option[1] == "box"){
+
+				put(option);
+			}
+
+			if (option[0] == "get" && option[1] == "ladder" || option[0] == "get" && option[1] == "wrench" || option[0] == "get" && option[1] == "money" || option[0] == "get" && option[1] == "ticket" || option[0] == "get" && option[1] == "key" || option[0] == "get" && option[1] == "map" || option[0] == "get" && option[1] == "box"){
+
+				get(option);
 			}
 		}
 
@@ -480,7 +498,7 @@ void World::movement(){
 								if (exit[i]->closed == true){
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == SOUTH){
+										if (exit[j]->orientation == SOUTH && exit[j]->door == true){
 											if (exit[j]->destiny->name == exit[i]->origin->name){
 												exit[j]->closed = false;
 												printf("The door is opened.\n");
@@ -513,7 +531,7 @@ void World::movement(){
 								if (exit[i]->closed == true){
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == EAST){
+										if (exit[j]->orientation == EAST && exit[j]->door == true){
 											if (exit[j]->destiny->name == exit[i]->origin->name){
 												exit[j]->closed = false;
 												printf("The door is opened.\n");
@@ -546,7 +564,7 @@ void World::movement(){
 								if (exit[i]->closed == true){
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == WEST){
+										if (exit[j]->orientation == WEST && exit[j]->door == true){
 											if (exit[j]->destiny->name == exit[i]->origin->name){
 												exit[j]->closed = false;
 												printf("The door is opened.\n");
@@ -573,17 +591,17 @@ void World::movement(){
 			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){
+					if (exit[i]->origin == player->playerposit){
 						if (exit[i]->orientation == SOUTH){
 							if (exit[i]->door == true){
 								if (exit[i]->closed == true){
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == NORTH){
-											if (exit[j]->destiny->name == exit[i]->origin->name){
+										if (exit[j]->orientation == NORTH && exit[j]->door== true){
+ 											if (exit[j]->destiny == player->playerposit){
 												exit[j]->closed = false;
 												printf("The door is opened.\n");
-												return;
+												break;
 											}
 										}
 									}
@@ -616,7 +634,7 @@ void World::movement(){
 								if (exit[i]->closed == false){
 									exit[i]->closed = true;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation = SOUTH){
+										if (exit[j]->orientation == SOUTH && exit[j]->door == true && exit[j]->closed == false){
 											if (exit[j]->destiny->name == exit[i]->origin->name){
 												exit[j]->closed == true;
 												printf("The door is closed.\n");
@@ -649,7 +667,7 @@ void World::movement(){
 									exit[i]->closed = true;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation == EAST){
-											if (exit[j]->destiny->name == exit[i]->origin->name){
+											if (exit[j]->destiny->name == exit[i]->origin->name && exit[j]->door == true && exit[j]->closed == false){
 												exit[j]->closed = true;
 												printf("The door is closed.\n");
 												return;
@@ -682,7 +700,7 @@ void World::movement(){
 									exit[i]->closed = true;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation = WEST){
-											if (exit[j]->destiny->name == exit[i]->origin->name){
+											if (exit[j]->destiny->name == exit[i]->origin->name && exit[j]->door == true && exit[j]->closed == false){
 												exit[j]->closed = true;
 												printf("The door is closed.\n");
 												return;
@@ -715,7 +733,7 @@ void World::movement(){
 									exit[i]->closed = true;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation = NORTH){
-											if (exit[j]->destiny->name == exit[i]->origin->name){
+											if (exit[j]->destiny->name == exit[i]->origin->name && exit[j]->door == true && exit[j]->closed == false){
 												exit[j]->closed = true;
 												printf("The door is closed.\n");
 												return;
@@ -742,7 +760,7 @@ void World::movement(){
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false){
+					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false){
 						items[i]->inventory = true;
 						printf("%s\n %s\n", items[i]->name.C_Str(), items[i]->descrip.C_Str());
 						//items[i]->maximum++;
@@ -774,8 +792,8 @@ void World::movement(){
 				for (int i = 0; i < NUM_ITEM; i++){
 					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == true){
 						items[i]->inventory = false;
+
 						printf("You have droped %s\n", items[i]->name.C_Str());
-						//items[i]->maximum++;
 						break;
 					}
 				/*if (items[i]->itempos != player->playerposit){
@@ -792,7 +810,6 @@ void World::movement(){
 					if (items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = true;
 						printf("You have equiped %s\n", items[i]->name.C_Str());
-						//items[i]->maximum++;
 						break;
 					}
 				/*if (items[i]->inventory != true){
@@ -827,6 +844,9 @@ void World::movement(){
 				if (items[i]->inventory == true){
 					items[i]->itempos = player->playerposit;
 				}
+				if (items[i]->inbox == true){
+					items[i]->itempos = items[BOX]->itempos;
+				}
 			}
 		}
 	
@@ -840,8 +860,50 @@ void World::movement(){
 			if (i != 0){
 				for (j = 0; j < NUM_ITEM; j++){
 					if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false){
-						printf("\nIn this room there is: %s\n", items[j]->name);
+						printf("\nIn this room there is: %s\n", items[j]->name.C_Str());
 					}
 				}
 			}
 		}
+
+		void World::put(Vector<mystring>& options){
+			int maximum = 0;
+			if (options.size() > 1){
+				for (int i = 0; i < NUM_ITEM; i++){
+					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
+						items[i]->inventory = false;
+						items[i]->inbox = true;
+						items[i]->itempos = items[BOX]->itempos;
+						printf("You have put %s into the box", items[i]->name.C_Str());
+						//items[i]->maximum++;
+						break;
+					}
+					/*if (items[i]->itempos != player->playerposit){
+					printf("This item isn't here");
+					}*/
+				}
+			}
+
+		
+		}
+
+		void World::get(Vector<mystring>& options){
+			int maximum = 0;
+			if (options.size() > 1){
+				for (int i = 0; i < NUM_ITEM; i++){
+					if (options[1] == items[i]->name && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == true){
+						items[i]->inbox = false;
+						items[i]->inventory = true;
+						printf("You have get %s of the box", items[i]->name.C_Str());
+						//items[i]->maximum++;
+						break;
+					}
+					/*if (items[i]->itempos != player->playerposit){
+					printf("This item isn't here");
+					}*/
+				}
+			}
+
+
+		}
+

@@ -33,6 +33,8 @@ public:
 	void unequip(Vector<mystring>& options);
 	void update();
 	void itemsroom();
+	void put(Vector<mystring>& options);
+	void get(Vector<mystring>& options);
 	~World();
 };
 #endif
