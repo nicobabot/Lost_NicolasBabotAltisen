@@ -362,7 +362,7 @@ void World::movement(){
 		}
 
 
-		if (option[0] == "open" && option[1] == "north" || option[0] == "open" && option[1] == "east" || option[0] == "open" && option[1] == "west" || option[0] == "open" && option[1] == "south"){
+		if (option[0] == "open" && option[1] == "north" || option[0] == "open" && option[1] == "east" || option[0] == "open" && option[1] == "west" || option[0] == "open" && option[1] == "south" || option[0] == "pass" && option[1] == "south" || option[0] == "pass" && option[1] == "s"){
 			Open(option);
 		}
 
@@ -588,18 +588,26 @@ void World::movement(){
 			}
 
 
-			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south")
+			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south" || options[0] == "pass" && options[1] == "south" || options[0] == "pass" && options[1] == "s")
 			{
 				for (i = 0; i < EXITNUM; i++){
 					if (exit[i]->origin == player->playerposit){
 						if (exit[i]->orientation == SOUTH){
 							if (exit[i]->door == true){
 								if (exit[i]->closed == true){
+									if (player->playerposit == room[2] && items[LADDER]->inventory == false){
+										printf("YOU CAN'T PASS\n");
+										break;
+									}
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation == NORTH && exit[j]->door== true){
  											if (exit[j]->destiny == player->playerposit){
 												exit[j]->closed = false;
+												if (player->playerposit == room[2]){
+													printf("You passed the wall\n");
+													break;
+												}
 												printf("The door is opened.\n");
 												break;
 											}
