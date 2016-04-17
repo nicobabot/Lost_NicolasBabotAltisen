@@ -10,10 +10,9 @@ public:
 	bool inventory = false;
 	bool equipped = false;
 	bool inbox = false;
-	int maxinventory=3;
-	int maxequipped = 1;
-	int maximum = 0;
-	int nequip = 0;
+
+
+	
 public:
 	Item(char* name, char* description, Room* position, bool invent, bool equiped, bool inbox);
 	//void createitems();

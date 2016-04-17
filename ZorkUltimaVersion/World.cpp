@@ -496,7 +496,7 @@ void World::movement(){
 
 		
 
-		void World::Open(Vector<mystring>& options)
+		void World::Open(Vector<mystring>& options)const
 		{
 
 
@@ -646,7 +646,7 @@ void World::movement(){
 			}
 		}
 
-		void World::Close(Vector<mystring>& options)
+		void World::Close(Vector<mystring>& options)const
 		{
 
 			int i, j;
@@ -786,10 +786,9 @@ void World::movement(){
 		}
 
 		void World::pick(Vector<mystring>& options){
-			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false){
+					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false && maxinventory<=3){
 						if (options[1] == items[TICKET]->name){
 							if (items[MONEY]->inventory == false){
 								printf("You don't have money\n");
@@ -799,23 +798,29 @@ void World::movement(){
 								items[MONEY]->inventory == false;
 									printf("You have given the mony to have some information\n");
 									printf("If you go south you will find the park and near you will find House 3");
+									maxinventory++;
 							}
 						}
 						items[i]->inventory = true;
+						maxinventory++;
 						printf("%s\n %s\n", items[i]->name.C_Str(), items[i]->descrip.C_Str());
-						//items[i]->maximum++;
+						
 						return;
 					}
 					else if (options[1] == items[i]->name && items[i]->itempos != player->playerposit){
 						printf("The item isn't here");
 						return;
 					}
+					else if (maxinventory == 3){
+						printf("You have full inventory, you should drop something");
+						break;
+					}
 				}
 			}
 
 		}
 
-		void World::inventory(){
+		void World::inventory()const{
 			int i;
 
 			for (i = 0; i < NUM_ITEM; i++){
@@ -827,9 +832,8 @@ void World::movement(){
 
 		}
 
-		void World::drop(Vector<mystring>& options){
+		void World::drop(Vector<mystring>& options)const{
 
-			int maximum = 0;
 		if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
 
@@ -861,13 +865,14 @@ void World::movement(){
 					}
 					else if (options[1] == items[i]->name && items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = true;
+						items[i]->inventory = false;
 						printf("You have equiped %s\n", items[i]->name.C_Str());
 						return;
 					}
 				}
 		}		
 
-		void World::unequip(Vector<mystring>& options){
+		void World::unequip(Vector<mystring>& options)const{
 			
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
@@ -876,8 +881,9 @@ void World::movement(){
 						return;
 					}
 
-					else if (items[i]->equipped == true /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
+					else if (options[1] == items[i]->name && items[i]->equipped == true /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = false;
+						items[i]->inventory = true;
 						printf("You have unequiped %s\n", items[i]->name.C_Str());
 						//items[i]->maximum++;
 						return;;
@@ -888,7 +894,7 @@ void World::movement(){
 
 		
 
-		void World::update(){
+		void World::update()const{
 			for (int i = 0; i < NUM_ITEM; i++){
 				if (items[i]->inventory == true){
 					items[i]->itempos = player->playerposit;
@@ -899,7 +905,7 @@ void World::movement(){
 			}
 		}
 	
-		void World::itemsroom(){
+		void World::itemsroom()const{
 			int j = 0, i = 0;
 			for (j = 0; j < NUM_ITEM; j++){
 				if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false){
@@ -915,7 +921,7 @@ void World::movement(){
 			}
 		}
 
-		void World::put(Vector<mystring>& options){
+		void World::put(Vector<mystring>& options)const{
 			int maximum = 0;
 
 				for (int i = 0; i < NUM_ITEM; i++){
@@ -928,6 +934,13 @@ void World::movement(){
 						return;
 					}
 					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
+						if (items[BOX]->inventory == false){
+							items[i]->inventory = false;
+							items[i]->inbox = true;
+							items[i]->itempos = items[BOX]->itempos;
+							printf("You have put %s into the box", items[i]->name.C_Str());
+							break;
+						}	
 						items[i]->inventory = true;
 						items[i]->inbox = true;
 						items[i]->itempos = items[BOX]->itempos;
@@ -940,12 +953,14 @@ void World::movement(){
 						printf("This item isn't here");
 						return;
 					}
+
+					
 						
 				}
 		
 		}
 
-		void World::get(Vector<mystring>& options){
+		void World::get(Vector<mystring>& options)const{
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){

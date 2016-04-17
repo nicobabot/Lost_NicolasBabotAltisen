@@ -11,6 +11,9 @@
 #define EXITNUM 35
 class World{
 public:
+	int maxinventory = 0;
+	int maxequipped = 0;
+	int maxitembox = 0;
 	int q = 0;
 	Player *player = nullptr;
 	Vector<Room*> room;
@@ -22,17 +25,17 @@ public:
 	void help()const;
 	void look(Vector<mystring>&, int)const;
 	void createworld();
-	void Open(Vector<mystring>&);
-	void Close(Vector<mystring>&);
+	void Open(Vector<mystring>&)const;
+	void Close(Vector<mystring>&)const;
 	void pick(Vector<mystring>&);
-	void inventory();
-	void drop(Vector<mystring>&);
+	void inventory()const;
+	void drop(Vector<mystring>&)const;
 	void equip(Vector<mystring>& options)const;
-	void unequip(Vector<mystring>& options);
-	void update();
-	void itemsroom();
-	void put(Vector<mystring>& options);
-	void get(Vector<mystring>& options);
+	void unequip(Vector<mystring>& options)const;
+	void update()const;
+	void itemsroom()const;
+	void put(Vector<mystring>& options)const;
+	void get(Vector<mystring>& options)const;
 	void map()const;
 	~World();
 };
