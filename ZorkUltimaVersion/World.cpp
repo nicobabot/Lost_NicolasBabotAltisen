@@ -33,7 +33,7 @@ void World::createworld(){
 	//room 7
 	room.pushback(new Room("House 3", "Its seems that there is something important..."));
 	//room 8
-	room.pushback(new Room("Finish", "You finish the game"));
+	room.pushback(new Room("Finish", "You end the game"));
 
 
 
@@ -852,7 +852,7 @@ void World::movement(){
 
 		void World::equip(Vector<mystring>& options)const{
 
-			if (options.size() > 1){
+		
 				for (int i = 0; i < NUM_ITEM; i++){
 					if (options[1] == items[i]->name && items[i]->inventory == false){
 						items[i]->inbox = false;
@@ -865,7 +865,6 @@ void World::movement(){
 						return;
 					}
 				}
-			}
 		}		
 
 		void World::unequip(Vector<mystring>& options){
@@ -928,7 +927,7 @@ void World::movement(){
 						printf("You can't do this");
 						return;
 					}
-					if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
+					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
 						items[i]->inventory = true;
 						items[i]->inbox = true;
 						items[i]->itempos = items[BOX]->itempos;
@@ -937,7 +936,10 @@ void World::movement(){
 						return;
 					}
 
-					
+					else if(items[i]->itempos != player->playerposit){
+						printf("This item isn't here");
+						return;
+					}
 						
 				}
 		
