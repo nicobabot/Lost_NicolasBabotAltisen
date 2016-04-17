@@ -36,9 +36,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
@@ -66,6 +63,9 @@
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
+      <Filter>Archivos de código fuente</Filter>
+    </ClInclude>
+    <ClInclude Include="memleaks.h">
       <Filter>Archivos de código fuente</Filter>
     </ClInclude>
   </ItemGroup>

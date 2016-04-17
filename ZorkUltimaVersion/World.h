@@ -11,9 +11,7 @@
 #define EXITNUM 35
 class World{
 public:
-	
-	int quit = 0;
-	mystring *direction = nullptr;
+	int q = 0;
 	Player *player = nullptr;
 	Vector<Room*> room;
 	Vector<Exit*> exit;
@@ -22,7 +20,7 @@ public:
 	World();
 	void movement();
 	void help()const;
-	void look(Vector<mystring>&, int);
+	void look(Vector<mystring>&, int)const;
 	void createworld();
 	void Open(Vector<mystring>&);
 	void Close(Vector<mystring>&);
@@ -36,7 +34,6 @@ public:
 	void put(Vector<mystring>& options);
 	void get(Vector<mystring>& options);
 	void map()const;
-	//void passwall(Vector<mystring>&);
 	~World();
 };
 #endif

@@ -9,17 +9,9 @@
 
 World::World(){
 	player = new Player;//player
-	//room = new Room[ROOMNUM];//9 rooms
-	//exit = new Exit[EXITNUM];//33 exits
-	direction = new mystring;
-	//items = new Item[NUM_ITEM];
 }
 World::~World(){
-	//delete[] room;//free memory
-	//delete[] exit;//free memory
 	delete player;//free memory
-	delete direction;
-//	delete[] items;
 }
 
 void World::createworld(){
@@ -197,218 +189,227 @@ void World::movement(){
 		mystring command;
 
 		Vector<mystring> option = command.Tokenize(" ", direction1);
-		if (option.size() >= 1){
-	
-		system("cls");
-		//-------------------------------------------------------------------------------------------------------------North
-		if (option[0] == "go" && option[1] == "north" || option[0] == "go" && option[1] == "n" || option[0] == "n" || option[0] == "north"){
-			for (i = 0; i < EXITNUM; i++){
-				if (player->playerposit == exit[i]->origin && exit[i]->orientation == NORTH){
-					if (exit[i]->origin == exit[i]->destiny){
-						printf("There's a wall");
-						break;
-					}
-					for (j = 0; j< ROOMNUM; j++){
-						if (exit[i]->destiny == room[j]){
-							if (exit[i]->origin == exit[i]->destiny){
-								printf("%s", exit[i]->descrip);
-								break;
-							}
-							else{
-								if (exit[i]->door == true && exit[i]->closed == true){
-									printf("There's a door");
+		
 
+			system("cls");
+			//-------------------------------------------------------------------------------------------------------------North
+			if (option.size() == 2 && option[0] == "go" && option[1] == "north" || option.size() == 2 && option[0] == "go" && option[1] == "n" || option.size() == 1 && option[0] == "n" || option.size() == 1 && option[0] == "north"){
+				for (i = 0; i < EXITNUM; i++){
+					if (player->playerposit == exit[i]->origin && exit[i]->orientation == NORTH){
+						if (exit[i]->origin == exit[i]->destiny){
+							printf("There's a wall");
+							break;
+						}
+						for (j = 0; j < ROOMNUM; j++){
+							if (exit[i]->destiny == room[j]){
+								if (exit[i]->origin == exit[i]->destiny){
+									printf("%s", exit[i]->descrip);
 									break;
 								}
 								else{
-									printf("%s\n", exit[i]->name.C_Str());
-									printf("%s\n", room[j]->name.C_Str());
-									printf("%s\n", room[j]->descrip.C_Str());
-									//player->playerposit = &room[j]
-									roompos = j;
-									break;
-								
+									if (exit[i]->door == true && exit[i]->closed == true){
+										printf("There's a door");
 
-								}
-							}
-						}
-					}break;
-				}
-			}
-		}
-		//----------------------------------------------------------------------------------------------------------------West
-		if (option[0] == "go" && option[1] == "west" || option[0] == "go" && option[1] == "w" || option[0] == "w" || option[0] == "west"){
-			for (i = 0; i < EXITNUM; i++){
-				if (player->playerposit == exit[i]->origin && exit[i]->orientation == WEST){
-					if (exit[i]->origin == exit[i]->destiny){
-						printf("There's a wall");
-						break;
-					}
-					for (j = 0; j< ROOMNUM; j++){
-						if (exit[i]->destiny == room[j]){
-							if (exit[i]->origin == exit[i]->destiny){
-								printf("%s", exit[i]->descrip);
-								break;
-							}
-							else{
-								if (exit[i]->door == true && exit[i]->closed == true){
-									printf("There's a door");
-									break;
-								}
-								else{
-									printf("%s\n", exit[i]->name.C_Str());
-									printf("%s\n", room[j]->name.C_Str());
-									printf("%s\n", room[j]->descrip.C_Str());
-									//player->playerposit = &room[j]
-									roompos = j;
-									//break;
-									
-								}
-							}
-						}
-					}break;
-				}
-			}
-		}
-		//----------------------------------------------------------------------------------------------------------------South
-		if (option[0] == "go" && option[1] == "south" || option[0] == "go" && option[1] == "s" || option[0] == "s" || option[0] == "south")
-			{
-			for (i = 0; i < EXITNUM; i++){
-				if (player->playerposit == exit[i]->origin && exit[i]->orientation == SOUTH){
-					if (exit[i]->origin == exit[i]->destiny){
-						printf("There's a wall");
-						break;
-					}
-					for (j = 0; j< ROOMNUM; j++){
-						if (exit[i]->destiny == room[j]){
-							if (exit[i]->origin == exit[i]->destiny){
-								printf("%s", exit[i]->descrip);
-								break;
-							}
-							else{
-								if (exit[i]->door == true && exit[i]->closed == true){
-									if (player->playerposit == room[2]){
-										printf("There's a wall you have to pass");
+										break;
 									}
 									else{
-										printf("There's a door");
+										printf("%s\n", exit[i]->name.C_Str());
+										printf("%s\n", room[j]->name.C_Str());
+										printf("%s\n", room[j]->descrip.C_Str());
+										//player->playerposit = &room[j]
+										roompos = j;
+										break;
+
+
 									}
+								}
+							}
+						}break;
+					}
+				}
+			}
+			//----------------------------------------------------------------------------------------------------------------West
+			else if (option.size() == 2 && option[0] == "go" && option[1] == "west" || option.size() == 2 && option[0] == "go" && option[1] == "w" || option.size() == 1 && option[0] == "w" || option.size() == 1 && option[0] == "west"){
+				for (i = 0; i < EXITNUM; i++){
+					if (player->playerposit == exit[i]->origin && exit[i]->orientation == WEST){
+						if (exit[i]->origin == exit[i]->destiny){
+							printf("There's a wall");
+							break;
+						}
+						for (j = 0; j < ROOMNUM; j++){
+							if (exit[i]->destiny == room[j]){
+								if (exit[i]->origin == exit[i]->destiny){
+									printf("%s", exit[i]->descrip);
 									break;
 								}
 								else{
-									printf("%s\n", exit[i]->name.C_Str());
-									printf("%s\n", room[j]->name.C_Str());
-									printf("%s\n", room[j]->descrip.C_Str());
-									//player->playerposit = &room[j]
-									roompos = j;
-									break;
-					
+									if (exit[i]->door == true && exit[i]->closed == true){
+										printf("There's a door");
+										break;
+									}
+									else{
+										printf("%s\n", exit[i]->name.C_Str());
+										printf("%s\n", room[j]->name.C_Str());
+										printf("%s\n", room[j]->descrip.C_Str());
+										//player->playerposit = &room[j]
+										roompos = j;
+										//break;
+
+									}
 								}
 							}
-						}
-					}break;
+						}break;
+					}
 				}
 			}
-		}
-		//-----------------------------------------------------------------------------------------------------------------East
-		if (option[0] == "go" && option[1] == "east" || option[0] == "go" && option[1] == "e" || option[0] == "e" || option[0] == "east")
-		{
-			for (i = 0; i < EXITNUM; i++)
+			//----------------------------------------------------------------------------------------------------------------South
+			else if (option.size() == 2 && option[0] == "go" && option[1] == "south" || option.size() == 2 && option[0] == "go" && option[1] == "s" || option.size() == 1 && option[0] == "s" || option.size() == 1 && option[0] == "south")
 			{
-				if (player->playerposit == exit[i]->origin && exit[i]->orientation == EAST)
-				{
-					if (exit[i]->origin == exit[i]->destiny)
-					{
-						printf("%s", exit[i]->descrip);
-						break;
-					}
-					for (j = 0; j< ROOMNUM; j++)
-					{
-						if (exit[i]->destiny == room[j])
-						{
-							if (exit[i]->origin == exit[i]->destiny)
-							{
-								printf("%s", exit[i]->descrip.C_Str());
-								break;
+				for (i = 0; i < EXITNUM; i++){
+					if (player->playerposit == exit[i]->origin && exit[i]->orientation == SOUTH){
+						if (exit[i]->origin == exit[i]->destiny){
+							printf("There's a wall");
+							break;
+						}
+						for (j = 0; j < ROOMNUM; j++){
+							if (exit[i]->destiny == room[j]){
+								if (exit[i]->origin == exit[i]->destiny){
+									printf("%s", exit[i]->descrip);
+									break;
+								}
+								else{
+									if (exit[i]->door == true && exit[i]->closed == true){
+										if (player->playerposit == room[2]){
+											printf("There's a wall you have to pass");
+										}
+										else{
+											printf("There's a door");
+										}
+										break;
+									}
+									else{
+										printf("%s\n", exit[i]->name.C_Str());
+										printf("%s\n", room[j]->name.C_Str());
+										printf("%s\n", room[j]->descrip.C_Str());
+										//player->playerposit = &room[j]
+										roompos = j;
+										break;
+
+									}
+								}
 							}
-							else
+						}break;
+					}
+				}
+			}
+			//-----------------------------------------------------------------------------------------------------------------East
+			else if (option.size() == 2 && option[0] == "go" && option[1] == "east" || option.size() == 2 && option[0] == "go" && option[1] == "e" || option.size() == 1 && option[0] == "e" || option.size() == 1 && option[0] == "east")
+			{
+				for (i = 0; i < EXITNUM; i++)
+				{
+					if (player->playerposit == exit[i]->origin && exit[i]->orientation == EAST)
+					{
+						if (exit[i]->origin == exit[i]->destiny)
+						{
+							printf("%s", exit[i]->descrip);
+							break;
+						}
+						for (j = 0; j < ROOMNUM; j++)
+						{
+							if (exit[i]->destiny == room[j])
 							{
-								if (exit[i]->door == true && exit[i]->closed == true)
+								if (exit[i]->origin == exit[i]->destiny)
 								{
-									printf("There's a door");
+									printf("%s", exit[i]->descrip.C_Str());
 									break;
 								}
 								else
 								{
-									printf("%s\n", exit[i]->name.C_Str());
-									printf("%s\n", room[j]->name.C_Str());
-									printf("%s\n", room[j]->descrip.C_Str());
-									//player->playerposit = &room[j]
-									roompos = j;
-									break;
+									if (exit[i]->door == true && exit[i]->closed == true)
+									{
+										printf("There's a door");
+										break;
+									}
+									else
+									{
+										printf("%s\n", exit[i]->name.C_Str());
+										printf("%s\n", room[j]->name.C_Str());
+										printf("%s\n", room[j]->descrip.C_Str());
+										//player->playerposit = &room[j]
+										roompos = j;
+										break;
+									}
 								}
 							}
-						}
-					}break;
+						}break;
+					}
 				}
 			}
-		}
-		if (option[0] == "h" || option[0] == "help"){
-			help();
-		}
+		
+			else if (option.size() == 1 && (option[0] == "h" || option[0] == "help")){
+				help();
+			}
+			else if (option.size() == 1 && (option[0] == "map" || option[0] == "m")){
+				map();
+			}
 
-		if (option[0] == "look" && option[1] == "north" || option[0] == "look" && option[1] == "east" || option[0] == "look" && option[1] == "west" || option[0] == "look" && option[1] == "south"){
-			look(option, roompos);
-		}
+			else if (option.size() == 1 && (option[0] == "q" || option[0] == "quit")){
+				q++;
+			}
+			else if (option.size() == 1 && (option[0] == "inventory" || option[0] == "inv" || option[0] == "i")){
+				inventory();
+			}
+
+			else if (option.size() >= 2 && (option[0] == "look" && option[1] == "north" || option[0] == "look" && option[1] == "east" || option[0] == "look" && option[1] == "west" || option[0] == "look" && option[1] == "south" || option[0] == "look" && option[1] == "ladder" || option[0] == "look" && option[1] == "wrench" || option[0] == "look" && option[1] == "money" || option[0] == "look" && option[1] == "ticket" || option[0] == "look" && option[1] == "ticket" || option[0] == "look" && option[1] == "key" || option[0] == "look" && option[1] == "map" || option[0] == "look" && option[1] == "box")){
+				look(option, roompos);
+			}
 
 
-		if (option[0] == "open" && option[1] == "north" || option[0] == "open" && option[1] == "east" || option[0] == "open" && option[1] == "west" || option[0] == "open" && option[1] == "south" || option[0] == "pass" && option[1] == "south" || option[0] == "pass" && option[1] == "s"){
-			Open(option);
-		}
+			else if (option.size() >= 2 && (option[0] == "open" && option[1] == "north" || option[0] == "open" && option[1] == "east" || option[0] == "open" && option[1] == "west" || option[0] == "open" && option[1] == "south" || option[0] == "pass" && option[1] == "south" || option[0] == "pass" && option[1] == "s")){
+				Open(option);
+			}
 
-		if (option[0] == "close" && option[1] == "north" || option[0] == "close" && option[1] == "east" || option[0] == "close" && option[1] == "west" || option[0] == "close" && option[1] == "south"){
-			Close(option);
-		}
-		if (option[0] == "inventory" || option[0] == "look" && option[1] == "inventory"){
-			inventory();
-		}
-	
-			if (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map" || option[0] == "pick" && option[1] == "box"){
+			else if (option.size() >= 2 && (option[0] == "close" && option[1] == "north" || option[0] == "close" && option[1] == "east" || option[0] == "close" && option[1] == "west" || option[0] == "close" && option[1] == "south")){
+				Close(option);
+			}
+
+			else if (option.size() >= 2 && (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map" || option[0] == "pick" && option[1] == "box")){
 
 				pick(option);
 			}
 
-			if (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "drop" && option[1] == "box"){
+			else if (option.size() >= 2 && (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "drop" && option[1] == "box")){
 
 				drop(option);
 			}
 
-			if (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map"){
+			else if (option.size() >= 2 && (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map")){
 
 				equip(option);
 			}
 
-			if (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map"){
+			else if (option.size() >= 2 && (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map")){
 
 				unequip(option);
 			}
 
-			if (option[0] == "put" && option[1] == "ladder" || option[0] == "put" && option[1] == "wrench" || option[0] == "put" && option[1] == "money" || option[0] == "put" && option[1] == "ticket" || option[0] == "put" && option[1] == "key" || option[0] == "put" && option[1] == "map" || option[0] == "put" && option[1] == "box"){
+			else if (option.size() >= 2 && (option[0] == "put" && option[1] == "ladder" || option[0] == "put" && option[1] == "wrench" || option[0] == "put" && option[1] == "money" || option[0] == "put" && option[1] == "ticket" || option[0] == "put" && option[1] == "key" || option[0] == "put" && option[1] == "map" || option[0] == "put" && option[1] == "box")){
 
 				put(option);
 			}
 
-			if (option[0] == "get" && option[1] == "ladder" || option[0] == "get" && option[1] == "wrench" || option[0] == "get" && option[1] == "money" || option[0] == "get" && option[1] == "ticket" || option[0] == "get" && option[1] == "key" || option[0] == "get" && option[1] == "map" || option[0] == "get" && option[1] == "box"){
+			else if (option.size() >= 2 && (option[0] == "get" && option[1] == "ladder" || option[0] == "get" && option[1] == "wrench" || option[0] == "get" && option[1] == "money" || option[0] == "get" && option[1] == "ticket" || option[0] == "get" && option[1] == "key" || option[0] == "get" && option[1] == "map" || option[0] == "get" && option[1] == "box")){
+			get(option);
 
-				get(option);
 			}
-			if (option[0] == "map" || option[0] == "m"){
-				map();
+			
+			else{
+				printf("What?");
 			}
+			
+	
 
-		}
-
-	} while (*direction != "q");
+	} while (q==0);
 }
 
 
@@ -419,7 +420,7 @@ void World::movement(){
 
 		}
 		
-		void World::look(Vector<mystring>& options, int numroom){
+		void World::look(Vector<mystring>& options, int numroom)const{
 			int exitnum=0;//count
 
 			if (options[0] == "look" && options[1] == "north"){//if the user says look north
@@ -474,14 +475,30 @@ void World::movement(){
 					}
 				}
 			}
+			for (int x = 0; x < NUM_ITEM; x++){
+				if (options[0] == "look" && options[1] == items[x]->name && items[x]->itempos == player->playerposit){
+					printf("%s\n", items[x]->name.C_Str());
+					printf("%s\n", items[x]->descrip.C_Str());
+					if (options[1] == items[BOX]->name){
+						printf("And the items that are inside the box are:\n");
+						for (x = 0; x < NUM_ITEM; x++){
+							if (items[x]->inbox == true){
+								printf("%s\n", items[x]->name.C_Str());
+								printf("%s\n", items[x]->descrip.C_Str());
+							}
+						}
+					}
+					}
+				}
+			}
 
 
-		}
 
 		
 
 		void World::Open(Vector<mystring>& options)
 		{
+
 
 			int i, j;
 			if (options[0] == "open" && options[1] == "north" || options[0] == "open" && options[1] == "n" || options[0] == "n" || options[0] == "north")
@@ -557,7 +574,7 @@ void World::movement(){
 						if (exit[i]->orientation == EAST){
 							if (exit[i]->door == true){
 								if (exit[i]->closed == true){
-									if (player->playerposit == room[7] && items[KEY]->inventory != true){
+									if (player->playerposit == room[7] && items[KEY]->equipped != true){
 										printf("YOU CAN'T PASS");
 										break;
 									}
@@ -595,7 +612,7 @@ void World::movement(){
 						if (exit[i]->orientation == SOUTH){
 							if (exit[i]->door == true){
 								if (exit[i]->closed == true){
-									if (player->playerposit == room[2] && items[LADDER]->inventory == false){
+									if (player->playerposit == room[2] && items[LADDER]->equipped == false){
 										printf("YOU CAN'T PASS\n");
 										break;
 									}
@@ -640,6 +657,10 @@ void World::movement(){
 						if (exit[i]->orientation == NORTH){
 							if (exit[i]->door == true){
 								if (exit[i]->closed == false){
+									if (player->playerposit == room[3]){
+										printf("You can't do this\n");
+										break;
+									}
 									exit[i]->closed = true;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation == SOUTH && exit[j]->door == true && exit[j]->closed == false){
@@ -772,7 +793,7 @@ void World::movement(){
 						if (options[1] == items[TICKET]->name){
 							if (items[MONEY]->inventory == false){
 								printf("You don't have money\n");
-								break;
+								return;
 							}
 							else{
 								items[MONEY]->inventory == false;
@@ -785,10 +806,10 @@ void World::movement(){
 						//items[i]->maximum++;
 						return;
 					}
-				/*if (items[i]->itempos != player->playerposit){
-					printf("This item isn't here");
-					return;
-				}*/
+					else if (options[1] == items[i]->name && items[i]->itempos != player->playerposit){
+						printf("The item isn't here");
+						return;
+					}
 				}
 			}
 
@@ -796,6 +817,7 @@ void World::movement(){
 
 		void World::inventory(){
 			int i;
+
 			for (i = 0; i < NUM_ITEM; i++){
 				if (items[i]->inventory == true){
 					printf("You have in the inventory:");
@@ -810,16 +832,20 @@ void World::movement(){
 			int maximum = 0;
 		if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == true){
-						items[i]->inventory = false;
 
+					if (options[1] == items[i]->name && items[i]->inventory == false){
+			printf("You don't have the item in the inventary");
+			return;
+		}
+					else if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == true){
+						items[i]->inventory = false;
+						if (items[i]->equipped == true){
+							items[i]->equipped == false;
+						}
 						printf("You have droped %s\n", items[i]->name.C_Str());
-						return;;
+						return;
 					}
-				/*if (items[i]->inventory == false){
-					printf("You don't have this item in the inventory");
-					return;
-				}*/
+
 				}
 			}
 		}
@@ -828,15 +854,16 @@ void World::movement(){
 
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
+					if (options[1] == items[i]->name && items[i]->inventory == false){
+						items[i]->inbox = false;
+						printf("You don't have this item in the inventary");
+						return;
+					}
+					else if (options[1] == items[i]->name && items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = true;
 						printf("You have equiped %s\n", items[i]->name.C_Str());
 						return;
 					}
-				/*if (items[i]->inventory != true){
-					printf("You don't have this item in the inventary");
-					return;
-				}*/
 				}
 			}
 		}		
@@ -845,17 +872,17 @@ void World::movement(){
 			
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (items[i]->equipped == true /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
+					if (items[i]->inventory != true){
+						printf("You don't have this item in the inventary");
+						return;
+					}
+
+					else if (items[i]->equipped == true /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = false;
 						printf("You have unequiped %s\n", items[i]->name.C_Str());
 						//items[i]->maximum++;
 						return;;
 					}
-				
-				/*if (items[i]->inventory != true){
-					printf("You don't have this item in the inventary");
-					return;
-				}*/
 				}
 			}
 		}
@@ -893,23 +920,24 @@ void World::movement(){
 			int maximum = 0;
 
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[BOX]->name && items[BOX]->itempos == player->playerposit){
-						printf("You can't do this");
-						return;
-					}
 					/*if (items[i]->itempos != player->playerposit){
 						printf("This item isn't here");
 						return;
 					}*/
-					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
-						items[i]->inventory = false;
+					if (options[1] == items[BOX]->name && items[BOX]->itempos == player->playerposit){
+						printf("You can't do this");
+						return;
+					}
+					if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
+						items[i]->inventory = true;
 						items[i]->inbox = true;
 						items[i]->itempos = items[BOX]->itempos;
 						printf("You have put %s into the box", items[i]->name.C_Str());
 						//items[i]->maximum++;
 						return;
 					}
-						printf("This item isn't here");
+
+					
 						
 				}
 		
@@ -923,7 +951,7 @@ void World::movement(){
 						printf("You can't do this");
 						return;
 					}
-					if (options[1] == items[i]->name && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == true){
+					if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == true){
 						items[i]->inbox = false;
 						items[i]->inventory = true;
 						printf("You have get %s of the box", items[i]->name.C_Str());

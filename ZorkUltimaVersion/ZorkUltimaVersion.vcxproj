@@ -71,13 +71,13 @@
     <ClCompile Include="MyString.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="item.h" />
+    <ClInclude Include="memleaks.h" />
     <ClInclude Include="MyString.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
