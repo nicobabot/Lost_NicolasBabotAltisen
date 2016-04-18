@@ -36,7 +36,7 @@ void World::createworld(){
 	//room 4
 	room.pushback(new Room("Shop", "The seller gives you money because he is sad because you are lost."));
 	//room 5
-	room.pushback(new Room("Cinema", "If you buy my ticket i will tell you where is the house 3 where you cand find the key to enter to your house."));
+	room.pushback(new Room("Cinema", "If you buy my ticket i will tell you where is the house 3 where you can find the key to enter to your house."));
 	//room 6
 	room.pushback(new Room("Park", "Oh no! There is a thug take care!"));
 	//room 7
@@ -60,7 +60,7 @@ void World::createworld(){
 	exit.pushback(new Exit("There's a wall", "There's a wall", WEST, room[0], room[0], false, false));
 	//--------------------------------------------------------------------
 	//exit 4
-	exit.pushback(new Exit("Studiant Street", "In the east there is the school", EAST, room[1], room[2], false, false));
+	exit.pushback(new Exit("Student Street", "In the east there is the school", EAST, room[1], room[2], false, false));
 	//exit 5
 	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[1], room[1], false, false));
 	//exit 6
@@ -420,7 +420,7 @@ void World::movement(){
 
 		void World::help()const{//help description
 
-			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and in his directions, also you can look items\n\n Now the user can use this commands \n\n pick and drop items \n\n equip and unequip to use some items \n\n put and get to put or get items from the box that is in the school\n\n some door you will need a key to pass and in a wall you will need to take the ladder\n\n if the user puts inventory it will print the items that are there\n\n if you find the map you will be able to see the map of the city, you have to put m or map\n\n you don't need to look your room because there is a function that is printing all time the objects that are there\n\n");
+			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and in his directions, also you can look items\n\n Now the user can use this commands \n\n pick and drop items \n\n equip and unequip to use some items \n\n put and get to put or get items from the box that is in the school\n\n some door you will need a key to pass and in a wall you will need to take the ladder\n\n if the user puts inventory it will print the items that are there\n\n if you find the map you will be able to see the map of the city, you have to put m or map\n\n you don't need to look your room because there is a function that is printing all time the objects that are there\n\n to pass the wall you have to say pass and the direction");
 
 
 		}
@@ -582,7 +582,7 @@ void World::movement(){
 										printf("YOU CAN'T PASS");
 										break;
 									}
-									printf("The door is open\n");
+									//printf("The door is open\n");
 									exit[i]->closed = false;
 									for (j = 0; j < EXITNUM; j++){
 										if (exit[j]->orientation == WEST && exit[j]->door == true){//to open the door of the other side 
@@ -801,7 +801,7 @@ void World::movement(){
 							}
 							else{//true, if its true user loses the money
 								items[MONEY]->inventory == false;
-									printf("You have given the mony to have some information\n");
+									printf("You have given the money to have some information\n");
 									printf("If you go south you will find the park and near you will find House 3");
 									maxinventory--;
 									return;
@@ -816,8 +816,8 @@ void World::movement(){
 						printf("The item isn't here");
 						return;
 					}
-					else if (maxinventory > 3){//if the inventary is full
-						printf("You have full inventary you should drop an item");
+					else if (maxinventory > 3){//if the inventory is full
+						printf("You have full inventory you should drop an item");
 						return;
 					}
 				}
@@ -829,7 +829,7 @@ void World::movement(){
 			int i;
 
 			for (i = 0; i < NUM_ITEM; i++){
-				if (items[i]->inventory == true){//print the items that are in the inventary
+				if (items[i]->inventory == true){//print the items that are in the inventory
 					printf("You have in the inventory:");
 					printf("%s\n", items[i]->name.C_Str());
 				}
@@ -842,12 +842,12 @@ void World::movement(){
 		if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
 
-					if (options[1] == items[i]->name && items[i]->inventory == false){//it the item isn't in the inventary
-			printf("You don't have the item in the inventary");
+					if (options[1] == items[i]->name && items[i]->inventory == false){//it the item isn't in the inventory
+			printf("You don't have the item in the inventory");
 			return;
 		}
 					else if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == true){//drop the item
-						if (items[i]->inventory == true){//item of the inventary droped
+						if (items[i]->inventory == true){//item of the inventory droped
 							items[i]->inventory = false;
 						}
 						else if (items[i]->equipped == true){//item equipped droped
@@ -867,8 +867,8 @@ void World::movement(){
 
 		
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->inventory == false){//if user don't have the item in the inventary
-						printf("You don't have this item in the inventary");
+					if (options[1] == items[i]->name && items[i]->inventory == false){//if user don't have the item in the inventory
+						printf("You don't have this item in the inventory");
 						return;
 					}
 					else if (options[1] == items[i]->name && items[i]->equipped == false && items[i]->inventory == true && maxequiped==0){//if the item isn't equipped and is in the inventory
@@ -890,8 +890,8 @@ void World::movement(){
 			
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->equipped == false && items[i]->inventory == false){//if the item isn't in the inventary
-						printf("You don't have this item in the inventary");
+					if (options[1] == items[i]->name && items[i]->equipped == false && items[i]->inventory == false){//if the item isn't in the inventory
+						printf("You don't have this item in the inventory");
 						return;
 					}
 
@@ -912,7 +912,7 @@ void World::movement(){
 
 		void World::update(){//this function updates the directions of the items
 			for (int i = 0; i < NUM_ITEM; i++){
-				if (items[i]->inventory == true){//if the item is in the inventary the dicrection will be the same of the player
+				if (items[i]->inventory == true){//if the item is in the inventory the dicrection will be the same of the player
 					items[i]->itempos = player->playerposit;
 				}
 				if (items[i]->inbox == true){//if the item is in the box the tirection will be the same as the box
