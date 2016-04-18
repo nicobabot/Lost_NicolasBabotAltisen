@@ -8,7 +8,7 @@
 class mystring{
 private:
 	char *buffer = nullptr;
-	unsigned int maxcapacity=50;
+	unsigned int maxcapacity=100;
 public:
 	const char* C_Str() const;
 	mystring();

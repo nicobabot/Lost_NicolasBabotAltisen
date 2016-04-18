@@ -12,6 +12,8 @@
 class World{
 public:
 	int q = 0;
+	int maxinventory = 0;
+	int maxbox = 0;
 	Player *player = nullptr;
 	Vector<Room*> room;
 	Vector<Exit*> exit;

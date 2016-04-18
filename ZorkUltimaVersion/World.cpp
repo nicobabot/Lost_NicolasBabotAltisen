@@ -399,7 +399,7 @@ void World::movement(){
 			}
 
 			else if (option.size() >= 2 && (option[0] == "get" && option[1] == "ladder" || option[0] == "get" && option[1] == "wrench" || option[0] == "get" && option[1] == "money" || option[0] == "get" && option[1] == "ticket" || option[0] == "get" && option[1] == "key" || option[0] == "get" && option[1] == "map" || option[0] == "get" && option[1] == "box")){
-			get(option);
+				get(option);
 
 			}
 			
@@ -789,7 +789,7 @@ void World::movement(){
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false){
+					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false && maxinventory<4){
 						if (options[1] == items[TICKET]->name){
 							if (items[MONEY]->inventory == false){
 								printf("You don't have money\n");
@@ -799,15 +799,20 @@ void World::movement(){
 								items[MONEY]->inventory == false;
 									printf("You have given the mony to have some information\n");
 									printf("If you go south you will find the park and near you will find House 3");
+									maxinventory++;
 							}
 						}
 						items[i]->inventory = true;
 						printf("%s\n %s\n", items[i]->name.C_Str(), items[i]->descrip.C_Str());
-						//items[i]->maximum++;
+						maxinventory++;
 						return;
 					}
 					else if (options[1] == items[i]->name && items[i]->itempos != player->playerposit){
 						printf("The item isn't here");
+						return;
+					}
+					else if (maxinventory > 3){
+						printf("You have full inventary you should drop an item");
 						return;
 					}
 				}
@@ -843,6 +848,7 @@ void World::movement(){
 							items[i]->equipped == false;
 						}
 						printf("You have droped %s\n", items[i]->name.C_Str());
+						maxinventory--;
 						return;
 					}
 
@@ -861,6 +867,7 @@ void World::movement(){
 					}
 					else if (options[1] == items[i]->name && items[i]->equipped == false /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = true;
+						items[i]->inventory = false;
 						printf("You have equiped %s\n", items[i]->name.C_Str());
 						return;
 					}
@@ -879,7 +886,7 @@ void World::movement(){
 					else if (items[i]->equipped == true /*&& items[i]->nequip < items[i]->maxequipped*/ && items[i]->inventory == true){
 						items[i]->equipped = false;
 						printf("You have unequiped %s\n", items[i]->name.C_Str());
-						//items[i]->maximum++;
+						maxinventory--;
 						return;;
 					}
 				}
@@ -927,17 +934,25 @@ void World::movement(){
 						printf("You can't do this");
 						return;
 					}
-					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false){
-						items[i]->inventory = true;
+					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false && maxbox <3){
+						items[i]->inventory = false;
 						items[i]->inbox = true;
 						items[i]->itempos = items[BOX]->itempos;
 						printf("You have put %s into the box", items[i]->name.C_Str());
-						//items[i]->maximum++;
+						maxbox++;
 						return;
 					}
 
 					else if(items[i]->itempos != player->playerposit){
 						printf("This item isn't here");
+						return;
+					}
+					else if (items[i]->inbox == true){
+						printf("This item is in the box you should get it from there");
+						return;
+					}
+					else if (maxbox > 2){
+						printf("In the box you only can put two items");
 						return;
 					}
 						
@@ -953,17 +968,18 @@ void World::movement(){
 						printf("You can't do this");
 						return;
 					}
-					if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == true){
+					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == items[BOX]->itempos && player->playerposit == items[BOX]->itempos  && items[i]->inbox == true){
 						items[i]->inbox = false;
 						items[i]->inventory = true;
 						printf("You have get %s of the box", items[i]->name.C_Str());
-						//items[i]->maximum++;
+						maxinventory++;
+						maxbox--;
 						return;
 					}
-					/*if (items[i]->itempos != player->playerposit){
+					else if (items[i]->itempos != player->playerposit){
 					printf("This item isn't here");
 					return;
-					}*/
+					}
 				}
 			}
 
