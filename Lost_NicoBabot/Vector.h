@@ -76,7 +76,7 @@ public:
 		num_elements = 0;
 	}
 
-	bool empty(){
+	bool empty()const{
 		for (TYPE i = 0; i < num_elements; i++){
 			if (buffer[i] != NULL){
 				return false;
@@ -85,7 +85,7 @@ public:
 		return true;
 	}
 
-	uint size(){
+	uint size()const{
 		return num_elements;
 	}
 

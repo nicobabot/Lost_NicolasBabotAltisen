@@ -14,7 +14,7 @@ public:
 	mystring();
 	mystring(const char* STR);
 	mystring(const mystring& otherclas);
-	unsigned int lenght();
+	unsigned int lenght() const;
 	bool empty() const;
 	bool operator ==(const mystring& otherclas) const;
 	bool operator ==(const char* otherstring) const;
@@ -25,9 +25,10 @@ public:
 	mystring operator+(const mystring &otherclas);
 	bool SameLenght(const mystring& str);
 	bool IsSmaller(const mystring& str);
-	void clear();
+	void clear()const;
 	void set();
-	Vector<mystring> Tokenize(const char *parameters, char* option);
+	uint capacity()const;
+	Vector<mystring> Tokenize(const char *parameters, char* option)const;
 	~mystring();
 };
 #endif

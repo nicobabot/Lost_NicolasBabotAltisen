@@ -192,7 +192,7 @@ void World::movement(){
 			//system("pause");
 			return;
 		}
-		printf("Where do you want to go?\n");
+		printf("\nWhere do you want to go?\n");
 		char direction1[50];
 		gets_s(direction1, 50);
 		mystring command;

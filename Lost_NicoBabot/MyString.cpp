@@ -22,7 +22,7 @@ mystring::mystring(const mystring& otherclas){
 	strcpy_s(buffer, len, otherclas.buffer);
 }
 
-unsigned int mystring::lenght(){
+unsigned int mystring::lenght()const{
 	unsigned int i = strlen(buffer);
 	return i;
 }
@@ -96,9 +96,13 @@ mystring  mystring::operator+(const mystring &otherclas)
 	return newstring;
 }
 
-void  mystring::clear()
+void  mystring::clear()const
 {
 	buffer[0] = '\0';
+}
+
+uint mystring::capacity()const{
+	return maxcapacity;
 }
 
 void mystring::set()
@@ -114,7 +118,7 @@ void mystring::set()
 	strcpy_s(buffer, maxcapacity, otherstring);
 }
 
-Vector<mystring> mystring::Tokenize(const char *parameters, char* option){
+Vector<mystring> mystring::Tokenize(const char *parameters, char* option)const{
 	
 	uint len = strlen(option) + 1;
 	Vector<mystring> stringvector;

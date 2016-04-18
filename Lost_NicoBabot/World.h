@@ -8,7 +8,7 @@
 #include"Vector.h"
 #include"item.h"
 #define ROOMNUM 9
-#define EXITNUM 35
+#define EXITNUM 36
 class World{
 public:
 	int q = 0;
