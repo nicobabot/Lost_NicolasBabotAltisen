@@ -5,9 +5,10 @@ class Entity{
 public:
 	mystring name;
 	mystring descrip;
+
 public:
 	Entity(const char* name, const char* descrip);
-
+	virtual ~Entity();
 
 
 };

@@ -14,3 +14,6 @@ Entity::Entity(const char* name, const char* descrip) : name(name), descrip(desc
 
 
 }
+Entity::~Entity(){
+	
+}
