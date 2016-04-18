@@ -420,7 +420,7 @@ void World::movement(){
 
 		void World::help()const{//help description
 
-			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and int his directions\n There is only a door you have to open and close that now you can but in nexts Zorks you will need a key\n");
+			printf("You are lost in the city and you have to find your new house.\n You can move arround the map using ONLY lowercase.\n\n You can use to move: n, e, s, w or north, east, south, west, also go north, go south, go west, go east.\n\n There will be doors in the map you can open and close some them using open and to close use the word close.\n You can look what is in the room you are and in his directions, also you can look items\n\n Now the user can use this commands \n\n pick and drop items \n\n equip and unequip to use some items \n\n put and get to put or get items from the box that is in the school\n\n some door you will need a key to pass and in a wall you will need to take the ladder\n\n if the user puts inventory it will print the items that are there\n\n if you find the map you will be able to see the map of the city, you have to put m or map\n\n you don't need to look your room because there is a function that is printing all time the objects that are there\n\n");
 
 
 		}
