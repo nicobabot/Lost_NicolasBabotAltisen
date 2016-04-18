@@ -16,7 +16,7 @@ public:
 	int nequip = 0;
 public:
 	Item(char* name, char* description, Room* position, bool invent, bool equiped, bool inbox);
-	//void createitems();
+	
 	~Item();
 
 

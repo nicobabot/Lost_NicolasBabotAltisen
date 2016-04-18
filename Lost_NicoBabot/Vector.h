@@ -111,7 +111,7 @@ public:
 		delete[]buffer;
 	}
 
-	//hacer: empty(), clean(), size(), capacity(), pop_back() elimina ultimo elemento, shrink_to_fit()
+	
 
 };
 #endif
