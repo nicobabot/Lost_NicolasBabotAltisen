@@ -14,6 +14,7 @@ public:
 	int q = 0;
 	int maxinventory = 0;
 	int maxbox = 0;
+	int maxequiped=0;
 	Player *player = nullptr;
 	Vector<Room*> room;
 	Vector<Exit*> exit;
@@ -29,7 +30,7 @@ public:
 	void pick(Vector<mystring>&);
 	void inventory();
 	void drop(Vector<mystring>&);
-	void equip(const Vector<mystring>& options)const;
+	void equip(const Vector<mystring>& options);
 	void unequip(Vector<mystring>& options);
 	void update();
 	void itemsroom();

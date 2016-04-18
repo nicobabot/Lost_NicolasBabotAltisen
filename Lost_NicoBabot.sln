@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZorkUltimaVersion", "ZorkUltimaVersion\ZorkUltimaVersion.vcxproj", "{D6071A45-070D-4832-A22A-337CE9D2D273}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lost_NicoBabot", "Lost_NicoBabot\Lost_NicoBabot.vcxproj", "{D6071A45-070D-4832-A22A-337CE9D2D273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
