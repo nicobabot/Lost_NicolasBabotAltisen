@@ -16,9 +16,12 @@ public:
 	int maxbox = 0;
 	int maxequiped=0;
 	Player *player = nullptr;
+	Vector<Entity*> entities;
+	/*
 	Vector<Room*> room;
 	Vector<Exit*> exit;
 	Vector<Item*> items;
+	*/
 public:
 	World();
 	void movement();

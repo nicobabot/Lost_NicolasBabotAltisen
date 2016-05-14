@@ -5,7 +5,7 @@ class Room : public Entity{
 public:
 	
 	
-	Room(char *str1, char *str2);
+	Room(char *str1, char *str2, TYPE type);
 
 
 

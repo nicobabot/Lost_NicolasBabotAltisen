@@ -4,12 +4,13 @@
 #include"MyString.h"
 #include"Vector.h"
 #include"Entity.h"
+#include"Entity.h"
 
 
 World::World(){
 	player = new Player;//player
 }
-World::~World(){
+World::~World(){/*
 	for (int i = 0; i < EXITNUM; i++){
 		delete exit[i];
 	}
@@ -18,30 +19,30 @@ World::~World(){
 	}
 	for (int i = 0; i < NUM_ITEM; i++){
 		delete items[i];
-	}
+	}*/
 	delete player;//free memory
 }
 
 void World::createworld(){
 	//room 0
-	room.pushback(new Room("Entrance of the city", "You are in the entrance of the city and you have to find your house."));
+	entities.pushback(new Room("Entrance of the city", "You are in the entrance of the city and you have to find your house.", ROOM));
 	//--------------------------------------------------------------------
 	//room 1
-	room.pushback(new Room("House 1", "In this house there is only a woman tell you that near her house there's a school, and also she that she has a ladder. If you want to continue serching go out of the house."));
+	entities.pushback(new Room("House 1", "In this house there is only a woman tell you that near her house there's a school, and also she that she has a ladder. If you want to continue serching go out of the house.", ROOM));
 	//room 2
-	room.pushback(new Room("School", "There's a girl and she want to talk with you. Here you have a box."));
+	entities.pushback(new Room("School", "There's a girl and she want to talk with you. Here you have a box.", ROOM));
 	//room 3
-	room.pushback(new Room("House 2", "An old man explain information about the family of the house three.The family three controls the city and may have the key to unlock the doors that are next to his house. And the old man will offer to the boy a wrench and he will say : the streets are dangerous if a young boy goes alone."));
+	entities.pushback(new Room("House 2", "An old man explain information about the family of the house three.The family three controls the city and may have the key to unlock the doors that are next to his house. And the old man will offer to the boy a wrench and he will say : the streets are dangerous if a young boy goes alone.", ROOM));
 	//room 4
-	room.pushback(new Room("Shop", "The seller gives you money because he is sad because you are lost."));
+	entities.pushback(new Room("Shop", "The seller gives you money because he is sad because you are lost.", ROOM));
 	//room 5
-	room.pushback(new Room("Cinema", "If you buy my ticket i will tell you where is the house 3 where you can find the key to enter to your house."));
+	entities.pushback(new Room("Cinema", "If you buy my ticket i will tell you where is the house 3 where you can find the key to enter to your house.", ROOM));
 	//room 6
-	room.pushback(new Room("Park", "Oh no! There is a thug take care!"));
+	entities.pushback(new Room("Park", "Oh no! There is a thug take care!", ROOM));
 	//room 7
-	room.pushback(new Room("House 3", "Its seems that there is something important..."));
+	entities.pushback(new Room("House 3", "Its seems that there is something important...", ROOM));
 	//room 8
-	room.pushback(new Room("Finish", "You end the game"));
+	entities.pushback(new Room("Finish", "You end the game", ROOM));
 
 
 
@@ -50,129 +51,129 @@ void World::createworld(){
 
 	
 	//exit 0
-	exit.pushback(new Exit("Main street", "In the east there is the house 1", EAST, room[0], room[1], false, false));
+	entities.pushback(new Exit("Main street", "In the east there is the house 1", EAST, (Room*)entities[0], (Room*)entities[1], false, false, EXIT));
 	//exit 1
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[0], room[0], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[0], (Room*)entities[0], false, false, EXIT));
 	//exit 2
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[0], room[0], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[0], (Room*)entities[0], false, false, EXIT));
 	//exit 3
-	exit.pushback(new Exit("There's a wall", "There's a wall", WEST, room[0], room[0], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", WEST, (Room*)entities[0], (Room*)entities[0], false, false, EXIT));
 	//--------------------------------------------------------------------
 	//exit 4
-	exit.pushback(new Exit("Student Street", "In the east there is the school", EAST, room[1], room[2], false, false));
+	entities.pushback(new Exit("Student Street", "In the east there is the school", EAST, (Room*)entities[1], (Room*)entities[2], false, false, EXIT));
 	//exit 5
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[1], room[1], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[1], (Room*)entities[1], false, false, EXIT));
 	//exit 6
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[1], room[1], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[1], (Room*)entities[1], false, false, EXIT));
 	//exit 7
-	exit.pushback(new Exit("Main street", "In the west there is the entrance of the city", WEST, room[1], room[0], false, false));
+	entities.pushback(new Exit("Main street", "In the west there is the entrance of the city", WEST, (Room*)entities[1], (Room*)entities[0], false, false, EXIT));
 
 
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	
 	//exit 8
-	exit.pushback(new Exit("There's a wall", "There's a wall", EAST, room[2], room[2], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", EAST, (Room*)entities[2], (Room*)entities[2], false, false, EXIT));
 	//exit 9
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[2], room[2], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[2], (Room*)entities[2], false, false, EXIT));
 	//exit 10
-	exit.pushback(new Exit("Joan Oliver street", "In the south there is the house 2", SOUTH, room[2], room[3], true, true));
+	entities.pushback(new Exit("Joan Oliver street", "In the south there is the house 2", SOUTH, (Room*)entities[2], (Room*)entities[3], true, true, EXIT));
 	//exit 11
-	exit.pushback(new Exit("Student Street", "In the west there is the house 1", WEST, room[2], room[1], false, false));
+	entities.pushback(new Exit("Student Street", "In the west there is the house 1", WEST, (Room*)entities[2], (Room*)entities[1], false, false, EXIT));
 	
 	//----------------------------------------------
 	//--------------------------------------------------------------------
 	//exit 12
-	exit.pushback(new Exit("Verdi street", "In the east there is the shop", EAST, room[3], room[4], false, false));
+	entities.pushback(new Exit("Verdi street", "In the east there is the shop", EAST, (Room*)entities[3], (Room*)entities[4], false, false, EXIT));
 	//exit 13
-	exit.pushback(new Exit("Joan Oliver street", "In the north there is the school", NORTH, room[3], room[2], true, true));
+	entities.pushback(new Exit("Joan Oliver street", "In the north there is the school", NORTH, (Room*)entities[3], (Room*)entities[2], true, true, EXIT));
 	//exit 14
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[3], room[3], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[3], (Room*)entities[3], false, false, EXIT));
 	//exit 15
-	exit.pushback(new Exit("There's a wall", "There's a wall", WEST, room[3], room[3], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", WEST, (Room*)entities[3], (Room*)entities[3], false, false, EXIT));
 	
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	//exit 16
-	exit.pushback(new Exit("Elisenda street", "In the east there is the cinema", EAST, room[4], room[5], false, false));
+	entities.pushback(new Exit("Elisenda street", "In the east there is the cinema", EAST, (Room*)entities[4], (Room*)entities[5], false, false, EXIT));
 	//exit 17
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[4], room[4], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[4], (Room*)entities[4], false, false, EXIT));
 	//exit 18
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[4], room[4], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[4], (Room*)entities[4], false, false, EXIT));
 	//exit 19
-	exit.pushback(new Exit("Verdi street", "In the east there is the house 2", WEST, room[4], room[3], false, false));
+	entities.pushback(new Exit("Verdi street", "In the east there is the house 2", WEST, (Room*)entities[4], (Room*)entities[3], false, false, EXIT));
 	
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	//exit 20
-	exit.pushback(new Exit("There's a wall", "There's a wall", EAST, room[5], room[5], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", EAST, (Room*)entities[5], (Room*)entities[5], false, false, EXIT));
 	//exit 21
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[5], room[5], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[5], (Room*)entities[5], false, false, EXIT));
 	//exit 22
-	exit.pushback(new Exit("Hobby street", "In the south there is the park", SOUTH, room[5], room[6], false, false));
+	entities.pushback(new Exit("Hobby street", "In the south there is the park", SOUTH, (Room*)entities[5], (Room*)entities[6], false, false, EXIT));
 	//exit 23
-	exit.pushback(new Exit("Elisenda street", "In the south there is the shop", WEST, room[5], room[4], false, false));
+	entities.pushback(new Exit("Elisenda street", "In the south there is the shop", WEST, (Room*)entities[5], (Room*)entities[4], false, false, EXIT));
 
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	//exit 24
-	exit.pushback(new Exit("Residencial Street", "In the east there is the house 3", EAST, room[6], room[7], false, false));
+	entities.pushback(new Exit("Residencial Street", "In the east there is the house 3", EAST, (Room*)entities[6], (Room*)entities[7], false, false, EXIT));
 	//exit 25
-	exit.pushback(new Exit("Hobby street", "In the north there is the cinema", NORTH, room[6], room[5], false, false));
+	entities.pushback(new Exit("Hobby street", "In the north there is the cinema", NORTH, (Room*)entities[6], (Room*)entities[5], false, false, EXIT));
 	//exit 26
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[6], room[6], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[6], (Room*)entities[6], false, false, EXIT));
 	//exit 27
-	exit.pushback(new Exit("There's a wall", "There's a wall", WEST, room[6], room[6], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", WEST, (Room*)entities[6], (Room*)entities[6], false, false, EXIT));
 	
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	//exit 28
-	exit.pushback(new Exit("Residencial Street", "In the east there is the goal", EAST, room[7], room[8], true, true));
+	entities.pushback(new Exit("Residencial Street", "In the east there is the goal", EAST, (Room*)entities[7], (Room*)entities[8], true, true, EXIT));
 	//exit 29
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[7], room[7], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[7], (Room*)entities[7], false, false, EXIT));
 	//exit 30
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[7], room[7], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[7], (Room*)entities[7], false, false, EXIT));
 	//exit 31
-	exit.pushback(new Exit("Residencial Street", "In the east there is the park", WEST, room[7], room[6], false, false));
+	entities.pushback(new Exit("Residencial Street", "In the east there is the park", WEST, (Room*)entities[7], (Room*)entities[6], false, false, EXIT));
 
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	//exit 32
-	exit.pushback(new Exit("There's a wall", "There's a wall", EAST, room[8], room[8], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", EAST, (Room*)entities[8], (Room*)entities[8], false, false, EXIT));
 	//exit 33
-	exit.pushback(new Exit("There's a wall", "There's a wall", NORTH, room[8], room[8], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[8], (Room*)entities[8], false, false, EXIT));
 	//exit 34
-	exit.pushback(new Exit("There's a wall", "There's a wall", SOUTH, room[8], room[8], false, false));
+	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[8], (Room*)entities[8], false, false, EXIT));
 	//exit 35
-	exit.pushback(new Exit("Residencial Street", "In the west there's house 3", WEST, room[8], room[7], true, true));
+	entities.pushback(new Exit("Residencial Street", "In the west there's house 3", WEST, (Room*)entities[8], (Room*)entities[7], true, true, EXIT));
 
 	//ITEMS---------------------------------------------
-	//item 0
-	items.pushback(new Item("ladder", "A ladder that you can use it to pass walls", room[1], false, false, false));
+	//item 43 (1)
+	entities.pushback(new Item("ladder", "A ladder that you can use it to pass walls", (Room*)entities[1], false, false, false, ITEM));
+	
+	//-------
+	//item 44 (2)
+	entities.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", (Room*)entities[3], false, false, false, ITEM));
+	
+	//-------
+	//item 45 (3)
+	entities.pushback(new Item("money", "With this money you can buy somthing", (Room*)entities[4], false, false, false, ITEM));
+	
+	//-------
+	//item 46 (4)
+	entities.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", (Room*)entities[5], false, false, false, ITEM));
 
 	//-------
-	//item 1
-	items.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", room[3], false, false, false));
+	//item 47 (5)
+	entities.pushback(new Item("key", "With this key you can enter to your house!!", (Room*)entities[7], false, false, false, ITEM));
 	
 	//-------
-	//item 2
-	items.pushback(new Item("money", "With this money you can buy somthing", room[4], false, false, false));
+	//item 48 (6)
+	entities.pushback(new Item("map", "With this special feature if you press you can see the map of the city", (Room*)entities[2], false, false, false, ITEM));
 	
 	//-------
-	//item 3
-	items.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", room[5], false, false, false));
-
-	//-------
-	//item 4
-	items.pushback(new Item("key", "With this key you can enter to your house!!", room[7], false, false, false));
-	
-	//-------
-	//item 5
-	items.pushback(new Item("map", "With this special feature if you press you can see the map of the city", room[2], false, false, false));
-	
-	//-------
-	//item 6
-	items.pushback(new Item("box", "A box that you find in school and you can put and get things", room[2], false, false, false));
+	//item 49 (7)
+	entities.pushback(new Item("box", "A box that you find in school and you can put and get things", (Room*)entities[2], false, false, false, ITEM));
 
 }
 
@@ -184,14 +185,15 @@ void World::movement(){
 	help();	
 	
 	do{
-		player->playerposit = room[roompos];
+		player->playerposit = (Room*)entities[roompos];
 		update();
 		itemsroom();
-		if (player->playerposit == room[8]){
+		if (player->playerposit == (Room*)entities[8]){
 			//system("pause");
 			return;
 		}
 		printf("\nWhere do you want to go?\n");
+		printf("%s", entities[7]->name);
 		char direction1[50];
 		gets_s(direction1, 50);
 		mystring command;
@@ -203,27 +205,27 @@ void World::movement(){
 			//-------------------------------------------------------------------------------------------------------------North
 			if (option.size() == 2 && option[0] == "go" && option[1] == "north" || option.size() == 2 && option[0] == "go" && option[1] == "n" || option.size() == 1 && option[0] == "n" || option.size() == 1 && option[0] == "north"){
 				for (i = 0; i < EXITNUM; i++){
-					if (player->playerposit == exit[i]->origin && exit[i]->orientation == NORTH){ //if the origin is the same position as the origin, also look the orientation
-						if (exit[i]->origin == exit[i]->destiny){//if the origin and the destiny are the same there's a wall
+					if (entities[i]->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == NORTH){ //if the origin is the same position as the origin, also look the orientation
+						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("\nThere's a wall");
 							break;
 						}
 						for (j = 0; j < ROOMNUM; j++){
-							if (exit[i]->destiny == room[j]){//if the destiny is the same position of the room
-								if (exit[i]->origin == exit[i]->destiny){
-									printf("%s", exit[i]->descrip);
+							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
+								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
+									printf("%s", ((Exit*)entities[i])->descrip);
 									break;
 								}
 								else{
-									if (exit[i]->door == true && exit[i]->closed == true){//if there's a door and if its closed
+									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
 										printf("There's a door");
 
 										break;
 									}
 									else{
-										printf("%s\n", exit[i]->name.C_Str());//print the exit
-										printf("%s\n", room[j]->name.C_Str());//print the room
-										printf("%s\n", room[j]->descrip.C_Str());//print the description of the room
+										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
+										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
+										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										roompos = j;
 										break;
 
@@ -238,26 +240,26 @@ void World::movement(){
 			//----------------------------------------------------------------------------------------------------------------West
 			else if (option.size() == 2 && option[0] == "go" && option[1] == "west" || option.size() == 2 && option[0] == "go" && option[1] == "w" || option.size() == 1 && option[0] == "w" || option.size() == 1 && option[0] == "west"){
 				for (i = 0; i < EXITNUM; i++){
-					if (player->playerposit == exit[i]->origin && exit[i]->orientation == WEST){//if the origin is the same position as the origin, also look the orientation
-						if (exit[i]->origin == exit[i]->destiny){//if the origin and the destiny are the same there's a wall
+					if (((Exit*)entities[i])->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == WEST){//if the origin is the same position as the origin, also look the orientation
+						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
 							break;
 						}
 						for (j = 0; j < ROOMNUM; j++){
-							if (exit[i]->destiny == room[j]){//if the destiny is the same position of the room
-								if (exit[i]->origin == exit[i]->destiny){
-									printf("%s", exit[i]->descrip);
+							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
+								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
+									printf("%s", ((Exit*)entities[i])->descrip);
 									break;
 								}
 								else{
-									if (exit[i]->door == true && exit[i]->closed == true){//if there's a door and if its closed
+									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
 										printf("There's a door");
 										break;
 									}
 									else{
-										printf("%s\n", exit[i]->name.C_Str());//print the exit
-										printf("%s\n", room[j]->name.C_Str());//print the room
-										printf("%s\n", room[j]->descrip.C_Str());//print the description of the room
+										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
+										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
+										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										roompos = j;
 										break;
 
@@ -272,20 +274,20 @@ void World::movement(){
 			else if (option.size() == 2 && option[0] == "go" && option[1] == "south" || option.size() == 2 && option[0] == "go" && option[1] == "s" || option.size() == 1 && option[0] == "s" || option.size() == 1 && option[0] == "south")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (player->playerposit == exit[i]->origin && exit[i]->orientation == SOUTH){//if the origin is the same position as the origin, also look the orientation
-						if (exit[i]->origin == exit[i]->destiny){//if the origin and the destiny are the same there's a wall
+					if (((Exit*)entities[i])->Typeobj== EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == SOUTH){//if the origin is the same position as the origin, also look the orientation
+						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
 							break;
 						}
 						for (j = 0; j < ROOMNUM; j++){
-							if (exit[i]->destiny == room[j]){//if the destiny is the same position of the room
-								if (exit[i]->origin == exit[i]->destiny){
-									printf("%s", exit[i]->descrip);
+							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
+								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
+									printf("%s", ((Exit*)entities[i])->descrip);
 									break;
 								}
 								else{
-									if (exit[i]->door == true && exit[i]->closed == true){//if there's a door and if its closed
-										if (player->playerposit == room[2]){
+									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
+										if (player->playerposit == (Room*)entities[2]){
 											printf("There's a wall you have to pass");
 										}
 										else{
@@ -294,9 +296,9 @@ void World::movement(){
 										break;
 									}
 									else{
-										printf("%s\n", exit[i]->name.C_Str());//print the exit
-										printf("%s\n", room[j]->name.C_Str());//print the room
-										printf("%s\n", room[j]->descrip.C_Str());//print the description of the room
+										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
+										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
+										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										roompos = j;
 										break;
 
@@ -312,34 +314,34 @@ void World::movement(){
 			{
 				for (i = 0; i < EXITNUM; i++)
 				{
-					if (player->playerposit == exit[i]->origin && exit[i]->orientation == EAST)//if the origin is the same position as the origin, also look the orientation
+					if (((Exit*)entities[i])->Typeobj == EXIT &&player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == EAST)//if the origin is the same position as the origin, also look the orientation
 					{
-						if (exit[i]->origin == exit[i]->destiny)//if the origin and the destiny are the same there's a wall
+						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny)//if the origin and the destiny are the same there's a wall
 						{
-							printf("%s", exit[i]->descrip);
+							printf("%s", ((Exit*)entities[i])->descrip);
 							break;
 						}
 						for (j = 0; j < ROOMNUM; j++)
 						{
-							if (exit[i]->destiny == room[j])//if the destiny is the same position of the room
+							if (((Exit*)entities[i])->destiny == (Room*)entities[j])//if the destiny is the same position of the room
 							{
-								if (exit[i]->origin == exit[i]->destiny)
+								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny)
 								{
-									printf("%s", exit[i]->descrip.C_Str());
+									printf("%s", ((Exit*)entities[i])->descrip.C_Str());
 									break;
 								}
 								else
 								{
-									if (exit[i]->door == true && exit[i]->closed == true)//if there's a door and if its closed
+									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true)//if there's a door and if its closed
 									{
 										printf("There's a door");
 										break;
 									}
 									else
 									{
-										printf("%s\n", exit[i]->name.C_Str());//print the exit
-										printf("%s\n", room[j]->name.C_Str());//print the room
-										printf("%s\n", room[j]->descrip.C_Str());//print the description of the room
+										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
+										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
+										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										roompos = j;
 										break;
 									}
@@ -430,11 +432,11 @@ void World::movement(){
 			if (options[0] == "look" && options[1] == "north"){//if the user says look north
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
-					if (exit[exitnum]->orientation == NORTH)//exits with north orientation
+					if (((Exit*)entities[exitnum])->orientation == NORTH && ((Exit*)entities[exitnum])->Typeobj==EXIT)//exits with north orientation
 					{
-						if (exit[exitnum]->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
-							printf("%s\n", exit[exitnum]->descrip.C_Str());
+							printf("%s\n", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
 
 					}
@@ -443,11 +445,11 @@ void World::movement(){
 			if (options[0] == "look" && options[1] == "west"){//if the user says look west
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
-					if (exit[exitnum]->orientation == WEST)//exits with west orientation
+					if (((Exit*)entities[exitnum])->orientation == WEST && ((Exit*)entities[exitnum])->Typeobj == EXIT)//exits with west orientation
 					{
-						if (exit[exitnum]->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
-							printf("%s\n", exit[exitnum]->descrip.C_Str());
+							printf("%s\n", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
 					}
 				}
@@ -456,11 +458,11 @@ void World::movement(){
 			if (options[0] == "look" && options[1] == "south"){//if the user says look south
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
-					if (exit[exitnum]->orientation == SOUTH)//exits with south orientation
+					if (((Exit*)entities[exitnum])->orientation == SOUTH && ((Exit*)entities[exitnum])->Typeobj == EXIT)//exits with south orientation
 					{
-						if (exit[exitnum]->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
-							printf("%s\n", exit[exitnum]->descrip.C_Str());
+							printf("%s\n", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
 					}
 				}
@@ -469,25 +471,25 @@ void World::movement(){
 			if (options[0] == "look" && options[1] == "east"){//if the user says look east
 				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
 				{
-					if (exit[exitnum]->orientation == EAST)//exits with east orientation
+					if (((Exit*)entities[exitnum])->orientation == EAST && ((Exit*)entities[exitnum])->Typeobj == EXIT)//exits with east orientation
 					{
-						if (exit[exitnum]->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
-							printf("%s", exit[exitnum]->descrip.C_Str());
+							printf("%s", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
 					}
 				}
 			}
 			for (int x = 0; x < NUM_ITEM; x++){
-				if (options[0] == "look" && options[1] == items[x]->name && items[x]->itempos == player->playerposit){//what object did the user said and if its in the same position of the player
-					printf("%s\n", items[x]->name.C_Str());//name
-					printf("%s\n", items[x]->descrip.C_Str());//description
-					if (options[1] == items[BOX]->name){//if its look box
+				if (options[0] == "look" && options[1] == ((Item*)entities[x])->name && ((Item*)entities[x])->itempos == player->playerposit && ((Item*)entities[x])->Typeobj ==ITEM){//what object did the user said and if its in the same position of the player
+					printf("%s\n", ((Item*)entities[x])->name.C_Str());//name
+					printf("%s\n", ((Item*)entities[x])->descrip.C_Str());//description
+					if (options[1] == ((Item*)entities[BOX])->name){//if its look box
 						printf("And the items that are inside the box are:\n");
 						for (x = 0; x < NUM_ITEM; x++){
-							if (items[x]->inbox == true){//print the objects that ar inside the box
-								printf("%s\n", items[x]->name.C_Str());//name
-								printf("%s\n", items[x]->descrip.C_Str());//description
+							if (((Item*)entities[x])->inbox == true){//print the objects that ar inside the box
+								printf("%s\n", ((Item*)entities[x])->name.C_Str());//name
+								printf("%s\n", ((Item*)entities[x])->descrip.C_Str());//description
 							}
 						}
 					}
@@ -507,15 +509,15 @@ void World::movement(){
 			if (options[0] == "open" && options[1] == "north" || options[0] == "open" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == NORTH){//looks the orientation
-							if (exit[i]->door == true){//if it has door
-								if (exit[i]->closed == true){// if its closed 
-									exit[i]->closed = false;
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == NORTH){//looks the orientation
+							if (((Exit*)entities[i])->door == true){//if it has door
+								if (((Exit*)entities[i])->closed == true){// if its closed 
+									((Exit*)entities[i])->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == SOUTH && exit[j]->door == true){//what direcction looks the door of the other side and if it has door
-											if (exit[j]->destiny->name == exit[i]->origin->name){//if destiny in the second for is the same as origin 
-												exit[j]->closed = false;
+										if (((Exit*)entities[j])->orientation == SOUTH && ((Exit*)entities[j])->door == true){//what direcction looks the door of the other side and if it has door
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){//if destiny in the second for is the same as origin 
+												((Exit*)entities[j])->closed = false;
 												printf("The door is opened.\n");
 												return;
 											}
@@ -540,15 +542,15 @@ void World::movement(){
 			if (options[0] == "open" && options[1] == "west" || options[0] == "open" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == WEST){//looks the orientation
-							if (exit[i]->door == true){// if it has door 
-								if (exit[i]->closed == true){// if its closed 
-									exit[i]->closed = false;
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == WEST){//looks the orientation
+							if (((Exit*)entities[i])->door == true){// if it has door 
+								if (((Exit*)entities[i])->closed == true){// if its closed 
+									((Exit*)entities[i])->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == EAST && exit[j]->door == true){//what direcction looks the door of the other side and if it has door
-											if (exit[j]->destiny->name == exit[i]->origin->name){//if destiny in the second for is the same as origin 
-												exit[j]->closed = false;
+										if (((Exit*)entities[j])->orientation == EAST && ((Exit*)entities[j])->door == true){//what direcction looks the door of the other side and if it has door
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){//if destiny in the second for is the same as origin 
+												((Exit*)entities[j])->closed = false;
 												printf("The door is opened.\n");
 												return;
 											}
@@ -573,20 +575,20 @@ void World::movement(){
 			if (options[0] == "open" && options[1] == "east" || options[0] == "open" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == EAST){//looks the orientation
-							if (exit[i]->door == true){// if it has door 
-								if (exit[i]->closed == true){// if its closed 
-									if (player->playerposit == room[7] && items[KEY]->equipped != true){//if its the last room you need the key to pass
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj==EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == EAST){//looks the orientation
+							if (((Exit*)entities[i])->door == true){// if it has door 
+								if (((Exit*)entities[i])->closed == true){// if its closed 
+									if (player->playerposit == (Room*)entities[7] && ((Item*)entities[KEY])->equipped != true){//if its the last room you need the key to pass
 										printf("YOU CAN'T PASS");
 										break;
 									}
 									//printf("The door is open\n");
-									exit[i]->closed = false;
+									((Exit*)entities[i])->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == WEST && exit[j]->door == true){//to open the door of the other side 
-											if (exit[j]->destiny->name == exit[i]->origin->name){
-												exit[j]->closed = false;
+										if (((Exit*)entities[j])->orientation == WEST && ((Exit*)entities[j])->door == true){//to open the door of the other side 
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){
+												((Exit*)entities[j])->closed = false;
 												printf("The door is opened.\n");
 												break;
 											}
@@ -611,20 +613,20 @@ void World::movement(){
 			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south" || options[0] == "pass" && options[1] == "south" || options[0] == "pass" && options[1] == "s")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin == player->playerposit){//if the origin is the same as the player position
-						if (exit[i]->orientation == SOUTH){//looks the orientation
-							if (exit[i]->door == true){// if it has door 
-								if (exit[i]->closed == true){// if its closed 
-									if (player->playerposit == room[2] && items[LADDER]->equipped == false){//if its the room 2 you will need a ladder to pass
+					if (((Exit*)entities[i])->origin == player->playerposit && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == SOUTH){//looks the orientation
+							if (((Exit*)entities[i])->door == true){// if it has door 
+								if (((Exit*)entities[i])->closed == true){// if its closed 
+									if (player->playerposit == (Room*)entities[2] && ((Item*)entities[LADDER])->equipped == false){//if its the room 2 you will need a ladder to pass
 										printf("YOU CAN'T PASS\n");
 										break;
 									}
-									exit[i]->closed = false;
+									((Exit*)entities[i])->closed = false;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == NORTH && exit[j]->door== true){//to open the door of the other side 
- 											if (exit[j]->destiny == player->playerposit){
-												exit[j]->closed = false;
-												if (player->playerposit == room[2]){//if its room 2 have to print you passed the wall
+										if (((Exit*)entities[j])->orientation == NORTH && ((Exit*)entities[j])->door == true){//to open the door of the other side 
+											if (((Exit*)entities[j])->destiny == player->playerposit){
+												((Exit*)entities[j])->closed = false;
+												if (player->playerposit == (Room*)entities[2]){//if its room 2 have to print you passed the wall
 													printf("You passed the wall\n");
 													break;
 												}
@@ -656,19 +658,19 @@ void World::movement(){
 			if (options[0] == "close" && options[1] == "north" || options[0] == "close" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == NORTH){//looks the orientation
-							if (exit[i]->door == true){//if it has door
-								if (exit[i]->closed == false){//if its closed
-									if (player->playerposit == room[3]){//in the room 2 you have to pass a wall then you can't close north
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == NORTH){//looks the orientation
+							if (((Exit*)entities[i])->door == true){//if it has door
+								if (((Exit*)entities[i])->closed == false){//if its closed
+									if (player->playerposit == (Room*)entities[3]){//in the room 2 you have to pass a wall then you can't close north
 										printf("You can't do this\n");
 										break;
 									}
-									exit[i]->closed = true;
+									((Exit*)entities[i])->closed = true;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == SOUTH && exit[j]->door == true && exit[j]->closed == false){//to close the door of the other side
-											if (exit[j]->destiny->name == exit[i]->origin->name){
-												exit[j]->closed == true;
+										if (((Exit*)entities[j])->orientation == SOUTH && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){//to close the door of the other side
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){
+												((Exit*)entities[j])->closed == true;
 												printf("The door is closed.\n");
 												return;
 											}
@@ -692,15 +694,15 @@ void World::movement(){
 			if (options[0] == "close" && options[1] == "west" || options[0] == "close" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == WEST){//looks the orientation
-							if (exit[i]->door == true){//if it has door
-								if (exit[i]->closed == false){//if its closed
-									exit[i]->closed = true;
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == WEST){//looks the orientation
+							if (((Exit*)entities[i])->door == true){//if it has door
+								if (((Exit*)entities[i])->closed == false){//if its closed
+									((Exit*)entities[i])->closed = true;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation == EAST){//to close the door of the other side
-											if (exit[j]->destiny->name == exit[i]->origin->name && exit[j]->door == true && exit[j]->closed == false){
-												exit[j]->closed = true;
+										if (((Exit*)entities[j])->orientation == EAST){//to close the door of the other side
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){
+												((Exit*)entities[j])->closed = true;
 												printf("The door is closed.\n");
 												return;
 											}
@@ -725,15 +727,15 @@ void World::movement(){
 			if (options[0] == "close" && options[1] == "east" || options[0] == "close" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == EAST){//looks the orientation
-							if (exit[i]->door == true){//if it has door
-								if (exit[i]->closed == false){//if its closed
-									exit[i]->closed = true;
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == EAST){//looks the orientation
+							if (((Exit*)entities[i])->door == true){//if it has door
+								if (((Exit*)entities[i])->closed == false){//if its closed
+									((Exit*)entities[i])->closed = true;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation = WEST){//to close the door of the other side
-											if (exit[j]->destiny->name == exit[i]->origin->name && exit[j]->door == true && exit[j]->closed == false){
-												exit[j]->closed = true;
+										if (((Exit*)entities[j])->orientation = WEST){//to close the door of the other side
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){
+												((Exit*)entities[j])->closed = true;
 												printf("The door is closed.\n");
 												return;
 											}
@@ -758,15 +760,15 @@ void World::movement(){
 			if (options[0] == "close" && options[1] == "south" || options[0] == "close" && options[1] == "s" || options[0] == "s" || options[0] == "south")
 			{
 				for (i = 0; i < EXITNUM; i++){
-					if (exit[i]->origin->name == player->playerposit->name){//if the origin is the same as the player position
-						if (exit[i]->orientation == SOUTH){//looks the orientation
-							if (exit[i]->door == true){//if it has door
-								if (exit[i]->closed == false){//if its closed
-									exit[i]->closed = true;
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+						if (((Exit*)entities[i])->orientation == SOUTH){//looks the orientation
+							if (((Exit*)entities[i])->door == true){//if it has door
+								if (((Exit*)entities[i])->closed == false){//if its closed
+									((Exit*)entities[i])->closed = true;
 									for (j = 0; j < EXITNUM; j++){
-										if (exit[j]->orientation = NORTH){//to close the door of the other side
-											if (exit[j]->destiny->name == exit[i]->origin->name && exit[j]->door == true && exit[j]->closed == false){
-												exit[j]->closed = true;
+										if (((Exit*)entities[j])->orientation = NORTH){//to close the door of the other side
+											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){
+												((Exit*)entities[j])->closed = true;
 												printf("The door is closed.\n");
 												return;
 											}
@@ -792,26 +794,26 @@ void World::movement(){
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == false && items[i]->equipped == false && items[i]->inbox == false && maxinventory<4){//look name and position, look inventory, look if its equipped and if its the maximum
-						if (options[1] == items[TICKET]->name){//if the user wants to take the ticket they will have to have money 
-							if (items[MONEY]->inventory == false){//false
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inbox == false && maxinventory<4 && ((Item*)entities[i])->Typeobj == ITEM){//look name and position, look inventory, look if its equipped and if its the maximum
+						if (options[1] == ((Item*)entities[TICKET])->name){//if the user wants to take the ticket they will have to have money 
+							if (((Item*)entities[MONEY])->inventory == false){//false
 								printf("You don't have money\n");
 								return;
 							}
 							else{//true, if its true user loses the money
-								items[MONEY]->inventory == false;
+								((Item*)entities[MONEY])->inventory == false;
 									printf("You have given the money to have some information\n");
 									printf("If you go south you will find the park and near you will find House 3");
 									maxinventory--;
 									return;
 							}
 						}
-						items[i]->inventory = true;//pick the object
-						printf("%s\n %s\n", items[i]->name.C_Str(), items[i]->descrip.C_Str());
+						((Item*)entities[i])->inventory = true;//pick the object
+						printf("%s\n %s\n", ((Item*)entities[i])->name.C_Str(), ((Item*)entities[i])->descrip.C_Str());
 						maxinventory++;//the maximum of the inventory
 						return;
 					}
-					else if (options[1] == items[i]->name && items[i]->itempos != player->playerposit){//if the object isn't there
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos != player->playerposit){//if the object isn't there
 						printf("The item isn't here");
 						return;
 					}
@@ -828,9 +830,9 @@ void World::movement(){
 			int i;
 
 			for (i = 0; i < NUM_ITEM; i++){
-				if (items[i]->inventory == true){//print the items that are in the inventory
+				if (((Item*)entities[i])->inventory == true){//print the items that are in the inventory
 					printf("You have in the inventory:");
-					printf("%s\n", items[i]->name.C_Str());
+					printf("%s\n", ((Item*)entities[i])->name.C_Str());
 				}
 			}
 
@@ -841,19 +843,19 @@ void World::movement(){
 		if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
 
-					if (options[1] == items[i]->name && items[i]->inventory == false){//it the item isn't in the inventory
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//it the item isn't in the inventory
 			printf("You don't have the item in the inventory");
 			return;
 		}
-					else if (options[1] == items[i]->name && items[i]->itempos == player->playerposit && items[i]->inventory == true){//drop the item
-						if (items[i]->inventory == true){//item of the inventory droped
-							items[i]->inventory = false;
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == true && ((Item*)entities[i])->Typeobj == ITEM){//drop the item
+						if (((Item*)entities[i])->inventory == true){//item of the inventory droped
+							((Item*)entities[i])->inventory = false;
 						}
-						else if (items[i]->equipped == true){//item equipped droped
-							items[i]->equipped == false;
+						else if (((Item*)entities[i])->equipped == true){//item equipped droped
+							((Item*)entities[i])->equipped == false;
 							maxequiped--;
 						}
-						printf("You have droped %s\n", items[i]->name.C_Str());
+						printf("You have droped %s\n", ((Item*)entities[i])->name.C_Str());
 						maxinventory--;//one less in the inventory
 						return;
 					}
@@ -866,19 +868,19 @@ void World::movement(){
 
 		
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->inventory == false){//if user don't have the item in the inventory
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if user don't have the item in the inventory
 						printf("You don't have this item in the inventory");
 						return;
 					}
-					else if (options[1] == items[i]->name && items[i]->equipped == false && items[i]->inventory == true && maxequiped==0){//if the item isn't equipped and is in the inventory
-						items[i]->equipped = true;//if its equipped its not in the inventory
-						items[i]->inventory = false;
-						printf("You have equiped %s\n", items[i]->name.C_Str());
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped == 0 && ((Item*)entities[i])->Typeobj == ITEM){//if the item isn't equipped and is in the inventory
+						((Item*)entities[i])->equipped = true;//if its equipped its not in the inventory
+						((Item*)entities[i])->inventory = false;
+						printf("You have equiped %s\n", ((Item*)entities[i])->name.C_Str());
 						maxinventory--;
 						maxequiped++;//maximum equiped
 						return;
 					}
-					else if (options[1] == items[i]->name && items[i]->equipped == false && items[i]->inventory == true && maxequiped > 0){//if there is one item equipped
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped > 0 && ((Item*)entities[i])->Typeobj == ITEM){//if there is one item equipped
 						printf("You already have one item equiped");
 						return;
 					}
@@ -889,15 +891,15 @@ void World::movement(){
 			
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[i]->name && items[i]->equipped == false && items[i]->inventory == false){//if the item isn't in the inventory
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if the item isn't in the inventory
 						printf("You don't have this item in the inventory");
 						return;
 					}
 
-					else if (options[1] == items[i]->name && items[i]->equipped == true && items[i]->inventory == false){//if the item is in the inventory and equipped
-						items[i]->equipped = false;
-						items[i]->inventory = true;
-						printf("You have unequiped %s\n", items[i]->name.C_Str());
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == true && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the inventory and equipped
+						((Item*)entities[i])->equipped = false;
+						((Item*)entities[i])->inventory = true;
+						printf("You have unequiped %s\n", ((Item*)entities[i])->name.C_Str());
 						maxequiped--;
 						maxinventory++;
 						return;
@@ -911,11 +913,11 @@ void World::movement(){
 
 		void World::update(){//this function updates the directions of the items
 			for (int i = 0; i < NUM_ITEM; i++){
-				if (items[i]->inventory == true){//if the item is in the inventory the dicrection will be the same of the player
-					items[i]->itempos = player->playerposit;
+				if (((Item*)entities[i])->inventory == true && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the inventory the dicrection will be the same of the player
+					((Item*)entities[i])->itempos = player->playerposit;
 				}
-				if (items[i]->inbox == true){//if the item is in the box the tirection will be the same as the box
-					items[i]->itempos = items[BOX]->itempos;
+				if (((Item*)entities[i])->inbox == true && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the box the tirection will be the same as the box
+					((Item*)entities[i])->itempos = ((Item*)entities[BOX])->itempos;
 				}
 			}
 		}
@@ -923,17 +925,17 @@ void World::movement(){
 		void World::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
 			int j = 0, i = 0;
 			for (j = 0; j < NUM_ITEM; j++){
-				if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false ){//if there aren't objects
+				if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if there aren't objects
 					i++;
 				}
 			}
 			if (i != 0){
 				for (j = 0; j < NUM_ITEM; j++){
-					if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false && items[j]->inbox == false && items[j]->equipped==false){
-						printf("\nIn this room there is: %s\n", items[j]->name.C_Str());
+					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == false && ((Item*)entities[j])->equipped == false && ((Item*)entities[i])->Typeobj == ITEM){
+						printf("\nIn this room there is: %s\n", ((Item*)entities[j])->name.C_Str());
 					}
-					if ((items[j]->itempos == player->playerposit) && items[j]->inventory == false && items[j]->inbox==true){//if the object is in the box
-						printf("\nIn the box there is: %s\n", items[j]->name.C_Str());
+					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == true && ((Item*)entities[i])->Typeobj == ITEM){//if the object is in the box
+						printf("\nIn the box there is: %s\n", ((Item*)entities[j])->name.C_Str());
 					}
 				}
 			}
@@ -948,32 +950,32 @@ void World::movement(){
 						printf("In the box you only can put two items");
 						return;
 					}
-					else if (options[1] == items[BOX]->name && items[BOX]->itempos == player->playerposit){//if the player try to put the box into the box
+					else if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit && ((Item*)entities[i])->Typeobj == ITEM){//if the player try to put the box into the box
 						printf("You can't do this");
 						return;
 					}
-					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == player->playerposit && items[i]->itempos == items[BOX]->itempos && items[i]->inbox == false && maxbox <3){//puts an item iside the box
-						if (items[i]->inventory == true){
-							items[i]->inventory = false;
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false && maxbox <3 && ((Item*)entities[i])->Typeobj == ITEM){//puts an item iside the box
+						if (((Item*)entities[i])->inventory == true){
+							((Item*)entities[i])->inventory = false;
 							maxinventory--;
 						}
-						if (items[i]->equipped == true){
-							items[i]->equipped == false;
+						if (((Item*)entities[i])->equipped == true && ((Item*)entities[i])->Typeobj == ITEM){
+							((Item*)entities[i])->equipped == false;
 							maxequiped--;
 						}
 						
-						items[i]->inbox = true;//puts the item in the box
-						items[i]->itempos = items[BOX]->itempos;//change the position of the object to the box direction
-						printf("You have put %s into the box", items[i]->name.C_Str());
+						((Item*)entities[i])->inbox = true;//puts the item in the box
+						((Item*)entities[i])->itempos = ((Item*)entities[BOX])->itempos;//change the position of the object to the box direction
+						printf("You have put %s into the box", ((Item*)entities[i])->name.C_Str());
 						maxbox++;//maximum of items
 						return;
 					}
 
-					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos != items[BOX]->itempos && items[i]->inbox == false){//if the object isn't there
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos != ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false && ((Item*)entities[i])->Typeobj == ITEM){//if the object isn't there
 						printf("This item isn't here");
 						return;
 					}
-					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->inbox == true && items[i]->itempos == items[BOX]->itempos){//if this item its in the box
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->inbox == true && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->Typeobj == ITEM){//if this item its in the box
 						printf("This item is in the box you should get it from there");
 						return;
 					}
@@ -987,19 +989,19 @@ void World::movement(){
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == items[BOX]->name && items[BOX]->itempos == player->playerposit){//if you try to get the box from the box
+					if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit && ((Item*)entities[i])->Typeobj == ITEM){//if you try to get the box from the box
 						printf("You can't do this");
 						return;
 					}
-					else if (options[1] == items[i]->name && options[3] == items[BOX]->name && items[i]->itempos == items[BOX]->itempos && player->playerposit == items[BOX]->itempos  && items[i]->inbox == true){//to get some item from the box
-						items[i]->inbox = false;//out of the box
-						items[i]->inventory = true;//to the inventory
-						printf("You have get %s of the box", items[i]->name.C_Str());
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && player->playerposit == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == true && ((Item*)entities[i])->Typeobj == ITEM){//to get some item from the box
+						((Item*)entities[i])->inbox = false;//out of the box
+						((Item*)entities[i])->inventory = true;//to the inventory
+						printf("You have get %s of the box", ((Item*)entities[i])->name.C_Str());
 						maxinventory++;//maximum of inventory
 						maxbox--;//maximum inside the box
 						return;
 					}
-					else if (items[i]->itempos != player->playerposit){//if the item isn't there
+					else if (((Item*)entities[i])->itempos != player->playerposit && ((Item*)entities[i])->Typeobj == ITEM){//if the item isn't there
 					printf("This item isn't here");
 					return;
 					}
@@ -1011,7 +1013,7 @@ void World::movement(){
 
 		void World::map()const{//This function is the special feature, prints the map if you pick the map and tells you where are you
 
-			if (items[MAP]->inventory == true){//if you have the map
+			if (((Item*)entities[MAP])->inventory == true ){//if you have the map
 				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177);
 				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                                          %c\n", 177, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
 				printf("%c%c ENTRANCE %c %c         %c %c        %c                                          %c\n", 177, 186, 186, 186, 186, 186, 186, 177);

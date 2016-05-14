@@ -4,7 +4,7 @@
 enum command{ NORTH=0, WEST, SOUTH, EAST};
 class Exit : public Entity{
 public:
-	Exit(char*, char*, command orientation, Room* origen, Room* destination, bool door, bool close);
+	Exit(char*, char*, command orientation, Room* origen, Room* destination, bool door, bool close, TYPE type);
 	Room *origin;
 	Room *destiny;
 	bool door;
