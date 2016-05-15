@@ -193,7 +193,7 @@ void World::movement(){
 			return;
 		}
 		printf("\nWhere do you want to go?\n");
-		printf("%s", entities[7]->name);
+		//printf("%s", entities[45]->name);
 		char direction1[50];
 		gets_s(direction1, 50);
 		mystring command;
@@ -204,13 +204,13 @@ void World::movement(){
 			system("cls");
 			//-------------------------------------------------------------------------------------------------------------North
 			if (option.size() == 2 && option[0] == "go" && option[1] == "north" || option.size() == 2 && option[0] == "go" && option[1] == "n" || option.size() == 1 && option[0] == "n" || option.size() == 1 && option[0] == "north"){
-				for (i = 0; i < EXITNUM; i++){
+				for (i = 0; i < entities.size(); i++){
 					if (entities[i]->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == NORTH){ //if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("\nThere's a wall");
 							break;
 						}
-						for (j = 0; j < ROOMNUM; j++){
+						for (j = 0; j < entities.size(); j++){
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
 									printf("%s", ((Exit*)entities[i])->descrip);
@@ -239,13 +239,13 @@ void World::movement(){
 			}
 			//----------------------------------------------------------------------------------------------------------------West
 			else if (option.size() == 2 && option[0] == "go" && option[1] == "west" || option.size() == 2 && option[0] == "go" && option[1] == "w" || option.size() == 1 && option[0] == "w" || option.size() == 1 && option[0] == "west"){
-				for (i = 0; i < EXITNUM; i++){
+				for (i = 0; i < entities.size(); i++){
 					if (((Exit*)entities[i])->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == WEST){//if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
 							break;
 						}
-						for (j = 0; j < ROOMNUM; j++){
+						for (j = 0; j < entities.size(); j++){
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
 									printf("%s", ((Exit*)entities[i])->descrip);
@@ -273,13 +273,13 @@ void World::movement(){
 			//----------------------------------------------------------------------------------------------------------------South
 			else if (option.size() == 2 && option[0] == "go" && option[1] == "south" || option.size() == 2 && option[0] == "go" && option[1] == "s" || option.size() == 1 && option[0] == "s" || option.size() == 1 && option[0] == "south")
 			{
-				for (i = 0; i < EXITNUM; i++){
+				for (i = 0; i < entities.size(); i++){
 					if (((Exit*)entities[i])->Typeobj== EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == SOUTH){//if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
 							break;
 						}
-						for (j = 0; j < ROOMNUM; j++){
+						for (j = 0; j < entities.size(); j++){
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
 									printf("%s", ((Exit*)entities[i])->descrip);
@@ -312,7 +312,7 @@ void World::movement(){
 			//-----------------------------------------------------------------------------------------------------------------East
 			else if (option.size() == 2 && option[0] == "go" && option[1] == "east" || option.size() == 2 && option[0] == "go" && option[1] == "e" || option.size() == 1 && option[0] == "e" || option.size() == 1 && option[0] == "east")
 			{
-				for (i = 0; i < EXITNUM; i++)
+				for (i = 0; i < entities.size(); i++)
 				{
 					if (((Exit*)entities[i])->Typeobj == EXIT &&player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == EAST)//if the origin is the same position as the origin, also look the orientation
 					{
@@ -321,7 +321,7 @@ void World::movement(){
 							printf("%s", ((Exit*)entities[i])->descrip);
 							break;
 						}
-						for (j = 0; j < ROOMNUM; j++)
+						for (j = 0; j < entities.size(); j++)
 						{
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j])//if the destiny is the same position of the room
 							{
@@ -430,9 +430,9 @@ void World::movement(){
 			int exitnum=0;//count
 
 			if (options[0] == "look" && options[1] == "north"){//if the user says look north
-				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
+				for (exitnum = 0; exitnum < entities.size(); exitnum++)
 				{
-					if (((Exit*)entities[exitnum])->orientation == NORTH && ((Exit*)entities[exitnum])->Typeobj==EXIT)//exits with north orientation
+					if (((Exit*)entities[exitnum])->orientation == NORTH )//exits with north orientation
 					{
 						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
@@ -443,9 +443,9 @@ void World::movement(){
 				}
 			}
 			if (options[0] == "look" && options[1] == "west"){//if the user says look west
-				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
+				for (exitnum = 0; exitnum < entities.size(); exitnum++)
 				{
-					if (((Exit*)entities[exitnum])->orientation == WEST && ((Exit*)entities[exitnum])->Typeobj == EXIT)//exits with west orientation
+					if (((Exit*)entities[exitnum])->orientation == WEST )//exits with west orientation
 					{
 						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
@@ -456,9 +456,9 @@ void World::movement(){
 			}
 
 			if (options[0] == "look" && options[1] == "south"){//if the user says look south
-				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
+				for (exitnum = 0; exitnum < entities.size(); exitnum++)
 				{
-					if (((Exit*)entities[exitnum])->orientation == SOUTH && ((Exit*)entities[exitnum])->Typeobj == EXIT)//exits with south orientation
+					if (((Exit*)entities[exitnum])->orientation == SOUTH )//exits with south orientation
 					{
 						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
@@ -469,9 +469,9 @@ void World::movement(){
 			}
 
 			if (options[0] == "look" && options[1] == "east"){//if the user says look east
-				for (exitnum = 0; exitnum < EXITNUM; exitnum++)
+				for (exitnum = 0; exitnum < entities.size(); exitnum++)
 				{
-					if (((Exit*)entities[exitnum])->orientation == EAST && ((Exit*)entities[exitnum])->Typeobj == EXIT)//exits with east orientation
+					if (((Exit*)entities[exitnum])->orientation == EAST )//exits with east orientation
 					{
 						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
 						{
@@ -480,13 +480,13 @@ void World::movement(){
 					}
 				}
 			}
-			for (int x = 0; x < NUM_ITEM; x++){
-				if (options[0] == "look" && options[1] == ((Item*)entities[x])->name && ((Item*)entities[x])->itempos == player->playerposit && ((Item*)entities[x])->Typeobj ==ITEM){//what object did the user said and if its in the same position of the player
+			for (int x = 0; x < entities.size(); x++){
+				if (options[0] == "look" && options[1] == ((Item*)entities[x])->name && ((Item*)entities[x])->itempos == player->playerposit){//what object did the user said and if its in the same position of the player
 					printf("%s\n", ((Item*)entities[x])->name.C_Str());//name
 					printf("%s\n", ((Item*)entities[x])->descrip.C_Str());//description
 					if (options[1] == ((Item*)entities[BOX])->name){//if its look box
 						printf("And the items that are inside the box are:\n");
-						for (x = 0; x < NUM_ITEM; x++){
+						for (x = 0; x < entities.size(); x++){
 							if (((Item*)entities[x])->inbox == true){//print the objects that ar inside the box
 								printf("%s\n", ((Item*)entities[x])->name.C_Str());//name
 								printf("%s\n", ((Item*)entities[x])->descrip.C_Str());//description
@@ -508,13 +508,13 @@ void World::movement(){
 			int i, j;
 			if (options[0] == "open" && options[1] == "north" || options[0] == "open" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == NORTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == true){// if its closed 
 									((Exit*)entities[i])->closed = false;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == SOUTH && ((Exit*)entities[j])->door == true){//what direcction looks the door of the other side and if it has door
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){//if destiny in the second for is the same as origin 
 												((Exit*)entities[j])->closed = false;
@@ -541,13 +541,13 @@ void World::movement(){
 
 			if (options[0] == "open" && options[1] == "west" || options[0] == "open" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == WEST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){// if it has door 
 								if (((Exit*)entities[i])->closed == true){// if its closed 
 									((Exit*)entities[i])->closed = false;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == EAST && ((Exit*)entities[j])->door == true){//what direcction looks the door of the other side and if it has door
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){//if destiny in the second for is the same as origin 
 												((Exit*)entities[j])->closed = false;
@@ -574,8 +574,8 @@ void World::movement(){
 
 			if (options[0] == "open" && options[1] == "east" || options[0] == "open" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj==EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin == player->playerposit ){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == EAST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){// if it has door 
 								if (((Exit*)entities[i])->closed == true){// if its closed 
@@ -585,7 +585,7 @@ void World::movement(){
 									}
 									//printf("The door is open\n");
 									((Exit*)entities[i])->closed = false;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == WEST && ((Exit*)entities[j])->door == true){//to open the door of the other side 
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){
 												((Exit*)entities[j])->closed = false;
@@ -612,8 +612,8 @@ void World::movement(){
 
 			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south" || options[0] == "pass" && options[1] == "south" || options[0] == "pass" && options[1] == "s")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin == player->playerposit && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin == player->playerposit ){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == SOUTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){// if it has door 
 								if (((Exit*)entities[i])->closed == true){// if its closed 
@@ -622,7 +622,7 @@ void World::movement(){
 										break;
 									}
 									((Exit*)entities[i])->closed = false;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == NORTH && ((Exit*)entities[j])->door == true){//to open the door of the other side 
 											if (((Exit*)entities[j])->destiny == player->playerposit){
 												((Exit*)entities[j])->closed = false;
@@ -657,8 +657,8 @@ void World::movement(){
 			int i, j;
 			if (options[0] == "close" && options[1] == "north" || options[0] == "close" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == NORTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
@@ -667,7 +667,7 @@ void World::movement(){
 										break;
 									}
 									((Exit*)entities[i])->closed = true;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == SOUTH && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){//to close the door of the other side
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){
 												((Exit*)entities[j])->closed == true;
@@ -693,13 +693,13 @@ void World::movement(){
 
 			if (options[0] == "close" && options[1] == "west" || options[0] == "close" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == WEST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
 									((Exit*)entities[i])->closed = true;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == EAST){//to close the door of the other side
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){
 												((Exit*)entities[j])->closed = true;
@@ -726,13 +726,13 @@ void World::movement(){
 
 			if (options[0] == "close" && options[1] == "east" || options[0] == "close" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == EAST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
 									((Exit*)entities[i])->closed = true;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation = WEST){//to close the door of the other side
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){
 												((Exit*)entities[j])->closed = true;
@@ -759,13 +759,13 @@ void World::movement(){
 
 			if (options[0] == "close" && options[1] == "south" || options[0] == "close" && options[1] == "s" || options[0] == "s" || options[0] == "south")
 			{
-				for (i = 0; i < EXITNUM; i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name && ((Exit*)entities[i])->Typeobj == EXIT){//if the origin is the same as the player position
+				for (i = 0; i < entities.size(); i++){
+					if (((Exit*)entities[i])->origin->name == player->playerposit->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == SOUTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
 									((Exit*)entities[i])->closed = true;
-									for (j = 0; j < EXITNUM; j++){
+									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation = NORTH){//to close the door of the other side
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name && ((Exit*)entities[j])->door == true && ((Exit*)entities[j])->closed == false){
 												((Exit*)entities[j])->closed = true;
@@ -793,8 +793,8 @@ void World::movement(){
 		void World::pick(Vector<mystring>& options){
 			int maximum = 0;
 			if (options.size() > 1){
-				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inbox == false && maxinventory<4 && ((Item*)entities[i])->Typeobj == ITEM){//look name and position, look inventory, look if its equipped and if its the maximum
+				for (int i = 0; i < entities.size(); i++){
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inbox == false && maxinventory<4){//look name and position, look inventory, look if its equipped and if its the maximum
 						if (options[1] == ((Item*)entities[TICKET])->name){//if the user wants to take the ticket they will have to have money 
 							if (((Item*)entities[MONEY])->inventory == false){//false
 								printf("You don't have money\n");
@@ -829,7 +829,7 @@ void World::movement(){
 		void World::inventory(){
 			int i;
 
-			for (i = 0; i < NUM_ITEM; i++){
+			for (i = 0; i < entities.size(); i++){
 				if (((Item*)entities[i])->inventory == true){//print the items that are in the inventory
 					printf("You have in the inventory:");
 					printf("%s\n", ((Item*)entities[i])->name.C_Str());
@@ -841,13 +841,13 @@ void World::movement(){
 		void World::drop(Vector<mystring>& options){
 
 		if (options.size() > 1){
-				for (int i = 0; i < NUM_ITEM; i++){
+			for (int i = 0; i < entities.size(); i++){
 
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//it the item isn't in the inventory
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false){//it the item isn't in the inventory
 			printf("You don't have the item in the inventory");
 			return;
 		}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == true && ((Item*)entities[i])->Typeobj == ITEM){//drop the item
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == true ){//drop the item
 						if (((Item*)entities[i])->inventory == true){//item of the inventory droped
 							((Item*)entities[i])->inventory = false;
 						}
@@ -867,12 +867,12 @@ void World::movement(){
 		void World::equip(const Vector<mystring>& options){
 
 		
-				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if user don't have the item in the inventory
+			for (int i = 0; i < entities.size(); i++){
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false){//if user don't have the item in the inventory
 						printf("You don't have this item in the inventory");
 						return;
 					}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped == 0 && ((Item*)entities[i])->Typeobj == ITEM){//if the item isn't equipped and is in the inventory
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped == 0 ){//if the item isn't equipped and is in the inventory
 						((Item*)entities[i])->equipped = true;//if its equipped its not in the inventory
 						((Item*)entities[i])->inventory = false;
 						printf("You have equiped %s\n", ((Item*)entities[i])->name.C_Str());
@@ -880,7 +880,7 @@ void World::movement(){
 						maxequiped++;//maximum equiped
 						return;
 					}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped > 0 && ((Item*)entities[i])->Typeobj == ITEM){//if there is one item equipped
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped > 0){//if there is one item equipped
 						printf("You already have one item equiped");
 						return;
 					}
@@ -890,13 +890,13 @@ void World::movement(){
 		void World::unequip(Vector<mystring>& options){
 			
 			if (options.size() > 1){
-				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if the item isn't in the inventory
+				for (int i = 0; i < entities.size(); i++){
+					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == false ){//if the item isn't in the inventory
 						printf("You don't have this item in the inventory");
 						return;
 					}
 
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == true && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the inventory and equipped
+					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == true && ((Item*)entities[i])->inventory == false ){//if the item is in the inventory and equipped
 						((Item*)entities[i])->equipped = false;
 						((Item*)entities[i])->inventory = true;
 						printf("You have unequiped %s\n", ((Item*)entities[i])->name.C_Str());
@@ -912,7 +912,7 @@ void World::movement(){
 		
 
 		void World::update(){//this function updates the directions of the items
-			for (int i = 0; i < NUM_ITEM; i++){
+			for (int i = 0; i < entities.size(); i++){
 				if (((Item*)entities[i])->inventory == true && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the inventory the dicrection will be the same of the player
 					((Item*)entities[i])->itempos = player->playerposit;
 				}
@@ -924,17 +924,18 @@ void World::movement(){
 	
 		void World::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
 			int j = 0, i = 0;
-			for (j = 0; j < NUM_ITEM; j++){
-				if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[i])->Typeobj == ITEM){//if there aren't objects
+			for (j = 0; j < entities.size(); j++){
+				if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false ){//if there aren't objects
+				
 					i++;
 				}
 			}
 			if (i != 0){
-				for (j = 0; j < NUM_ITEM; j++){
-					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == false && ((Item*)entities[j])->equipped == false && ((Item*)entities[i])->Typeobj == ITEM){
+				for (j = 0; j < entities.size(); j++){
+					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == false && ((Item*)entities[j])->equipped == false ){
 						printf("\nIn this room there is: %s\n", ((Item*)entities[j])->name.C_Str());
 					}
-					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == true && ((Item*)entities[i])->Typeobj == ITEM){//if the object is in the box
+					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == true ){//if the object is in the box
 						printf("\nIn the box there is: %s\n", ((Item*)entities[j])->name.C_Str());
 					}
 				}
@@ -944,22 +945,22 @@ void World::movement(){
 		void World::put(const Vector<mystring>& options){//
 			int maximum = 0;
 
-				for (int i = 0; i < NUM_ITEM; i++){
+			for (int i = 0; i < entities.size(); i++){
 					
 					if (maxbox == 2){//the box only can have two items
 						printf("In the box you only can put two items");
 						return;
 					}
-					else if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit && ((Item*)entities[i])->Typeobj == ITEM){//if the player try to put the box into the box
+					else if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit ){//if the player try to put the box into the box
 						printf("You can't do this");
 						return;
 					}
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false && maxbox <3 && ((Item*)entities[i])->Typeobj == ITEM){//puts an item iside the box
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false && maxbox <3 ){//puts an item iside the box
 						if (((Item*)entities[i])->inventory == true){
 							((Item*)entities[i])->inventory = false;
 							maxinventory--;
 						}
-						if (((Item*)entities[i])->equipped == true && ((Item*)entities[i])->Typeobj == ITEM){
+						if (((Item*)entities[i])->equipped == true ){
 							((Item*)entities[i])->equipped == false;
 							maxequiped--;
 						}
@@ -971,11 +972,11 @@ void World::movement(){
 						return;
 					}
 
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos != ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false && ((Item*)entities[i])->Typeobj == ITEM){//if the object isn't there
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos != ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false ){//if the object isn't there
 						printf("This item isn't here");
 						return;
 					}
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->inbox == true && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->Typeobj == ITEM){//if this item its in the box
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->inbox == true && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos ){//if this item its in the box
 						printf("This item is in the box you should get it from there");
 						return;
 					}
@@ -989,11 +990,11 @@ void World::movement(){
 			int maximum = 0;
 			if (options.size() > 1){
 				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit && ((Item*)entities[i])->Typeobj == ITEM){//if you try to get the box from the box
+					if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit ){//if you try to get the box from the box
 						printf("You can't do this");
 						return;
 					}
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && player->playerposit == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == true && ((Item*)entities[i])->Typeobj == ITEM){//to get some item from the box
+					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && player->playerposit == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == true){//to get some item from the box
 						((Item*)entities[i])->inbox = false;//out of the box
 						((Item*)entities[i])->inventory = true;//to the inventory
 						printf("You have get %s of the box", ((Item*)entities[i])->name.C_Str());
@@ -1001,7 +1002,7 @@ void World::movement(){
 						maxbox--;//maximum inside the box
 						return;
 					}
-					else if (((Item*)entities[i])->itempos != player->playerposit && ((Item*)entities[i])->Typeobj == ITEM){//if the item isn't there
+					else if (((Item*)entities[i])->itempos != player->playerposit){//if the item isn't there
 					printf("This item isn't here");
 					return;
 					}
