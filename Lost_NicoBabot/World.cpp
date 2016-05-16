@@ -8,7 +8,7 @@
 
 
 World::World(){
-	player = new Player;//player
+	
 }
 World::~World(){/*
 	for (int i = 0; i < EXITNUM; i++){
@@ -20,7 +20,7 @@ World::~World(){/*
 	for (int i = 0; i < NUM_ITEM; i++){
 		delete items[i];
 	}*/
-	delete player;//free memory
+	//delete player;//free memory
 }
 
 void World::createworld(){
@@ -50,150 +50,154 @@ void World::createworld(){
 
 
 	
-	//exit 0
+	//exit 0 9
 	entities.pushback(new Exit("Main street", "In the east there is the house 1", EAST, (Room*)entities[0], (Room*)entities[1], false, false, EXIT));
-	//exit 1
+	//exit 1 10
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[0], (Room*)entities[0], false, false, EXIT));
-	//exit 2
+	//exit 2 11
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[0], (Room*)entities[0], false, false, EXIT));
-	//exit 3
+	//exit 3 12
 	entities.pushback(new Exit("There's a wall", "There's a wall", WEST, (Room*)entities[0], (Room*)entities[0], false, false, EXIT));
 	//--------------------------------------------------------------------
-	//exit 4
+	//exit 4 13
 	entities.pushback(new Exit("Student Street", "In the east there is the school", EAST, (Room*)entities[1], (Room*)entities[2], false, false, EXIT));
-	//exit 5
+	//exit 5 14
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[1], (Room*)entities[1], false, false, EXIT));
-	//exit 6
+	//exit 6 15
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[1], (Room*)entities[1], false, false, EXIT));
-	//exit 7
+	//exit 7 16 
 	entities.pushback(new Exit("Main street", "In the west there is the entrance of the city", WEST, (Room*)entities[1], (Room*)entities[0], false, false, EXIT));
 
 
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
 	
-	//exit 8
+	//exit 8 17 
 	entities.pushback(new Exit("There's a wall", "There's a wall", EAST, (Room*)entities[2], (Room*)entities[2], false, false, EXIT));
-	//exit 9
+	//exit 9 18 
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[2], (Room*)entities[2], false, false, EXIT));
-	//exit 10
+	//exit 10 19
 	entities.pushback(new Exit("Joan Oliver street", "In the south there is the house 2", SOUTH, (Room*)entities[2], (Room*)entities[3], true, true, EXIT));
-	//exit 11
+	//exit 11 20
 	entities.pushback(new Exit("Student Street", "In the west there is the house 1", WEST, (Room*)entities[2], (Room*)entities[1], false, false, EXIT));
 	
 	//----------------------------------------------
 	//--------------------------------------------------------------------
-	//exit 12
+	//exit 12 21
 	entities.pushback(new Exit("Verdi street", "In the east there is the shop", EAST, (Room*)entities[3], (Room*)entities[4], false, false, EXIT));
-	//exit 13
+	//exit 13 22
 	entities.pushback(new Exit("Joan Oliver street", "In the north there is the school", NORTH, (Room*)entities[3], (Room*)entities[2], true, true, EXIT));
-	//exit 14
+	//exit 14 23
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[3], (Room*)entities[3], false, false, EXIT));
-	//exit 15
+	//exit 15 24
 	entities.pushback(new Exit("There's a wall", "There's a wall", WEST, (Room*)entities[3], (Room*)entities[3], false, false, EXIT));
 	
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
-	//exit 16
+	//exit 16 25
 	entities.pushback(new Exit("Elisenda street", "In the east there is the cinema", EAST, (Room*)entities[4], (Room*)entities[5], false, false, EXIT));
-	//exit 17
+	//exit 17 26
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[4], (Room*)entities[4], false, false, EXIT));
-	//exit 18
+	//exit 18 27
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[4], (Room*)entities[4], false, false, EXIT));
-	//exit 19
+	//exit 19 28
 	entities.pushback(new Exit("Verdi street", "In the east there is the house 2", WEST, (Room*)entities[4], (Room*)entities[3], false, false, EXIT));
 	
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
-	//exit 20
+	//exit 20 29
 	entities.pushback(new Exit("There's a wall", "There's a wall", EAST, (Room*)entities[5], (Room*)entities[5], false, false, EXIT));
-	//exit 21
+	//exit 21 30
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[5], (Room*)entities[5], false, false, EXIT));
-	//exit 22
+	//exit 22 31
 	entities.pushback(new Exit("Hobby street", "In the south there is the park", SOUTH, (Room*)entities[5], (Room*)entities[6], false, false, EXIT));
-	//exit 23
+	//exit 23 32
 	entities.pushback(new Exit("Elisenda street", "In the south there is the shop", WEST, (Room*)entities[5], (Room*)entities[4], false, false, EXIT));
 
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
-	//exit 24
+	//exit 24 33
 	entities.pushback(new Exit("Residencial Street", "In the east there is the house 3", EAST, (Room*)entities[6], (Room*)entities[7], false, false, EXIT));
-	//exit 25
+	//exit 25 34
 	entities.pushback(new Exit("Hobby street", "In the north there is the cinema", NORTH, (Room*)entities[6], (Room*)entities[5], false, false, EXIT));
-	//exit 26
+	//exit 26 35
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[6], (Room*)entities[6], false, false, EXIT));
-	//exit 27
+	//exit 27 36
 	entities.pushback(new Exit("There's a wall", "There's a wall", WEST, (Room*)entities[6], (Room*)entities[6], false, false, EXIT));
 	
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
-	//exit 28
+	//exit 28 37
 	entities.pushback(new Exit("Residencial Street", "In the east there is the goal", EAST, (Room*)entities[7], (Room*)entities[8], true, true, EXIT));
-	//exit 29
+	//exit 29 38
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[7], (Room*)entities[7], false, false, EXIT));
-	//exit 30
+	//exit 30 39
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[7], (Room*)entities[7], false, false, EXIT));
-	//exit 31
+	//exit 31 40
 	entities.pushback(new Exit("Residencial Street", "In the east there is the park", WEST, (Room*)entities[7], (Room*)entities[6], false, false, EXIT));
 
 	//--------------------------------------------------------------------
 	//--------------------------------------------------------------------
-	//exit 32
+	//exit 32 41
 	entities.pushback(new Exit("There's a wall", "There's a wall", EAST, (Room*)entities[8], (Room*)entities[8], false, false, EXIT));
-	//exit 33
+	//exit 33 42
 	entities.pushback(new Exit("There's a wall", "There's a wall", NORTH, (Room*)entities[8], (Room*)entities[8], false, false, EXIT));
-	//exit 34
+	//exit 34 43
 	entities.pushback(new Exit("There's a wall", "There's a wall", SOUTH, (Room*)entities[8], (Room*)entities[8], false, false, EXIT));
-	//exit 35
+	//exit 35 44
 	entities.pushback(new Exit("Residencial Street", "In the west there's house 3", WEST, (Room*)entities[8], (Room*)entities[7], true, true, EXIT));
 
 	//ITEMS---------------------------------------------
-	//item 43 (1)
+	//item 45 (1)
 	entities.pushback(new Item("ladder", "A ladder that you can use it to pass walls", (Room*)entities[1], false, false, false, ITEM));
 	
 	//-------
-	//item 44 (2)
+	//item 46 (2)
 	entities.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", (Room*)entities[3], false, false, false, ITEM));
 	
 	//-------
-	//item 45 (3)
+	//item 47 (3)
 	entities.pushback(new Item("money", "With this money you can buy somthing", (Room*)entities[4], false, false, false, ITEM));
 	
 	//-------
-	//item 46 (4)
+	//item 48 (4)
 	entities.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", (Room*)entities[5], false, false, false, ITEM));
 
 	//-------
-	//item 47 (5)
+	//item 49 (5)
 	entities.pushback(new Item("key", "With this key you can enter to your house!!", (Room*)entities[7], false, false, false, ITEM));
 	
 	//-------
-	//item 48 (6)
+	//item 50 (6)
 	entities.pushback(new Item("map", "With this special feature if you press you can see the map of the city", (Room*)entities[2], false, false, false, ITEM));
 	
 	//-------
-	//item 49 (7)
+	//item 51 (7)
 	entities.pushback(new Item("box", "A box that you find in school and you can put and get things", (Room*)entities[2], false, false, false, ITEM));
 
+	entities.pushback(new Player("player", "Don't need description", PLAYER, (Room*)entities[0]));
+	player = (Player*)entities[52];
 }
 
 void World::movement(){
 	int roompos = 0;
 	int i = 0, j = 0;
 	int x = 0;
-
+	
+	
+	
 	help();	
 	
 	do{
-		player->playerposit = (Room*)entities[roompos];
+		
 		update();
-		itemsroom();
+		item->itemsroom();
 		if (player->playerposit == (Room*)entities[8]){
 			//system("pause");
 			return;
 		}
 		printf("\nWhere do you want to go?\n");
-		//printf("%s", entities[45]->name);
+		
 		char direction1[50];
 		gets_s(direction1, 50);
 		mystring command;
@@ -226,7 +230,7 @@ void World::movement(){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										roompos = j;
+										player->playerposit = ((Room*)entities[j]);
 										break;
 
 
@@ -260,7 +264,7 @@ void World::movement(){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										roompos = j;
+										player->playerposit = ((Room*)entities[j]);
 										break;
 
 									}
@@ -299,7 +303,7 @@ void World::movement(){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										roompos = j;
+										player->playerposit = ((Room*)entities[j]);
 										break;
 
 									}
@@ -342,7 +346,7 @@ void World::movement(){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										roompos = j;
+										player->playerposit = ((Room*)entities[j]);
 										break;
 									}
 								}
@@ -356,14 +360,14 @@ void World::movement(){
 				help();
 			}
 			else if (option.size() == 1 && (option[0] == "map" || option[0] == "m")){//Map, special feature
-				map();
+				item->map();
 			}
 
 			else if (option.size() == 1 && (option[0] == "q" || option[0] == "quit")){//if the player wants to quit
 				q++;
 			}
 			else if (option.size() == 1 && (option[0] == "inventory" || option[0] == "inv" || option[0] == "i")){//inventory of the player
-				inventory();
+				player->inventory();
 			}
 
 			else if (option.size() >= 2 && (option[0] == "look" && option[1] == "north" || option[0] == "look" && option[1] == "east" || option[0] == "look" && option[1] == "west" || option[0] == "look" && option[1] == "south" || option[0] == "look" && option[1] == "ladder" || option[0] == "look" && option[1] == "wrench" || option[0] == "look" && option[1] == "money" || option[0] == "look" && option[1] == "ticket" || option[0] == "look" && option[1] == "ticket" || option[0] == "look" && option[1] == "key" || option[0] == "look" && option[1] == "map" || option[0] == "look" && option[1] == "box")){
@@ -381,31 +385,31 @@ void World::movement(){
 
 			else if (option.size() >= 2 && (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map" || option[0] == "pick" && option[1] == "box")){
 
-				pick(option);//if the user wants to pick items
+				player->pick(option);//if the user wants to pick items
 			}
 
 			else if (option.size() >= 2 && (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "drop" && option[1] == "box")){
 
-				drop(option);//if the user wants to drop items
+				player->drop(option);//if the user wants to drop items
 			}
 
 			else if (option.size() >= 2 && (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map")){
 
-				equip(option);//if the user wants to equip an item to use it
+				player->equip(option);//if the user wants to equip an item to use it
 			}
 
 			else if (option.size() >= 2 && (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map")){
 
-				unequip(option);//if the user wants to unequip an item
+				player->unequip(option);//if the user wants to unequip an item
 			}
 
 			else if (option.size() >= 2 && (option[0] == "put" && option[1] == "ladder" || option[0] == "put" && option[1] == "wrench" || option[0] == "put" && option[1] == "money" || option[0] == "put" && option[1] == "ticket" || option[0] == "put" && option[1] == "key" || option[0] == "put" && option[1] == "map" || option[0] == "put" && option[1] == "box")){
 
-				put(option);//if the user wants to put an item in the box
+				player->put(option);//if the user wants to put an item in the box
 			}
 
 			else if (option.size() >= 2 && (option[0] == "get" && option[1] == "ladder" || option[0] == "get" && option[1] == "wrench" || option[0] == "get" && option[1] == "money" || option[0] == "get" && option[1] == "ticket" || option[0] == "get" && option[1] == "key" || option[0] == "get" && option[1] == "map" || option[0] == "get" && option[1] == "box")){
-				get(option);//if the user wants to get something from the box
+				player->get(option);//if the user wants to get something from the box
 
 			}
 			
@@ -790,124 +794,13 @@ void World::movement(){
 			}
 		}
 
-		void World::pick(Vector<mystring>& options){
-			int maximum = 0;
-			if (options.size() > 1){
-				for (int i = 0; i < entities.size(); i++){
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == false && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inbox == false && maxinventory<4){//look name and position, look inventory, look if its equipped and if its the maximum
-						if (options[1] == ((Item*)entities[TICKET])->name){//if the user wants to take the ticket they will have to have money 
-							if (((Item*)entities[MONEY])->inventory == false){//false
-								printf("You don't have money\n");
-								return;
-							}
-							else{//true, if its true user loses the money
-								((Item*)entities[MONEY])->inventory == false;
-									printf("You have given the money to have some information\n");
-									printf("If you go south you will find the park and near you will find House 3");
-									maxinventory--;
-									return;
-							}
-						}
-						((Item*)entities[i])->inventory = true;//pick the object
-						printf("%s\n %s\n", ((Item*)entities[i])->name.C_Str(), ((Item*)entities[i])->descrip.C_Str());
-						maxinventory++;//the maximum of the inventory
-						return;
-					}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos != player->playerposit){//if the object isn't there
-						printf("The item isn't here");
-						return;
-					}
-					else if (maxinventory > 3){//if the inventory is full
-						printf("You have full inventory you should drop an item");
-						return;
-					}
-				}
-			}
-
-		}
-
-		void World::inventory(){
-			int i;
-
-			for (i = 0; i < entities.size(); i++){
-				if (((Item*)entities[i])->inventory == true){//print the items that are in the inventory
-					printf("You have in the inventory:");
-					printf("%s\n", ((Item*)entities[i])->name.C_Str());
-				}
-			}
-
-		}
-
-		void World::drop(Vector<mystring>& options){
-
-		if (options.size() > 1){
-			for (int i = 0; i < entities.size(); i++){
-
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false){//it the item isn't in the inventory
-			printf("You don't have the item in the inventory");
-			return;
-		}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->inventory == true ){//drop the item
-						if (((Item*)entities[i])->inventory == true){//item of the inventory droped
-							((Item*)entities[i])->inventory = false;
-						}
-						else if (((Item*)entities[i])->equipped == true){//item equipped droped
-							((Item*)entities[i])->equipped == false;
-							maxequiped--;
-						}
-						printf("You have droped %s\n", ((Item*)entities[i])->name.C_Str());
-						maxinventory--;//one less in the inventory
-						return;
-					}
-
-				}
-			}
-		}
-
-		void World::equip(const Vector<mystring>& options){
+		
 
 		
-			for (int i = 0; i < entities.size(); i++){
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->inventory == false){//if user don't have the item in the inventory
-						printf("You don't have this item in the inventory");
-						return;
-					}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped == 0 ){//if the item isn't equipped and is in the inventory
-						((Item*)entities[i])->equipped = true;//if its equipped its not in the inventory
-						((Item*)entities[i])->inventory = false;
-						printf("You have equiped %s\n", ((Item*)entities[i])->name.C_Str());
-						maxinventory--;
-						maxequiped++;//maximum equiped
-						return;
-					}
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == true && maxequiped > 0){//if there is one item equipped
-						printf("You already have one item equiped");
-						return;
-					}
-				}
-		}		
 
-		void World::unequip(Vector<mystring>& options){
-			
-			if (options.size() > 1){
-				for (int i = 0; i < entities.size(); i++){
-					if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == false && ((Item*)entities[i])->inventory == false ){//if the item isn't in the inventory
-						printf("You don't have this item in the inventory");
-						return;
-					}
+		
 
-					else if (options[1] == ((Item*)entities[i])->name && ((Item*)entities[i])->equipped == true && ((Item*)entities[i])->inventory == false ){//if the item is in the inventory and equipped
-						((Item*)entities[i])->equipped = false;
-						((Item*)entities[i])->inventory = true;
-						printf("You have unequiped %s\n", ((Item*)entities[i])->name.C_Str());
-						maxequiped--;
-						maxinventory++;
-						return;
-					}
 
-				}
-			}
-		}
 
 		
 
@@ -921,123 +814,8 @@ void World::movement(){
 				}
 			}
 		}
-	
-		void World::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
-			int j = 0, i = 0;
-			for (j = 0; j < entities.size(); j++){
-				if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false ){//if there aren't objects
-				
-					i++;
-				}
-			}
-			if (i != 0){
-				for (j = 0; j < entities.size(); j++){
-					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == false && ((Item*)entities[j])->equipped == false ){
-						printf("\nIn this room there is: %s\n", ((Item*)entities[j])->name.C_Str());
-					}
-					if ((((Item*)entities[j])->itempos == player->playerposit) && ((Item*)entities[j])->inventory == false && ((Item*)entities[j])->inbox == true ){//if the object is in the box
-						printf("\nIn the box there is: %s\n", ((Item*)entities[j])->name.C_Str());
-					}
-				}
-			}
-		}
-
-		void World::put(const Vector<mystring>& options){//
-			int maximum = 0;
-
-			for (int i = 0; i < entities.size(); i++){
-					
-					if (maxbox == 2){//the box only can have two items
-						printf("In the box you only can put two items");
-						return;
-					}
-					else if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit ){//if the player try to put the box into the box
-						printf("You can't do this");
-						return;
-					}
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == player->playerposit && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false && maxbox <3 ){//puts an item iside the box
-						if (((Item*)entities[i])->inventory == true){
-							((Item*)entities[i])->inventory = false;
-							maxinventory--;
-						}
-						if (((Item*)entities[i])->equipped == true ){
-							((Item*)entities[i])->equipped == false;
-							maxequiped--;
-						}
-						
-						((Item*)entities[i])->inbox = true;//puts the item in the box
-						((Item*)entities[i])->itempos = ((Item*)entities[BOX])->itempos;//change the position of the object to the box direction
-						printf("You have put %s into the box", ((Item*)entities[i])->name.C_Str());
-						maxbox++;//maximum of items
-						return;
-					}
-
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos != ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == false ){//if the object isn't there
-						printf("This item isn't here");
-						return;
-					}
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->inbox == true && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos ){//if this item its in the box
-						printf("This item is in the box you should get it from there");
-						return;
-					}
-				
-						
-				}
 		
-		}
 
-		void World::get(Vector<mystring>& options){
-			int maximum = 0;
-			if (options.size() > 1){
-				for (int i = 0; i < NUM_ITEM; i++){
-					if (options[1] == ((Item*)entities[BOX])->name && ((Item*)entities[BOX])->itempos == player->playerposit ){//if you try to get the box from the box
-						printf("You can't do this");
-						return;
-					}
-					else if (options[1] == ((Item*)entities[i])->name && options[3] == ((Item*)entities[BOX])->name && ((Item*)entities[i])->itempos == ((Item*)entities[BOX])->itempos && player->playerposit == ((Item*)entities[BOX])->itempos && ((Item*)entities[i])->inbox == true){//to get some item from the box
-						((Item*)entities[i])->inbox = false;//out of the box
-						((Item*)entities[i])->inventory = true;//to the inventory
-						printf("You have get %s of the box", ((Item*)entities[i])->name.C_Str());
-						maxinventory++;//maximum of inventory
-						maxbox--;//maximum inside the box
-						return;
-					}
-					else if (((Item*)entities[i])->itempos != player->playerposit){//if the item isn't there
-					printf("This item isn't here");
-					return;
-					}
-				}
-			}
+		
 
-
-		}
-
-		void World::map()const{//This function is the special feature, prints the map if you pick the map and tells you where are you
-
-			if (((Item*)entities[MAP])->inventory == true ){//if you have the map
-				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177);
-				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                                          %c\n", 177, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
-				printf("%c%c ENTRANCE %c %c         %c %c        %c                                          %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
-				printf("%c%c  OF THE  %c%c%c HOUSE 1 %c%c%c SCHOOL %c                                          %c\n", 177, 186, 186, 196, 186, 186, 196, 186, 186, 177);
-				printf("%c%c   CITY   %c %c         %c %c        %c                                          %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
-				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                                          %c\n", 177, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
-				printf("%c                             %c                                               %c\n", 177, 179, 177);
-				printf("%c                        %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                      %c\n", 177, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
-				printf("%c                        %c         %c %c      %c %c        %c                      %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
-				printf("%c                        %c HOUSE 2 %c%c%c SHOP %c%c%c CINEMA %c                      %c\n", 177, 186, 186, 196, 186, 186, 196, 186, 186, 177);
-				printf("%c                        %c         %c %c      %c %c        %c                      %c\n", 177, 186, 186, 186, 186, 186, 186, 177);
-				printf("%c                        %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c                      %c\n", 177, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
-				printf("%c                                                 %c                           %c\n", 177, 179, 177);
-				printf("%c                                              %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c\n", 177, 201, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 205, 205, 205, 187, 177);
-				printf("%c                                              %c      %c %c         %c %c        %c%c\n", 177, 186, 186, 186, 186, 186, 186, 177);
-				printf("%c                                              %c PARK %c%c%c HOUSE 3 %c%c%c FINISH %c%c\n", 177, 186, 186, 196, 186, 186, 196, 186, 186, 177);
-				printf("%c                                              %c      %c %c         %c %c        %c%c\n", 177, 186, 186, 186, 186, 186, 186, 177);
-				printf("%c                                              %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c\n", 177, 200, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
-				printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177);
-				printf("YOU ARE IN %s", player->playerposit->name);
-			}
-
-			else{//if you don't have the map
-				printf("You can't do this");
-			}
-		}
+	

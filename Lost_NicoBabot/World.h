@@ -16,6 +16,7 @@ public:
 	int maxbox = 0;
 	int maxequiped=0;
 	Player *player = nullptr;
+	Item *item=nullptr;
 	Vector<Entity*> entities;
 	/*
 	Vector<Room*> room;
@@ -30,16 +31,12 @@ public:
 	void createworld();
 	void Open(const Vector<mystring>&);
 	void Close(const Vector<mystring>&);
-	void pick(Vector<mystring>&);
-	void inventory();
-	void drop(Vector<mystring>&);
-	void equip(const Vector<mystring>& options);
-	void unequip(Vector<mystring>& options);
+	
 	void update();
-	void itemsroom();
-	void put(const Vector<mystring>& options);
-	void get(Vector<mystring>& options);
-	void map()const;
+	
+	
+	
 	~World();
 };
+extern World *world;
 #endif

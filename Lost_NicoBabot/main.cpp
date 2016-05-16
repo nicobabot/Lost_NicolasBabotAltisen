@@ -2,11 +2,12 @@
 #include<stdlib.h>
 #include"World.h"
 #include"memleaks.h"
+World *world = nullptr;
 int main(){
 	ReportMemoryLeaks();
-	World world;
-	world.createworld();
-	world.movement();
+	world = new World;
+	world->createworld();
+	world->movement();
 	system("pause");
 	return 0;
 }
