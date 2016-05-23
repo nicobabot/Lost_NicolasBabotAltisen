@@ -1,17 +1,17 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"World.h"
+#include"Creature.h"
 
-Player::Player(const char* name, const char* descrip, TYPE Typeobj, Room* pos): Entity(name, descrip, Typeobj), playerposit(pos){
 
-}
+
 
 
 void Player::pick(const Vector<mystring>& options){
 	int maximum = 0;
 	if (options.size() > 1){
 		for (int i = 0; i < world->entities.size(); i++){
-			if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos == world->player->playerposit && ((Item*)world->entities[i])->inventory == false && ((Item*)world->entities[i])->equipped == false && ((Item*)world->entities[i])->inbox == false && world->maxinventory<4){//look name and position, look inventory, look if its equipped and if its the maximum
+			if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos == world->player->position && ((Item*)world->entities[i])->inventory == false && ((Item*)world->entities[i])->equipped == false && ((Item*)world->entities[i])->inbox == false && world->maxinventory<4){//look name and position, look inventory, look if its equipped and if its the maximum
 				if (options[1] == ((Item*)world->entities[TICKET])->name){//if the user wants to take the ticket they will have to have money 
 					if (((Item*)world->entities[MONEY])->inventory == false){//false
 						printf("You don't have money\n");
@@ -30,7 +30,7 @@ void Player::pick(const Vector<mystring>& options){
 				world->maxinventory++;//the maximum of the inventory
 				return;
 			}
-			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos != world->player->playerposit){//if the object isn't there
+			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos != world->player->position){//if the object isn't there
 				printf("The item isn't here");
 				return;
 			}
@@ -71,7 +71,7 @@ void Player::drop(const Vector<mystring>& options){
 				printf("You don't have the item in the inventory");
 				return;
 			}
-			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos == world->player->playerposit && ((Item*)world->entities[i])->inventory == true){//drop the item
+			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos == world->player->position && ((Item*)world->entities[i])->inventory == true){//drop the item
 				if (((Item*)world->entities[i])->inventory == true){//item of the inventory droped
 					((Item*)world->entities[i])->inventory = false;
 				}
@@ -120,11 +120,11 @@ void Player::put(const Vector<mystring>& options){//
 			printf("In the box you only can put two items");
 			return;
 		}
-		else if (options[1] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[BOX])->itempos == world->player->playerposit){//if the player try to put the box into the box
+		else if (options[1] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[BOX])->itempos == world->player->position){//if the player try to put the box into the box
 			printf("You can't do this");
 			return;
 		}
-		else if (options[1] == ((Item*)world->entities[i])->name && options[3] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[i])->itempos == world->player->playerposit && ((Item*)world->entities[i])->itempos == ((Item*)world->entities[BOX])->itempos && ((Item*)world->entities[i])->inbox == false && world->maxbox <3){//puts an item iside the box
+		else if (options[1] == ((Item*)world->entities[i])->name && options[3] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[i])->itempos == world->player->position && ((Item*)world->entities[i])->itempos == ((Item*)world->entities[BOX])->itempos && ((Item*)world->entities[i])->inbox == false && world->maxbox <3){//puts an item iside the box
 			if (((Item*)world->entities[i])->inventory == true){
 				((Item*)world->entities[i])->inventory = false;
 				world->maxinventory--;
@@ -181,11 +181,11 @@ void Player::get(const Vector<mystring>& options){
 	int maximum = 0;
 	if (options.size() > 1){
 		for (int i = 0; i < NUM_ITEM; i++){
-			if (options[1] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[BOX])->itempos == world->player->playerposit){//if you try to get the box from the box
+			if (options[1] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[BOX])->itempos == world->player->position){//if you try to get the box from the box
 				printf("You can't do this");
 				return;
 			}
-			else if (options[1] == ((Item*)world->entities[i])->name && options[3] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[i])->itempos == ((Item*)world->entities[BOX])->itempos && world->player->playerposit == ((Item*)world->entities[BOX])->itempos && ((Item*)world->entities[i])->inbox == true){//to get some item from the box
+			else if (options[1] == ((Item*)world->entities[i])->name && options[3] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[i])->itempos == ((Item*)world->entities[BOX])->itempos && world->player->position == ((Item*)world->entities[BOX])->itempos && ((Item*)world->entities[i])->inbox == true){//to get some item from the box
 				((Item*)world->entities[i])->inbox = false;//out of the box
 				((Item*)world->entities[i])->inventory = true;//to the inventory
 				printf("You have get %s of the box", ((Item*)world->entities[i])->name.C_Str());
@@ -193,7 +193,7 @@ void Player::get(const Vector<mystring>& options){
 				world->maxbox--;//maximum inside the box
 				return;
 			}
-			else if (((Item*)world->entities[i])->itempos != world->player->playerposit){//if the item isn't there
+			else if (((Item*)world->entities[i])->itempos != world->player->position){//if the item isn't there
 				printf("This item isn't here");
 				return;
 			}

@@ -35,7 +35,7 @@ int main(){
 					option = command;
 					Vector<mystring> tokoption = option.Tokenize(" ", command);
 					world->movement(tokoption);
-					if (world->q != 0 || world->player->playerposit == world->entities[8]){
+					if (world->q != 0 || world->player->position == world->entities[8]){
 						printf("THANK YOU FOR PLAYING THE GAME");
 						system("pause");
 						return 0;

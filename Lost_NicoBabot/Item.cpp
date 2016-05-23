@@ -13,18 +13,18 @@ Item::~Item(){
 }
 void Item::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
 	int j = 0, i = 0;
-	for (j = 0; j < world->entities.size(); j++){
-		if ((((Item*)world->entities[j])->itempos == world->player->playerposit) && ((Item*)world->entities[j])->inventory == false){//if there aren't objects
+	for (j = 0; j < world->entities.size()-1; j++){
+		if ((((Item*)world->entities[j])->itempos == world->player->position) && ((Item*)world->entities[j])->inventory == false){//if there aren't objects
 
 			i++;
 		}
 	}
 	if (i != 0){
-		for (j = 0; j < world->entities.size(); j++){
-			if ((((Item*)world->entities[j])->itempos == world->player->playerposit) && ((Item*)world->entities[j])->inventory == false && ((Item*)world->entities[j])->inbox == false && ((Item*)world->entities[j])->equipped == false){
+		for (j = 0; j < world->entities.size() - 1; j++){
+			if ((((Item*)world->entities[j])->itempos == world->player->position) && ((Item*)world->entities[j])->inventory == false && ((Item*)world->entities[j])->inbox == false && ((Item*)world->entities[j])->equipped == false){
 				printf("\nIn this room there is: %s\n", ((Item*)world->entities[j])->name.C_Str());
 			}
-			if ((((Item*)world->entities[j])->itempos == world->player->playerposit) && ((Item*)world->entities[j])->inventory == false && ((Item*)world->entities[j])->inbox == true){//if the object is in the box
+			if ((((Item*)world->entities[j])->itempos == world->player->position) && ((Item*)world->entities[j])->inventory == false && ((Item*)world->entities[j])->inbox == true){//if the object is in the box
 				printf("\nIn the box there is: %s\n", ((Item*)world->entities[j])->name.C_Str());
 			}
 		}
@@ -52,7 +52,7 @@ void Item::map()const{//This function is the special feature, prints the map if 
 		printf("%c                                              %c      %c %c         %c %c        %c%c\n", 177, 186, 186, 186, 186, 186, 186, 177);
 		printf("%c                                              %c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c %c%c%c%c%c%c%c%c%c%c%c\n", 177, 200, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 205, 205, 205, 188, 177);
 		printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c\n", 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177, 177);
-		printf("YOU ARE IN %s", world->player->playerposit->name);
+		printf("YOU ARE IN %s", world->player->position->name);
 	}
 
 	else{//if you don't have the map

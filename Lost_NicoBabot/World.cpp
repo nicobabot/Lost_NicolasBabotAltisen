@@ -175,7 +175,7 @@ void World::createworld(){
 	//item 51 (7)
 	entities.pushback(new Item("box", "A box that you find in school and you can put and get things", (Room*)entities[2], false, false, false, ITEM));
 
-	entities.pushback(new Player("player", "Don't need description", PLAYER, (Room*)entities[0]));
+	entities.pushback(new Player("player", "Don't need description", 100, 20, 80, (Room*)entities[0]));
 	player = (Player*)entities[52];
 }
 
@@ -184,12 +184,18 @@ void World::movement(const Vector<mystring>& move){
 	int i = 0, j = 0;
 	int x = 0;
 	
-	
+	/*Player* player = (Player*)world->entities[0];
+	for (int i = 0; i <= entities.size(); i++)
+	{
+		if (world->entities[i]->Typeobj == PLAYER)
+		{
+			player = (Player*)world->entities[i];
+		}
+	}*/
 
-	
 		update();
 		
-		if (player->playerposit == (Room*)entities[8]){
+		if (player->position == (Room*)entities[8]){
 			//system("pause");
 			return;
 		}
@@ -208,7 +214,7 @@ void World::movement(const Vector<mystring>& move){
 			//-------------------------------------------------------------------------------------------------------------North
 			if (move.size() == 2 && move[0] == "go" && move[1] == "north" || move.size() == 2 && move[0] == "go" && move[1] == "n" || move.size() == 1 && move[0] == "n" || move.size() == 1 && move[0] == "north"){
 				for (i = 0; i < entities.size(); i++){
-					if (entities[i]->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == NORTH){ //if the origin is the same position as the origin, also look the orientation
+					if (entities[i]->Typeobj == EXIT && player->position == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == NORTH){ //if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("\nThere's a wall");
 							item->itemsroom();
@@ -231,7 +237,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										player->playerposit = ((Room*)entities[j]);
+										player->position = ((Room*)entities[j]);
 										item->itemsroom();
 										break;
 
@@ -246,7 +252,7 @@ void World::movement(const Vector<mystring>& move){
 			//----------------------------------------------------------------------------------------------------------------West
 			else if (move.size() == 2 && move[0] == "go" && move[1] == "west" || move.size() == 2 && move[0] == "go" && move[1] == "w" || move.size() == 1 && move[0] == "w" || move.size() == 1 && move[0] == "west"){
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == WEST){//if the origin is the same position as the origin, also look the orientation
+					if (((Exit*)entities[i])->Typeobj == EXIT && player->position == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == WEST){//if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
 							item->itemsroom();
@@ -270,7 +276,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										player->playerposit = ((Room*)entities[j]);
+										player->position = ((Room*)entities[j]);
 										item->itemsroom();
 										break;
 
@@ -285,7 +291,7 @@ void World::movement(const Vector<mystring>& move){
 			else if (move.size() == 2 && move[0] == "go" && move[1] == "south" || move.size() == 2 && move[0] == "go" && move[1] == "s" || move.size() == 1 && move[0] == "s" || move.size() == 1 && move[0] == "south")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->Typeobj== EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == SOUTH){//if the origin is the same position as the origin, also look the orientation
+					if (((Exit*)entities[i])->Typeobj == EXIT && player->position == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == SOUTH){//if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
 							item->itemsroom();
@@ -300,7 +306,7 @@ void World::movement(const Vector<mystring>& move){
 								}
 								else{
 									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
-										if (player->playerposit == (Room*)entities[2]){
+										if (player->position == (Room*)entities[2]){
 											printf("There's a wall you have to pass");
 											item->itemsroom();
 										}
@@ -314,7 +320,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										player->playerposit = ((Room*)entities[j]);
+										player->position = ((Room*)entities[j]);
 										break;
 
 									}
@@ -329,7 +335,7 @@ void World::movement(const Vector<mystring>& move){
 			{
 				for (i = 0; i < entities.size(); i++)
 				{
-					if (((Exit*)entities[i])->Typeobj == EXIT &&player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == EAST)//if the origin is the same position as the origin, also look the orientation
+					if (((Exit*)entities[i])->Typeobj == EXIT &&player->position == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == EAST)//if the origin is the same position as the origin, also look the orientation
 					{
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny)//if the origin and the destiny are the same there's a wall
 						{
@@ -360,7 +366,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
-										player->playerposit = ((Room*)entities[j]);
+										player->position = ((Room*)entities[j]);
 										item->itemsroom();
 										break;
 									}
@@ -452,7 +458,7 @@ void World::movement(const Vector<mystring>& move){
 				{
 					if (((Exit*)entities[exitnum])->orientation == NORTH )//exits with north orientation
 					{
-						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->position)//if origin and the player have the same direction
 						{
 							printf("%s\n", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
@@ -465,7 +471,7 @@ void World::movement(const Vector<mystring>& move){
 				{
 					if (((Exit*)entities[exitnum])->orientation == WEST )//exits with west orientation
 					{
-						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->position)//if origin and the player have the same direction
 						{
 							printf("%s\n", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
@@ -478,7 +484,7 @@ void World::movement(const Vector<mystring>& move){
 				{
 					if (((Exit*)entities[exitnum])->orientation == SOUTH )//exits with south orientation
 					{
-						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->position)//if origin and the player have the same direction
 						{
 							printf("%s\n", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
@@ -491,7 +497,7 @@ void World::movement(const Vector<mystring>& move){
 				{
 					if (((Exit*)entities[exitnum])->orientation == EAST )//exits with east orientation
 					{
-						if (((Exit*)entities[exitnum])->origin == player->playerposit)//if origin and the player have the same direction
+						if (((Exit*)entities[exitnum])->origin == player->position)//if origin and the player have the same direction
 						{
 							printf("%s", ((Exit*)entities[exitnum])->descrip.C_Str());
 						}
@@ -499,7 +505,7 @@ void World::movement(const Vector<mystring>& move){
 				}
 			}
 			for (int x = 0; x < entities.size(); x++){
-				if (options[0] == "look" && options[1] == ((Item*)entities[x])->name && ((Item*)entities[x])->itempos == player->playerposit){//what object did the user said and if its in the same position of the player
+				if (options[0] == "look" && options[1] == ((Item*)entities[x])->name && ((Item*)entities[x])->itempos == player->position){//what object did the user said and if its in the same position of the player
 					printf("%s\n", ((Item*)entities[x])->name.C_Str());//name
 					printf("%s\n", ((Item*)entities[x])->descrip.C_Str());//description
 					if (options[1] == ((Item*)entities[BOX])->name){//if its look box
@@ -527,7 +533,7 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "open" && options[1] == "north" || options[0] == "open" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin->name == player->position->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == NORTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == true){// if its closed 
@@ -560,7 +566,7 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "open" && options[1] == "west" || options[0] == "open" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin->name == player->position->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == WEST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){// if it has door 
 								if (((Exit*)entities[i])->closed == true){// if its closed 
@@ -593,11 +599,11 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "open" && options[1] == "east" || options[0] == "open" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin == player->playerposit ){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin == player->position){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == EAST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){// if it has door 
 								if (((Exit*)entities[i])->closed == true){// if its closed 
-									if (player->playerposit == (Room*)entities[7] && ((Item*)entities[KEY])->equipped != true){//if its the last room you need the key to pass
+									if (player->position == (Room*)entities[7] && ((Item*)entities[KEY])->equipped != true){//if its the last room you need the key to pass
 										printf("YOU CAN'T PASS");
 										break;
 									}
@@ -631,20 +637,20 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "open" && options[1] == "south" || options[0] == "open" && options[1] == "s" || options[0] == "s" || options[0] == "south" || options[0] == "pass" && options[1] == "south" || options[0] == "pass" && options[1] == "s")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin == player->playerposit ){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin == player->position){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == SOUTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){// if it has door 
 								if (((Exit*)entities[i])->closed == true){// if its closed 
-									if (player->playerposit == (Room*)entities[2] && ((Item*)entities[LADDER])->equipped == false){//if its the room 2 you will need a ladder to pass
+									if (player->position == (Room*)entities[2] && ((Item*)entities[LADDER])->equipped == false){//if its the room 2 you will need a ladder to pass
 										printf("YOU CAN'T PASS\n");
 										break;
 									}
 									((Exit*)entities[i])->closed = false;
 									for (j = 0; j < entities.size(); j++){
 										if (((Exit*)entities[j])->orientation == NORTH && ((Exit*)entities[j])->door == true){//to open the door of the other side 
-											if (((Exit*)entities[j])->destiny == player->playerposit){
+											if (((Exit*)entities[j])->destiny == player->position){
 												((Exit*)entities[j])->closed = false;
-												if (player->playerposit == (Room*)entities[2]){//if its room 2 have to print you passed the wall
+												if (player->position == (Room*)entities[2]){//if its room 2 have to print you passed the wall
 													printf("You passed the wall\n");
 													break;
 												}
@@ -676,11 +682,11 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "close" && options[1] == "north" || options[0] == "close" && options[1] == "n" || options[0] == "n" || options[0] == "north")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin->name == player->position->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == NORTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
-									if (player->playerposit == (Room*)entities[3]){//in the room 2 you have to pass a wall then you can't close north
+									if (player->position == (Room*)entities[3]){//in the room 2 you have to pass a wall then you can't close north
 										printf("You can't do this\n");
 										break;
 									}
@@ -712,7 +718,7 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "close" && options[1] == "west" || options[0] == "close" && options[1] == "w" || options[0] == "w" || options[0] == "west")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin->name == player->position->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == WEST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
@@ -745,7 +751,7 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "close" && options[1] == "east" || options[0] == "close" && options[1] == "e" || options[0] == "e" || options[0] == "east")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name ){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin->name == player->position->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == EAST){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
@@ -778,7 +784,7 @@ void World::movement(const Vector<mystring>& move){
 			if (options[0] == "close" && options[1] == "south" || options[0] == "close" && options[1] == "s" || options[0] == "s" || options[0] == "south")
 			{
 				for (i = 0; i < entities.size(); i++){
-					if (((Exit*)entities[i])->origin->name == player->playerposit->name){//if the origin is the same as the player position
+					if (((Exit*)entities[i])->origin->name == player->position->name){//if the origin is the same as the player position
 						if (((Exit*)entities[i])->orientation == SOUTH){//looks the orientation
 							if (((Exit*)entities[i])->door == true){//if it has door
 								if (((Exit*)entities[i])->closed == false){//if its closed
@@ -821,7 +827,7 @@ void World::movement(const Vector<mystring>& move){
 		void World::update(){//this function updates the directions of the items
 			for (int i = 0; i < entities.size(); i++){
 				if (((Item*)entities[i])->inventory == true && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the inventory the dicrection will be the same of the player
-					((Item*)entities[i])->itempos = player->playerposit;
+					((Item*)entities[i])->itempos = player->position;
 				}
 				if (((Item*)entities[i])->inbox == true && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the box the tirection will be the same as the box
 					((Item*)entities[i])->itempos = ((Item*)entities[BOX])->itempos;

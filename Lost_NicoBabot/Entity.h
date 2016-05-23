@@ -1,7 +1,7 @@
 #ifndef _Entity_
 #define _Entity_
 #include"MyString.h"
-enum TYPE{ EXIT, ROOM, PLAYER, ITEM };
+enum TYPE{ EXIT, ROOM, PLAYER, THUG, ITEM };
 class Entity{
 	
 public:
