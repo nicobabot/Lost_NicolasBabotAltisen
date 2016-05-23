@@ -4,7 +4,7 @@
 #include"MyString.h"
 #include"Vector.h"
 #include"Entity.h"
-#include"Entity.h"
+#include <Windows.h>
 
 
 World::World(){
@@ -179,51 +179,52 @@ void World::createworld(){
 	player = (Player*)entities[52];
 }
 
-void World::movement(){
+void World::movement(const Vector<mystring>& move){
 	int roompos = 0;
 	int i = 0, j = 0;
 	int x = 0;
 	
 	
+
 	
-	help();	
-	
-	do{
-		
 		update();
-		item->itemsroom();
+		
 		if (player->playerposit == (Room*)entities[8]){
 			//system("pause");
 			return;
 		}
 		printf("\nWhere do you want to go?\n");
+		//while (1){
 		
+	//	}
 		char direction1[50];
-		gets_s(direction1, 50);
-		mystring command;
+		//gets_s(direction1, 50);
+		//mystring command;
 
-		Vector<mystring> option = command.Tokenize(" ", direction1);
+		//Vector<mystring> option = command.Tokenize(" ", direction1);
 		
 
 			system("cls");
 			//-------------------------------------------------------------------------------------------------------------North
-			if (option.size() == 2 && option[0] == "go" && option[1] == "north" || option.size() == 2 && option[0] == "go" && option[1] == "n" || option.size() == 1 && option[0] == "n" || option.size() == 1 && option[0] == "north"){
+			if (move.size() == 2 && move[0] == "go" && move[1] == "north" || move.size() == 2 && move[0] == "go" && move[1] == "n" || move.size() == 1 && move[0] == "n" || move.size() == 1 && move[0] == "north"){
 				for (i = 0; i < entities.size(); i++){
 					if (entities[i]->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == NORTH){ //if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("\nThere's a wall");
+							item->itemsroom();
 							break;
 						}
 						for (j = 0; j < entities.size(); j++){
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
 									printf("%s", ((Exit*)entities[i])->descrip);
+									item->itemsroom();
 									break;
 								}
 								else{
 									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
 										printf("There's a door");
-
+										item->itemsroom();
 										break;
 									}
 									else{
@@ -231,6 +232,7 @@ void World::movement(){
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										player->playerposit = ((Room*)entities[j]);
+										item->itemsroom();
 										break;
 
 
@@ -242,22 +244,26 @@ void World::movement(){
 				}
 			}
 			//----------------------------------------------------------------------------------------------------------------West
-			else if (option.size() == 2 && option[0] == "go" && option[1] == "west" || option.size() == 2 && option[0] == "go" && option[1] == "w" || option.size() == 1 && option[0] == "w" || option.size() == 1 && option[0] == "west"){
+			else if (move.size() == 2 && move[0] == "go" && move[1] == "west" || move.size() == 2 && move[0] == "go" && move[1] == "w" || move.size() == 1 && move[0] == "w" || move.size() == 1 && move[0] == "west"){
 				for (i = 0; i < entities.size(); i++){
 					if (((Exit*)entities[i])->Typeobj == EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == WEST){//if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
+							item->itemsroom();
 							break;
 						}
 						for (j = 0; j < entities.size(); j++){
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
 									printf("%s", ((Exit*)entities[i])->descrip);
+									item->itemsroom();
 									break;
 								}
 								else{
 									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
 										printf("There's a door");
+										item->itemsroom();
+										item->itemsroom();
 										break;
 									}
 									else{
@@ -265,6 +271,7 @@ void World::movement(){
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										player->playerposit = ((Room*)entities[j]);
+										item->itemsroom();
 										break;
 
 									}
@@ -275,27 +282,31 @@ void World::movement(){
 				}
 			}
 			//----------------------------------------------------------------------------------------------------------------South
-			else if (option.size() == 2 && option[0] == "go" && option[1] == "south" || option.size() == 2 && option[0] == "go" && option[1] == "s" || option.size() == 1 && option[0] == "s" || option.size() == 1 && option[0] == "south")
+			else if (move.size() == 2 && move[0] == "go" && move[1] == "south" || move.size() == 2 && move[0] == "go" && move[1] == "s" || move.size() == 1 && move[0] == "s" || move.size() == 1 && move[0] == "south")
 			{
 				for (i = 0; i < entities.size(); i++){
 					if (((Exit*)entities[i])->Typeobj== EXIT && player->playerposit == ((Exit*)entities[i])->origin && ((Exit*)entities[i])->orientation == SOUTH){//if the origin is the same position as the origin, also look the orientation
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){//if the origin and the destiny are the same there's a wall
 							printf("There's a wall");
+							item->itemsroom();
 							break;
 						}
 						for (j = 0; j < entities.size(); j++){
 							if (((Exit*)entities[i])->destiny == (Room*)entities[j]){//if the destiny is the same position of the room
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny){
 									printf("%s", ((Exit*)entities[i])->descrip);
+									item->itemsroom();
 									break;
 								}
 								else{
 									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true){//if there's a door and if its closed
 										if (player->playerposit == (Room*)entities[2]){
 											printf("There's a wall you have to pass");
+											item->itemsroom();
 										}
 										else{
 											printf("There's a door");
+											item->itemsroom();
 										}
 										break;
 									}
@@ -314,7 +325,7 @@ void World::movement(){
 				}
 			}
 			//-----------------------------------------------------------------------------------------------------------------East
-			else if (option.size() == 2 && option[0] == "go" && option[1] == "east" || option.size() == 2 && option[0] == "go" && option[1] == "e" || option.size() == 1 && option[0] == "e" || option.size() == 1 && option[0] == "east")
+			else if (move.size() == 2 && move[0] == "go" && move[1] == "east" || move.size() == 2 && move[0] == "go" && move[1] == "e" || move.size() == 1 && move[0] == "e" || move.size() == 1 && move[0] == "east")
 			{
 				for (i = 0; i < entities.size(); i++)
 				{
@@ -323,6 +334,7 @@ void World::movement(){
 						if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny)//if the origin and the destiny are the same there's a wall
 						{
 							printf("%s", ((Exit*)entities[i])->descrip);
+							item->itemsroom();
 							break;
 						}
 						for (j = 0; j < entities.size(); j++)
@@ -332,6 +344,7 @@ void World::movement(){
 								if (((Exit*)entities[i])->origin == ((Exit*)entities[i])->destiny)
 								{
 									printf("%s", ((Exit*)entities[i])->descrip.C_Str());
+									item->itemsroom();
 									break;
 								}
 								else
@@ -339,6 +352,7 @@ void World::movement(){
 									if (((Exit*)entities[i])->door == true && ((Exit*)entities[i])->closed == true)//if there's a door and if its closed
 									{
 										printf("There's a door");
+										item->itemsroom();
 										break;
 									}
 									else
@@ -347,6 +361,7 @@ void World::movement(){
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										player->playerposit = ((Room*)entities[j]);
+										item->itemsroom();
 										break;
 									}
 								}
@@ -356,60 +371,60 @@ void World::movement(){
 				}
 			}
 		
-			else if (option.size() == 1 && (option[0] == "h" || option[0] == "help")){//help
+			else if (move.size() == 1 && (move[0] == "h" || move[0] == "help")){//help
 				help();
 			}
-			else if (option.size() == 1 && (option[0] == "map" || option[0] == "m")){//Map, special feature
+			else if (move.size() == 1 && (move[0] == "map" || move[0] == "m")){//Map, special feature
 				item->map();
 			}
 
-			else if (option.size() == 1 && (option[0] == "q" || option[0] == "quit")){//if the player wants to quit
+			else if (move.size() == 1 && move[0] == "q" || move[0] == "quit"){//if the player wants to quit
 				q++;
 			}
-			else if (option.size() == 1 && (option[0] == "inventory" || option[0] == "inv" || option[0] == "i")){//inventory of the player
+			else if (move.size() == 1 && (move[0] == "inventory" || move[0] == "inv" || move[0] == "i")){//inventory of the player
 				player->inventory();
 			}
 
-			else if (option.size() >= 2 && (option[0] == "look" && option[1] == "north" || option[0] == "look" && option[1] == "east" || option[0] == "look" && option[1] == "west" || option[0] == "look" && option[1] == "south" || option[0] == "look" && option[1] == "ladder" || option[0] == "look" && option[1] == "wrench" || option[0] == "look" && option[1] == "money" || option[0] == "look" && option[1] == "ticket" || option[0] == "look" && option[1] == "ticket" || option[0] == "look" && option[1] == "key" || option[0] == "look" && option[1] == "map" || option[0] == "look" && option[1] == "box")){
-				look(option, roompos);//to look the objects and the directions
+			else if (move.size() >= 2 && (move[0] == "look" && move[1] == "north" || move[0] == "look" && move[1] == "east" || move[0] == "look" && move[1] == "west" || move[0] == "look" && move[1] == "south" || move[0] == "look" && move[1] == "ladder" || move[0] == "look" && move[1] == "wrench" || move[0] == "look" && move[1] == "money" || move[0] == "look" && move[1] == "ticket" || move[0] == "look" && move[1] == "ticket" || move[0] == "look" && move[1] == "key" || move[0] == "look" && move[1] == "map" || move[0] == "look" && move[1] == "box")){
+				look(move, roompos);//to look the objects and the directions
 			}
 
 
-			else if (option.size() >= 2 && (option[0] == "open" && option[1] == "north" || option[0] == "open" && option[1] == "east" || option[0] == "open" && option[1] == "west" || option[0] == "open" && option[1] == "south" || option[0] == "pass" && option[1] == "south" || option[0] == "pass" && option[1] == "s")){
-				Open(option);//to open the doors of the game
+			else if (move.size() >= 2 && (move[0] == "open" && move[1] == "north" || move[0] == "open" && move[1] == "east" || move[0] == "open" && move[1] == "west" || move[0] == "open" && move[1] == "south" || move[0] == "pass" && move[1] == "south" || move[0] == "pass" && move[1] == "s")){
+				Open(move);//to open the doors of the game
 			}
 
-			else if (option.size() >= 2 && (option[0] == "close" && option[1] == "north" || option[0] == "close" && option[1] == "east" || option[0] == "close" && option[1] == "west" || option[0] == "close" && option[1] == "south")){
-				Close(option);////to close the doors of the game
+			else if (move.size() >= 2 && (move[0] == "close" && move[1] == "north" || move[0] == "close" && move[1] == "east" || move[0] == "close" && move[1] == "west" || move[0] == "close" && move[1] == "south")){
+				Close(move);////to close the doors of the game
 			}
 
-			else if (option.size() >= 2 && (option[0] == "pick" && option[1] == "ladder" || option[0] == "pick" && option[1] == "wrench" || option[0] == "pick" && option[1] == "money" || option[0] == "pick" && option[1] == "ticket" || option[0] == "pick" && option[1] == "key" || option[0] == "pick" && option[1] == "map" || option[0] == "pick" && option[1] == "box")){
+			else if (move.size() >= 2 && (move[0] == "pick" && move[1] == "ladder" || move[0] == "pick" && move[1] == "wrench" || move[0] == "pick" && move[1] == "money" || move[0] == "pick" && move[1] == "ticket" || move[0] == "pick" && move[1] == "key" || move[0] == "pick" && move[1] == "map" || move[0] == "pick" && move[1] == "box")){
 
-				player->pick(option);//if the user wants to pick items
+				player->pick(move);//if the user wants to pick items
 			}
 
-			else if (option.size() >= 2 && (option[0] == "drop" && option[1] == "ladder" || option[0] == "drop" && option[1] == "wrench" || option[0] == "drop" && option[1] == "money" || option[0] == "drop" && option[1] == "ticket" || option[0] == "drop" && option[1] == "key" || option[0] == "drop" && option[1] == "map" || option[0] == "drop" && option[1] == "box")){
+			else if (move.size() >= 2 && (move[0] == "drop" && move[1] == "ladder" || move[0] == "drop" && move[1] == "wrench" || move[0] == "drop" && move[1] == "money" || move[0] == "drop" && move[1] == "ticket" || move[0] == "drop" && move[1] == "key" || move[0] == "drop" && move[1] == "map" || move[0] == "drop" && move[1] == "box")){
 
-				player->drop(option);//if the user wants to drop items
+				player->drop(move);//if the user wants to drop items
 			}
 
-			else if (option.size() >= 2 && (option[0] == "equip" && option[1] == "ladder" || option[0] == "equip" && option[1] == "wrench" || option[0] == "equip" && option[1] == "money" || option[0] == "equip" && option[1] == "ticket" || option[0] == "equip" && option[1] == "key" || option[0] == "equip" && option[1] == "map")){
+			else if (move.size() >= 2 && (move[0] == "equip" && move[1] == "ladder" || move[0] == "equip" && move[1] == "wrench" || move[0] == "equip" && move[1] == "money" || move[0] == "equip" && move[1] == "ticket" || move[0] == "equip" && move[1] == "key" || move[0] == "equip" && move[1] == "map")){
 
-				player->equip(option);//if the user wants to equip an item to use it
+				player->equip(move);//if the user wants to equip an item to use it
 			}
 
-			else if (option.size() >= 2 && (option[0] == "unequip" && option[1] == "ladder" || option[0] == "unequip" && option[1] == "wrench" || option[0] == "unequip" && option[1] == "money" || option[0] == "unequip" && option[1] == "ticket" || option[0] == "unequip" && option[1] == "key" || option[0] == "unequip" && option[1] == "map")){
+			else if (move.size() >= 2 && (move[0] == "unequip" && move[1] == "ladder" || move[0] == "unequip" && move[1] == "wrench" || move[0] == "unequip" && move[1] == "money" || move[0] == "unequip" && move[1] == "ticket" || move[0] == "unequip" && move[1] == "key" || move[0] == "unequip" && move[1] == "map")){
 
-				player->unequip(option);//if the user wants to unequip an item
+				player->unequip(move);//if the user wants to unequip an item
 			}
 
-			else if (option.size() >= 2 && (option[0] == "put" && option[1] == "ladder" || option[0] == "put" && option[1] == "wrench" || option[0] == "put" && option[1] == "money" || option[0] == "put" && option[1] == "ticket" || option[0] == "put" && option[1] == "key" || option[0] == "put" && option[1] == "map" || option[0] == "put" && option[1] == "box")){
+			else if (move.size() >= 2 && (move[0] == "put" && move[1] == "ladder" || move[0] == "put" && move[1] == "wrench" || move[0] == "put" && move[1] == "money" || move[0] == "put" && move[1] == "ticket" || move[0] == "put" && move[1] == "key" || move[0] == "put" && move[1] == "map" || move[0] == "put" && move[1] == "box")){
 
-				player->put(option);//if the user wants to put an item in the box
+				player->put(move);//if the user wants to put an item in the box
 			}
 
-			else if (option.size() >= 2 && (option[0] == "get" && option[1] == "ladder" || option[0] == "get" && option[1] == "wrench" || option[0] == "get" && option[1] == "money" || option[0] == "get" && option[1] == "ticket" || option[0] == "get" && option[1] == "key" || option[0] == "get" && option[1] == "map" || option[0] == "get" && option[1] == "box")){
-				player->get(option);//if the user wants to get something from the box
+			else if (move.size() >= 2 && (move[0] == "get" && move[1] == "ladder" || move[0] == "get" && move[1] == "wrench" || move[0] == "get" && move[1] == "money" || move[0] == "get" && move[1] == "ticket" || move[0] == "get" && move[1] == "key" || move[0] == "get" && move[1] == "map" || move[0] == "get" && move[1] == "box")){
+				player->get(move);//if the user wants to get something from the box
 
 			}
 			
@@ -417,9 +432,8 @@ void World::movement(){
 				printf("What?");//unknown command
 			}
 			
-	
 
-	} while (q==0);
+	
 }
 
 

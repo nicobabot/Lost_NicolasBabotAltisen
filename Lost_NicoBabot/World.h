@@ -25,7 +25,7 @@ public:
 	*/
 public:
 	World();
-	void movement();
+	void movement(const Vector<mystring>&);
 	void help()const;
 	void look(const Vector<mystring>&, int)const;
 	void createworld();

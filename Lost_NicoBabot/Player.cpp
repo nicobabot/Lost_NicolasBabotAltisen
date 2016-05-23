@@ -7,7 +7,7 @@ Player::Player(const char* name, const char* descrip, TYPE Typeobj, Room* pos): 
 }
 
 
-void Player::pick(Vector<mystring>& options){
+void Player::pick(const Vector<mystring>& options){
 	int maximum = 0;
 	if (options.size() > 1){
 		for (int i = 0; i < world->entities.size(); i++){
@@ -62,7 +62,7 @@ void Player::inventory(){
 }
 
 
-void Player::drop(Vector<mystring>& options){
+void Player::drop(const Vector<mystring>& options){
 
 	if (options.size() > 1){
 		for (int i = 0; i < world->entities.size(); i++){
@@ -155,7 +155,7 @@ void Player::put(const Vector<mystring>& options){//
 
 }
 
-void Player::unequip(Vector<mystring>& options){
+void Player::unequip(const Vector<mystring>& options){
 
 	if (options.size() > 1){
 		for (int i = 0; i < world->entities.size(); i++){
@@ -177,7 +177,7 @@ void Player::unequip(Vector<mystring>& options){
 	}
 }
 
-void Player::get(Vector<mystring>& options){
+void Player::get(const Vector<mystring>& options){
 	int maximum = 0;
 	if (options.size() > 1){
 		for (int i = 0; i < NUM_ITEM; i++){
