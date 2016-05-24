@@ -8,6 +8,8 @@ public:
 	Thug(const char* name, const char* descrip, const int health, const int damage, const int accuracy, Room* pos) : Creature(name, descrip, health, damage, accuracy, THUG, pos){
 
 	}
-
+	void Thug::Update(){
+		printf("HI");
+	}
 };
 #endif

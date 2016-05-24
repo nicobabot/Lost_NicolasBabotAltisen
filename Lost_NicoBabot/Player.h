@@ -17,10 +17,6 @@ public:
 	void unequip(const Vector<mystring>& options);
 	void get(const Vector<mystring>& options);
 
-	/*Player::Update(){
-		return 0;
-	}*/
-
 
 };
 #endif

@@ -28,7 +28,6 @@ int main(){
 				command[charcommandnum + 1] = '\0';
 				//printf("String: %s\n", command);
 				charcommandnum++;
-				
 				if (command[charcommandnum - 1] == '\r'){
 					//printf("Your command is: %s\n", command);
 					command[charcommandnum - 1] = '\0';
@@ -36,6 +35,10 @@ int main(){
 					option = command;
 					Vector<mystring> tokoption = option.Tokenize(" ", command);
 					world->movement(tokoption);
+					for (int i = 0; i < world->entities.size(); i++)
+					{
+						world->entities[i]->Update();
+					}
 					if (world->player->position == world->thug->position){
 						printf("TAKE CARE THERE IS A THUG IN THIS ROOM\n");
 					}
