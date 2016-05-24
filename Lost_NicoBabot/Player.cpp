@@ -5,8 +5,6 @@
 
 
 
-
-
 void Player::pick(const Vector<mystring>& options){
 	int maximum = 0;
 	if (options.size() > 1){
@@ -102,6 +100,10 @@ void Player::equip(const Vector<mystring>& options){
 			printf("You have equiped %s\n", ((Item*)world->entities[i])->name.C_Str());
 			world->maxinventory--;
 			world->maxequiped++;//maximum equiped
+			if (((Item*)world->entities[i]) == ((Item*)world->entities[46])){
+				world->player->damage += 30;
+				printf("You have %i of damage", world->player->damage);
+			}
 			return;
 		}
 		else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->equipped == false && ((Item*)world->entities[i])->inventory == true && world->maxequiped > 0){//if there is one item equipped

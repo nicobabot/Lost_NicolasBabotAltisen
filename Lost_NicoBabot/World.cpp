@@ -5,6 +5,7 @@
 #include"Vector.h"
 #include"Entity.h"
 #include <Windows.h>
+#include"Thug.h"
 
 
 World::World(){
@@ -177,6 +178,9 @@ void World::createworld(){
 
 	entities.pushback(new Player("player", "Don't need description", 100, 20, 80, (Room*)entities[0]));
 	player = (Player*)entities[52];
+
+	entities.pushback(new Thug("thug", "A guy that wants to kick you", 100, 30, 90, (Room*)entities[6]));
+	thug =(Thug*)entities[53];
 }
 
 void World::movement(const Vector<mystring>& move){
@@ -184,30 +188,16 @@ void World::movement(const Vector<mystring>& move){
 	int i = 0, j = 0;
 	int x = 0;
 	
-	/*Player* player = (Player*)world->entities[0];
-	for (int i = 0; i <= entities.size(); i++)
-	{
-		if (world->entities[i]->Typeobj == PLAYER)
-		{
-			player = (Player*)world->entities[i];
-		}
-	}*/
+
 
 		update();
 		
 		if (player->position == (Room*)entities[8]){
-			//system("pause");
 			return;
 		}
 		printf("\nWhere do you want to go?\n");
-		//while (1){
-		
-	//	}
-		char direction1[50];
-		//gets_s(direction1, 50);
-		//mystring command;
 
-		//Vector<mystring> option = command.Tokenize(" ", direction1);
+		char direction1[50];
 		
 
 			system("cls");
@@ -321,6 +311,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										player->position = ((Room*)entities[j]);
+										item->itemsroom();
 										break;
 
 									}
@@ -368,6 +359,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										player->position = ((Room*)entities[j]);
 										item->itemsroom();
+										
 										break;
 									}
 								}

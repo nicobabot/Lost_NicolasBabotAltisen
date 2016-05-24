@@ -10,6 +10,7 @@ public:
 	TYPE Typeobj;
 public:
 	Entity(const char* name, const char* descrip, TYPE Typeobj);
+	//virtual int Update();
 	virtual ~Entity();
 
 

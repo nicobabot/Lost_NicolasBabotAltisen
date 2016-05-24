@@ -5,6 +5,7 @@
 #include"Room.h"
 #include"Exit.h"
 #include"Player.h"
+#include"Thug.h"
 #include"Vector.h"
 #include"item.h"
 #define ROOMNUM 9
@@ -16,6 +17,7 @@ public:
 	int maxbox = 0;
 	int maxequiped=0;
 	Player *player = nullptr;
+	Thug *thug = nullptr;
 	Item *item=nullptr;
 	Vector<Entity*> entities;
 	/*

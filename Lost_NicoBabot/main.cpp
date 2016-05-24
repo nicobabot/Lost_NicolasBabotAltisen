@@ -10,6 +10,7 @@ int main(){
 	ReportMemoryLeaks();
 	world = new World;
 	world->help();
+	printf("\n");
 	mystring option;
 	char command[COMMANDBUFFER];
 	unsigned int charcommandnum = 0;
@@ -35,8 +36,11 @@ int main(){
 					option = command;
 					Vector<mystring> tokoption = option.Tokenize(" ", command);
 					world->movement(tokoption);
+					if (world->player->position == world->thug->position){
+						printf("TAKE CARE THERE IS A THUG IN THIS ROOM\n");
+					}
 					if (world->q != 0 || world->player->position == world->entities[8]){
-						printf("THANK YOU FOR PLAYING THE GAME");
+						printf("THANK YOU FOR PLAYING THE GAME\n");
 						system("pause");
 						return 0;
 					}
