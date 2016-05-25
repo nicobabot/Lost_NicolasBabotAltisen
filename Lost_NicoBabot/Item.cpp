@@ -13,22 +13,17 @@ Item::~Item(){
 }
 void Item::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
 	int j = 0, i = 0;
-	for (j = 0; j < world->entities.size()-1; j++){
-		if ((((Item*)world->entities[j])->itempos == world->player->position) && ((Item*)world->entities[j])->inventory == false){//if there aren't objects
 
-			i++;
-		}
-	}
-	if (i != 0){
-		for (j = 0; j < world->entities.size() - 1; j++){
-			if ((((Item*)world->entities[j])->itempos == world->player->position) && ((Item*)world->entities[j])->inventory == false && ((Item*)world->entities[j])->inbox == false && ((Item*)world->entities[j])->equipped == false){
-				printf("\nIn this room there is: %s\n", ((Item*)world->entities[j])->name.C_Str());
-			}
-			if ((((Item*)world->entities[j])->itempos == world->player->position) && ((Item*)world->entities[j])->inventory == false && ((Item*)world->entities[j])->inbox == true){//if the object is in the box
-				printf("\nIn the box there is: %s\n", ((Item*)world->entities[j])->name.C_Str());
+			if (world->player->position->list.first != nullptr){
+			Dlist<Entity*>::DNodo* temp = world->player->position->list.first;
+			printf("\nIn this room there is:\n");
+			for (; temp != nullptr; temp = temp->next){
+					printf("%s\n", temp->data->name.C_Str());
 			}
 		}
-	}
+		else{
+			printf("You don't have this item");
+		}
 }
 void Item::map()const{//This function is the special feature, prints the map if you pick the map and tells you where are you
 

@@ -10,7 +10,6 @@ public:
 	}
 	//Room *playerposit = nullptr;
 	void pick(const Vector<mystring>&);
-	void inventory();
 	void drop(const Vector<mystring>&);
 	void equip(const Vector<mystring>& options);
 	void put(const Vector<mystring>& options);

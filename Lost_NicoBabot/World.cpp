@@ -151,30 +151,31 @@ void World::createworld(){
 	//ITEMS---------------------------------------------
 	//item 45 (1)
 	entities.pushback(new Item("ladder", "A ladder that you can use it to pass walls", (Room*)entities[1], false, false, false, ITEM));
-	
+	entities[1]->list.pushback(entities[45]);
 	//-------
 	//item 46 (2)
 	entities.pushback(new Item("wrench", "You can use the wrench to fight if you have problems", (Room*)entities[3], false, false, false, ITEM));
-	
+	entities[3]->list.pushback(entities[46]);
 	//-------
 	//item 47 (3)
 	entities.pushback(new Item("money", "With this money you can buy somthing", (Room*)entities[4], false, false, false, ITEM));
-	
+	entities[4]->list.pushback(entities[47]);
 	//-------
 	//item 48 (4)
 	entities.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", (Room*)entities[5], false, false, false, ITEM));
-
+	entities[5]->list.pushback(entities[48]);
 	//-------
 	//item 49 (5)
 	entities.pushback(new Item("key", "With this key you can enter to your house!!", (Room*)entities[7], false, false, false, ITEM));
-	
+	entities[7]->list.pushback(entities[49]);
 	//-------
 	//item 50 (6)
 	entities.pushback(new Item("map", "With this special feature if you press you can see the map of the city", (Room*)entities[2], false, false, false, ITEM));
-	
+	entities[2]->list.pushback(entities[50]);
 	//-------
 	//item 51 (7)
 	entities.pushback(new Item("box", "A box that you find in school and you can put and get things", (Room*)entities[2], false, false, false, ITEM));
+	entities[2]->list.pushback(entities[51]);
 
 	entities.pushback(new Player("player", "Don't need description", 100, 20, 80, (Room*)entities[0]));
 	player = (Player*)entities[52];
@@ -380,7 +381,7 @@ void World::movement(const Vector<mystring>& move){
 				q++;
 			}
 			else if (move.size() == 1 && (move[0] == "inventory" || move[0] == "inv" || move[0] == "i")){//inventory of the player
-				player->inventory();
+				inventory();
 			}
 
 			else if (move.size() >= 2 && (move[0] == "look" && move[1] == "north" || move[0] == "look" && move[1] == "east" || move[0] == "look" && move[1] == "west" || move[0] == "look" && move[1] == "south" || move[0] == "look" && move[1] == "ladder" || move[0] == "look" && move[1] == "wrench" || move[0] == "look" && move[1] == "money" || move[0] == "look" && move[1] == "ticket" || move[0] == "look" && move[1] == "ticket" || move[0] == "look" && move[1] == "key" || move[0] == "look" && move[1] == "map" || move[0] == "look" && move[1] == "box")){
@@ -444,7 +445,6 @@ void World::movement(const Vector<mystring>& move){
 		
 		void World::look(const Vector<mystring>& options, int numroom)const{
 			int exitnum=0;//count
-
 			if (options[0] == "look" && options[1] == "north"){//if the user says look north
 				for (exitnum = 0; exitnum < entities.size(); exitnum++)
 				{
@@ -831,3 +831,16 @@ void World::movement(const Vector<mystring>& move){
 		
 
 	
+		void World::inventory(){
+			int i=0;
+			int temp = 0;
+			Dlist<Entity*>::DNodo* tempor = nullptr;
+			for (tempor = player->list.first; tempor != nullptr; tempor = tempor->next){
+				printf("You have ladder%s\n", tempor->data->name);
+				i++;
+			}
+			if (i == player->list.Size()){
+				printf("You don't have nothing in the inventary\n");
+			}
+
+		}

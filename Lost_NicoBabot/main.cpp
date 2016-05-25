@@ -34,7 +34,9 @@ int main(){
 					charcommandnum = 0;
 					option = command;
 					Vector<mystring> tokoption = option.Tokenize(" ", command);
-					world->movement(tokoption);
+					if (tokoption.size() >=1){
+						world->movement(tokoption);
+					}
 					for (int i = 0; i < world->entities.size(); i++)
 					{
 						world->entities[i]->Update();

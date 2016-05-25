@@ -7,62 +7,62 @@
 
 void Player::pick(const Vector<mystring>& options){
 	int maximum = 0;
-	if (options.size() > 1){
-		for (int i = 0; i < world->entities.size(); i++){
-			if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos == world->player->position && ((Item*)world->entities[i])->inventory == false && ((Item*)world->entities[i])->equipped == false && ((Item*)world->entities[i])->inbox == false && world->maxinventory<4){//look name and position, look inventory, look if its equipped and if its the maximum
-				if (options[1] == ((Item*)world->entities[TICKET])->name){//if the user wants to take the ticket they will have to have money 
-					if (((Item*)world->entities[MONEY])->inventory == false){//false
-						printf("You don't have money\n");
-						return;
-					}
-					else{//true, if its true user loses the money
-						((Item*)world->entities[MONEY])->inventory == false;
-						printf("You have given the money to have some information\n");
-						printf("If you go south you will find the park and near you will find House 3");
-						world->maxinventory--;
-						return;
-					}
+if (options.size() > 1){
+
+		if (world->player->position->list.first != nullptr){
+			Dlist<Entity*>::DNodo* temp = world->player->position->list.first;
+			for (; temp != nullptr; temp = temp->next){
+				if (options[1] == temp->data->name && temp->data->Typeobj== ITEM){
+					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
+					world->player->list.pushback(temp->data);
+					temp->data->list.erase(temp);
+					break;
 				}
-				((Item*)world->entities[i])->inventory = true;//pick the object
-				printf("%s\n %s\n", ((Item*)world->entities[i])->name.C_Str(), ((Item*)world->entities[i])->descrip.C_Str());
-				world->maxinventory++;//the maximum of the inventory
-				return;
 			}
-			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos != world->player->position){//if the object isn't there
-				printf("The item isn't here");
-				return;
-			}
-			else if (world->maxinventory > 3){//if the inventory is full
-				printf("You have full inventory you should drop an item");
-				return;
-			}
-		}
-	}
-
-}
-
-void Player::inventory(){
-	int i;
-	int temp=0;
-	for (i = 0; i < world->entities.size(); i++){
-		if (((Item*)world->entities[i])->inventory == true){//print the items that are in the inventory
-			printf("You have in the inventory:");
-			printf("%s\n", ((Item*)world->entities[i])->name.C_Str());
 		}
 		else{
-			temp++;
+			printf("This item isn't here");
 		}
-	}
-	if (temp == world->entities.size()){
-		printf("You have nothing");
 	}
 
 }
+
+
 
 
 void Player::drop(const Vector<mystring>& options){
 
 	if (options.size() > 1){
+
+		if (world->player->list.first != nullptr){
+			Dlist<Entity*>::DNodo* temp = world->player->list.first;
+			for (; temp != nullptr; temp = temp->next){
+				if (options[1] == temp->data->name && temp->data->Typeobj == ITEM){
+					printf("You dropped: %s\n", temp->data->name.C_Str());
+					world->player->position->list.pushback(temp->data);
+					world->player->list.erase(temp);
+					break;
+				}
+			}
+		}
+		else{
+			printf("You don't have this item");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*if (options.size() > 1){
 		for (int i = 0; i < world->entities.size(); i++){
 
 			if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->inventory == false){//it the item isn't in the inventory
@@ -83,7 +83,7 @@ void Player::drop(const Vector<mystring>& options){
 			}
 
 		}
-	}
+	}*/
 }
 
 void Player::equip(const Vector<mystring>& options){

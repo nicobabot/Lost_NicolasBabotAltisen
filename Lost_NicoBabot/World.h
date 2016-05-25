@@ -33,7 +33,7 @@ public:
 	void createworld();
 	void Open(const Vector<mystring>&);
 	void Close(const Vector<mystring>&);
-	
+	void inventory();
 	void update();
 	
 	
