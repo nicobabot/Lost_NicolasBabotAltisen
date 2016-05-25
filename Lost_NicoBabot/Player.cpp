@@ -10,7 +10,7 @@ void Player::pick(const Vector<mystring>& options){
 if (options.size() > 1){
 
 		if (world->player->position->list.first != nullptr){
-			Dlist<Entity*>::DNodo* temp = world->player->position->list.first;
+			Dlist<Entity*>::DNode* temp = world->player->position->list.first;
 			for (; temp != nullptr; temp = temp->next){
 				if (options[1] == temp->data->name && temp->data->Typeobj== ITEM){
 					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
@@ -36,7 +36,7 @@ void Player::drop(const Vector<mystring>& options){
 	if (options.size() > 1){
 
 		if (world->player->list.first != nullptr){
-			Dlist<Entity*>::DNodo* temp = world->player->list.first;
+			Dlist<Entity*>::DNode* temp = world->player->list.first;
 			for (; temp != nullptr; temp = temp->next){
 				if (options[1] == temp->data->name && temp->data->Typeobj == ITEM){
 					printf("You dropped: %s\n", temp->data->name.C_Str());
@@ -50,41 +50,7 @@ void Player::drop(const Vector<mystring>& options){
 			printf("You don't have this item");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*if (options.size() > 1){
-		for (int i = 0; i < world->entities.size(); i++){
 
-			if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->inventory == false){//it the item isn't in the inventory
-				printf("You don't have the item in the inventory");
-				return;
-			}
-			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->itempos == world->player->position && ((Item*)world->entities[i])->inventory == true){//drop the item
-				if (((Item*)world->entities[i])->inventory == true){//item of the inventory droped
-					((Item*)world->entities[i])->inventory = false;
-				}
-				else if (((Item*)world->entities[i])->equipped == true){//item equipped droped
-					((Item*)world->entities[i])->equipped == false;
-					world->maxequiped--;
-				}
-				printf("You have droped %s\n", ((Item*)world->entities[i])->name.C_Str());
-				world->maxinventory--;//one less in the inventory
-				return;
-			}
-
-		}
-	}*/
 }
 
 void Player::equip(const Vector<mystring>& options){

@@ -4,17 +4,17 @@ typedef unsigned int uint;
 template<class TYPE>
 class Dlist{
 public:
-	class DNodo{
+	class DNode{
 	public:
 		TYPE data;
-		DNodo *next = nullptr;
-		DNodo *previous = nullptr;
+		DNode *next = nullptr;
+		DNode *previous = nullptr;
 	public:
-		DNodo(const TYPE &data) : data(data){
+		DNode(const TYPE &data) : data(data){
 		}
 
 	};
-	DNodo *first;
+	DNode *first;
 public:
 	Dlist(){
 	}
@@ -23,15 +23,15 @@ public:
 	}
 	unsigned int Size()const{
 		unsigned int i = 0;
-		DNodo  *temp = first;
+		DNode  *temp = first;
 		while (temp != nullptr){
 			temp = temp->next;
 			i++;
 		}
 		return i;
 	}
-	DNodo* end()const{
-		DNodo  *temp = first;
+	DNode* end()const{
+		DNode  *temp = first;
 		while (temp != nullptr){
 			if (temp->next == nullptr){
 				return temp;
@@ -41,8 +41,8 @@ public:
 	}
 
 	void pushback(const TYPE &data){
-		DNodo* temp = first;
-		DNodo* nnode = new DNodo(data);
+		DNode* temp = first;
+		DNode* nnode = new DNode(data);
 		if (temp == nullptr){
 			first = nnode;
 		}
@@ -56,8 +56,8 @@ public:
 	}
 
 	void pushfront(const TYPE &data){
-		DNodo* temp = first;
-		DNodo* nnode = new DNodo(data);
+		DNode* temp = first;
+		DNode* nnode = new DNode(data);
 		if (temp == nullptr){
 			first = nnode;
 		}
@@ -71,8 +71,8 @@ public:
 	void pop_back(){
 		if (first != nullptr){
 			if (first->next != nullptr){
-				DNodo* temp = first;
-				DNodo* temp2 = first;
+				DNode* temp = first;
+				DNode* temp2 = first;
 				while (temp->next != nullptr){
 					temp = temp->next;
 				}
@@ -83,7 +83,7 @@ public:
 				delete temp;
 			}
 			else{
-				DNodo* temp = first;
+				DNode* temp = first;
 				first = nullptr;
 				delete temp;
 
@@ -92,7 +92,7 @@ public:
 	}
 
 	bool pop_front(){
-		DNodo* temp = first;
+		DNode* temp = first;
 		if (first != nullptr){
 			if (first != nullptr && first->next != nullptr){
 				first = first->next;
@@ -101,7 +101,7 @@ public:
 
 			}
 			else{
-				DNodo* temp = first;
+				DNode* temp = first;
 				first = nullptr;
 				delete temp;
 			}
@@ -110,7 +110,7 @@ public:
 		return false;
 	}
 
-	void erase(DNodo* othernode){
+	void erase(DNode* othernode){
 		if (Size() > 1 && othernode != first){
 			if (othernode->previous == nullptr){
 				first = othernode->next;
@@ -131,8 +131,8 @@ public:
 		}
 	}
 
-	void insert(DNodo* newnodo, TYPE Data){
-		DNodo* nnode = new DNodo(Data);
+	void insert(DNode* newnodo, TYPE Data){
+		DNode* nnode = new DNode(Data);
 		if (first != nullptr){
 			if (newnodo->previous == nullptr){
 				nnode->next = newnodo;

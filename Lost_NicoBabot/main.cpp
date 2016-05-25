@@ -4,8 +4,10 @@
 #include"Room.h"
 #include"memleaks.h"
 #include "conio.h"
+#include <Windows.h>
 World *world = nullptr;
 #define COMMANDBUFFER 50
+#define DELAY 1000
 int main(){
 	ReportMemoryLeaks();
 	world = new World;
@@ -16,44 +18,56 @@ int main(){
 	unsigned int charcommandnum = 0;
 	char key;
 	int x = 0;
+	unsigned int initialtime = 0;
+	unsigned int currenttime = 0;
 	world->createworld();
 	while (1){
-		if (_kbhit())
-		{
-			if (charcommandnum < (COMMANDBUFFER - 2)){
-				
-				command[charcommandnum] = _getch();
-				key = command[charcommandnum];
-				printf("%c", key);
-				command[charcommandnum + 1] = '\0';
-				//printf("String: %s\n", command);
-				charcommandnum++;
-				if (command[charcommandnum - 1] == '\r'){
-					//printf("Your command is: %s\n", command);
-					command[charcommandnum - 1] = '\0';
-					charcommandnum = 0;
-					option = command;
-					Vector<mystring> tokoption = option.Tokenize(" ", command);
-					if (tokoption.size() >=1){
-						world->movement(tokoption);
-					}
-					for (int i = 0; i < world->entities.size(); i++)
-					{
-						world->entities[i]->Update();
-					}
-					if (world->player->position == world->thug->position){
-						printf("TAKE CARE THERE IS A THUG IN THIS ROOM\n");
-					}
-					if (world->q != 0 || world->player->position == world->entities[8]){
-						printf("THANK YOU FOR PLAYING THE GAME\n");
-						system("pause");
-						return 0;
-					}
-					//tokoption.clean();
+		initialtime = GetTickCount();
+
+		while (command != "q\0"){
+			currenttime = GetTickCount();
+			if (currenttime >= (initialtime + DELAY)){
+				initialtime = currenttime;
+				for (int i = 0; i < world->entities.size(); i++)
+				{
+					world->entities[i]->Update();
 				}
+
 			}
-			else{
-				command[COMMANDBUFFER - 1] = '\0';
+
+			if (_kbhit())
+			{
+				if (charcommandnum < (COMMANDBUFFER - 2)){
+
+					command[charcommandnum] = _getch();
+					key = command[charcommandnum];
+					printf("%c", key);
+					command[charcommandnum + 1] = '\0';
+					//printf("String: %s\n", command);
+					charcommandnum++;
+					if (command[charcommandnum - 1] == '\r'){
+						//printf("Your command is: %s\n", command);
+						command[charcommandnum - 1] = '\0';
+						charcommandnum = 0;
+						option = command;
+						Vector<mystring> tokoption = option.Tokenize(" ", command);
+						if (tokoption.size() >= 1){
+							world->movement(tokoption);
+						}
+						if (world->player->position == world->thug->position){
+							printf("TAKE CARE THERE IS A THUG IN THIS ROOM\n");
+						}
+						if (world->q != 0 || world->player->position == world->entities[8]){
+							printf("THANK YOU FOR PLAYING THE GAME\n");
+							system("pause");
+							return 0;
+						}
+						//tokoption.clean();
+					}
+				}
+				else{
+					command[COMMANDBUFFER - 1] = '\0';
+				}
 			}
 		}
 	}

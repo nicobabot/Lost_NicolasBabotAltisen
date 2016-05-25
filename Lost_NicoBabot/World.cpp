@@ -834,7 +834,7 @@ void World::movement(const Vector<mystring>& move){
 		void World::inventory(){
 			int i=0;
 			int temp = 0;
-			Dlist<Entity*>::DNodo* tempor = nullptr;
+			Dlist<Entity*>::DNode* tempor = nullptr;
 			for (tempor = player->list.first; tempor != nullptr; tempor = tempor->next){
 				printf("You have %s\n", tempor->data->name);
 				i++;
