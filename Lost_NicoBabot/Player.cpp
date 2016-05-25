@@ -15,7 +15,8 @@ if (options.size() > 1){
 				if (options[1] == temp->data->name && temp->data->Typeobj== ITEM){
 					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
 					world->player->list.pushback(temp->data);
-					temp->data->list.erase(temp);
+					//temp->data->list.erase(temp);
+					world->player->position->list.erase(temp);
 					break;
 				}
 			}

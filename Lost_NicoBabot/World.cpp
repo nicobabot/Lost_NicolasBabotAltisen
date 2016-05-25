@@ -836,7 +836,7 @@ void World::movement(const Vector<mystring>& move){
 			int temp = 0;
 			Dlist<Entity*>::DNodo* tempor = nullptr;
 			for (tempor = player->list.first; tempor != nullptr; tempor = tempor->next){
-				printf("You have ladder%s\n", tempor->data->name);
+				printf("You have %s\n", tempor->data->name);
 				i++;
 			}
 			if (i == player->list.Size()){

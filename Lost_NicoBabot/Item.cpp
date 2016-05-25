@@ -13,7 +13,6 @@ Item::~Item(){
 }
 void Item::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
 	int j = 0, i = 0;
-
 			if (world->player->position->list.first != nullptr){
 			Dlist<Entity*>::DNodo* temp = world->player->position->list.first;
 			printf("\nIn this room there is:\n");
