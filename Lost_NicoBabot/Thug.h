@@ -9,7 +9,7 @@ public:
 
 	}
 	void Thug::Update(){
-		printf("HI\n");
+		//printf("HI\n");
 	}
 };
 #endif

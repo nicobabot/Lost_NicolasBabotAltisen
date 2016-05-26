@@ -7,6 +7,7 @@ enum Items{ LADDER = 45, WRENCH, MONEY, TICKET, KEY, MAP, BOX };
 class Item: public Entity{
 public:
 	Room *itempos=nullptr;
+	Dlist<Entity*> equip;
 	bool inventory = false;
 	bool equipped = false;
 	bool inbox = false;

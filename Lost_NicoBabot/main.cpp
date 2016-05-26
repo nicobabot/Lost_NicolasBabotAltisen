@@ -43,10 +43,10 @@ int main(){
 					key = command[charcommandnum];
 					printf("%c", key);
 					command[charcommandnum + 1] = '\0';
-					//printf("String: %s\n", command);
+				
 					charcommandnum++;
 					if (command[charcommandnum - 1] == '\r'){
-						//printf("Your command is: %s\n", command);
+					
 						command[charcommandnum - 1] = '\0';
 						charcommandnum = 0;
 						option = command;
@@ -64,9 +64,14 @@ int main(){
 						}
 						//tokoption.clean();
 					}
+					/*else if (key == '\b' && charcommandnum > 0){
+						charcommandnum--;
+						charcommandnum--;
+					}*/
 				}
 				else{
-					command[COMMANDBUFFER - 1] = '\0';
+					command[charcommandnum - 1] = '\0';
+					charcommandnum = 0;
 				}
 			}
 		}
