@@ -9,6 +9,7 @@ public:
 
 	}
 	//Room *playerposit = nullptr;
+	Dlist<Entity*> equipedlist;
 	void pick(const Vector<mystring>&);
 	void drop(const Vector<mystring>&);
 	void equip(const Vector<mystring>& options);

@@ -176,7 +176,7 @@ void World::createworld(){
 	//item 51 (7)
 	entities.pushback(new Item("box", "A box that you find in school and you can put and get things", (Room*)entities[2], false, false, false, ITEM));
 	entities[2]->list.pushback(entities[51]);
-
+	box = (Item*)entities[51];
 	entities.pushback(new Player("player", "Don't need description", 100, 20, 80, (Room*)entities[0]));
 	player = (Player*)entities[52];
 
@@ -191,7 +191,7 @@ void World::movement(const Vector<mystring>& move){
 	
 
 
-		update();
+		//update();
 		
 		if (player->position == (Room*)entities[8]){
 			return;
@@ -428,7 +428,8 @@ void World::movement(const Vector<mystring>& move){
 			}
 			
 			else{
-				printf("What?");//unknown command
+				printf("What?\n");//unknown command
+				item->itemsroom();
 			}
 			
 
@@ -816,7 +817,7 @@ void World::movement(const Vector<mystring>& move){
 
 		
 
-		void World::update(){//this function updates the directions of the items
+		/*void World::update(){//this function updates the directions of the items
 			for (int i = 0; i < entities.size(); i++){
 				if (((Item*)entities[i])->inventory == true && ((Item*)entities[i])->Typeobj == ITEM){//if the item is in the inventory the dicrection will be the same of the player
 					((Item*)entities[i])->itempos = player->position;
@@ -825,7 +826,7 @@ void World::movement(const Vector<mystring>& move){
 					((Item*)entities[i])->itempos = ((Item*)entities[BOX])->itempos;
 				}
 			}
-		}
+		}*/
 		
 
 		
@@ -839,7 +840,7 @@ void World::movement(const Vector<mystring>& move){
 				printf("You have %s\n", tempor->data->name);
 				i++;
 			}
-			if (i == player->list.Size()){
+			if (i ==0){
 				printf("You don't have nothing in the inventary\n");
 			}
 

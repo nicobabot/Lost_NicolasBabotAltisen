@@ -13,16 +13,25 @@ Item::~Item(){
 }
 void Item::itemsroom(){//this is a function that in all moment is printing what objects ar in the room and then the user don't have to say look
 	int j = 0, i = 0;
-			if (world->player->position->list.first != nullptr){
-			Dlist<Entity*>::DNode* temp = world->player->position->list.first;
-			printf("\nIn this room there is:\n");
-			for (; temp != nullptr; temp = temp->next){
-					printf("%s\n", temp->data->name.C_Str());
+	if (world->player->position->list.first != nullptr){
+		Dlist<Entity*>::DNode* temp = world->player->position->list.first;
+		printf("\nIn this room there is:\n");
+		for (; temp != nullptr; temp = temp->next){
+			printf("%s\n", temp->data->name.C_Str());
+
+			if (world->box->list.first != nullptr && temp->data->list.first){
+				Dlist<Entity*>::DNode* temp2 = world->box->list.first;
+				printf("\nIn the box there is:\n");
+				for (; temp2 != nullptr; temp2 = temp2->next){
+					printf("%s\n", temp2->data->name.C_Str());
+				}
 			}
 		}
-		else{
-			printf("You don't have this item");
-		}
+	}
+	else{
+		printf("In this room there aren't any items");
+	}
+
 }
 void Item::map()const{//This function is the special feature, prints the map if you pick the map and tells you where are you
 

@@ -111,7 +111,7 @@ public:
 	}
 
 	void erase(DNode* othernode){
-		if (Size() > 1 && othernode != first){
+		if (Size() > 1){
 			if (othernode->previous == nullptr){
 				first = othernode->next;
 				first->previous = nullptr;

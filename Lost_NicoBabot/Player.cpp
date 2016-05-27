@@ -6,6 +6,7 @@
 
 
 
+
 void Player::pick(const Vector<mystring>& options){
 	int maximum = 0;
 if (options.size() > 1){
@@ -18,13 +19,11 @@ if (options.size() > 1){
 					world->player->list.pushback(temp->data);
 					//temp->data->list.erase(temp);
 					world->player->position->list.erase(temp);
-					break;
+					return;
 				}
 			}
 		}
-		else{
 			printf("This item isn't here");
-		}
 	}
 
 }
@@ -60,7 +59,7 @@ void Player::equip(const Vector<mystring>& options){
 		Dlist<Entity*>::DNode* temp = world->player->list.first;
 		for (; temp != nullptr; temp = temp->next){
 			if (options[1] == world->player->list.first->data->name && ((Item*)temp->data)->equipped == false && world->maxequiped == 0){//if the item isn't equipped and is in the inventory
-				((Item*)temp->data)->equipped == true;
+				((Item*)temp->data)->equipped = true;
 				printf("You have equiped %s\n", temp->data->name.C_Str());
 				world->maxinventory--;
 				world->maxequiped++;//maximum equiped
@@ -68,7 +67,7 @@ void Player::equip(const Vector<mystring>& options){
 					world->player->damage += 30;
 					printf("You have %i of damage", world->player->damage);
 				}
-			//	world->item->equip.pushback(temp->data);
+				equipedlist.pushback(temp->data);
 				world->player->list.erase(temp);
 				break;
 
@@ -78,65 +77,56 @@ void Player::equip(const Vector<mystring>& options){
 	else{
 		printf("You don't have this item");
 	}
-
-}
+	}
 
 void Player::unequip(const Vector<mystring>& options){
-	if (world->item->equip.first != nullptr){
-		Dlist<Entity*>::DNode* temp = world->item->equip.first;
+	if (equipedlist.first != nullptr){
+		Dlist<Entity*>::DNode* temp = equipedlist.first;
 		for (; temp != nullptr; temp = temp->next){
-			if (options[1] == world->player->list.first->data->name && ((Item*)temp->data)->equipped == true && world->maxequiped == 1){//if the item isn't equipped and is in the inventory
+			if (((Item*)temp->data)->equipped == true && world->maxequiped == 1){
 				((Item*)temp->data)->equipped == false;
-				printf("You have unequip: %s\n", temp->data->name.C_Str());
 				world->maxinventory++;
 				world->maxequiped--;//maximum equiped
-				if ((temp->data->name.C_Str() == (world->entities[46]->name.C_Str()))){
-					world->player->damage -= 30;
-					printf("You have %i of damage", world->player->damage);
-				}
 				world->player->list.pushback(temp->data);
-				//world->item->equip.erase(temp);
+				printf("You unequip: %s", temp->data->name.C_Str());
+				equipedlist.erase(temp);
 				break;
-
+			}
+			else{
+				printf("You have one item already equipped");
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*if (options.size() > 1){
-		for (int i = 0; i < world->entities.size(); i++){
-			if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->equipped == false && ((Item*)world->entities[i])->inventory == false){//if the item isn't in the inventory
-				printf("You don't have this item in the inventory");
-				return;
-			}
-
-			else if (options[1] == ((Item*)world->entities[i])->name && ((Item*)world->entities[i])->equipped == true && ((Item*)world->entities[i])->inventory == false){//if the item is in the inventory and equipped
-				((Item*)world->entities[i])->equipped = false;
-				((Item*)world->entities[i])->inventory = true;
-				printf("You have unequiped %s\n", ((Item*)world->entities[i])->name.C_Str());
-				world->maxequiped--;
-				world->maxinventory++;
-				return;
-			}
-
-		}
-	}*/
 }
 
 
-
-
-
-
 	void Player::put(const Vector<mystring>& options){//
-	int maximum = 0;
+		if (options.size() > 3){
+			Dlist<Entity*>::DNode* temp = world->box->list.first;
+			Dlist<Entity*>::DNode* temp2 = world->player->list.first;
+			if (temp == nullptr){
+				for (int i = 0; i < world->entities.size(); i++){
+					if (options[1] == (world->entities[i])->name && options[3] == "box"){
+						for (; temp2 != nullptr; temp2 = temp2->next){
+							if (((Item*)world->entities[i])->name.C_Str() == temp2->data->name.C_Str()){
+								world->box->list.pushback(temp2->data);
+								world->maxinventory--;
+								printf("you put %s into box", temp2->data->name.C_Str());
+								world->player->list.erase(temp2);
+								return;
+							}
+						}
+					}
+				}
+			}
+			printf("You need to have the item in the inventory");
+		}
+		else{
+			printf("What?\n");
+		}
+		
+		
+		/*int maximum = 0;
 
 	for (int i = 0; i < world->entities.size(); i++){
 
@@ -175,13 +165,44 @@ void Player::unequip(const Vector<mystring>& options){
 		}
 
 
-	}
+	}*/
 
 }
 
 
 void Player::get(const Vector<mystring>& options){
-	int maximum = 0;
+
+	if (options.size() > 3){
+		Dlist<Entity*>::DNode* temp = world->box->list.first;
+		Dlist<Entity*>::DNode* temp2 = world->player->list.first;
+		if (temp != nullptr){
+			for (int i = 0; i < world->entities.size(); i++){
+				if (options[1] == (world->entities[i])->name && options[3] == "box"){
+					for (; temp != nullptr; temp = temp->next){
+						if (((Item*)world->entities[i])->name.C_Str() == temp->data->name.C_Str()){
+							world->player->list.pushback(temp->data);
+							world->maxinventory++;
+							printf("you get %s from box", temp->data->name.C_Str());
+							world->box->list.erase(temp);
+							return;
+						}
+					}
+				}
+			}
+		}
+		printf("The item is not in the box");
+	}
+	else{
+		printf("What?\n");
+	}
+
+
+
+
+
+
+
+	/*int maximum = 0;
 	if (options.size() > 1){
 		for (int i = 0; i < NUM_ITEM; i++){
 			if (options[1] == ((Item*)world->entities[BOX])->name && ((Item*)world->entities[BOX])->itempos == world->player->position){//if you try to get the box from the box
@@ -201,7 +222,7 @@ void Player::get(const Vector<mystring>& options){
 				return;
 			}
 		}
-	}
+	}*/
 }
 
 

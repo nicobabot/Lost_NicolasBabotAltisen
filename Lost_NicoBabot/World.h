@@ -18,6 +18,7 @@ public:
 	int maxequiped=0;
 	Player *player = nullptr;
 	Thug *thug = nullptr;
+	Item *box = nullptr;
 	Item *item=nullptr;
 	Vector<Entity*> entities;
 	/*
@@ -34,7 +35,7 @@ public:
 	void Open(const Vector<mystring>&);
 	void Close(const Vector<mystring>&);
 	void inventory();
-	void update();
+	//void update();
 	
 	
 	
