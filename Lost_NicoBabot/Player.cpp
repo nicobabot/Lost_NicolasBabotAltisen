@@ -3,7 +3,9 @@
 #include"World.h"
 #include"Creature.h"
 #include"item.h"
-
+#include "conio.h"
+#include <Windows.h>
+#define COMMANDBUFFER 50
 
 
 
@@ -15,6 +17,10 @@ if (options.size() > 1){
 			Dlist<Entity*>::DNode* temp = world->player->position->list.first;
 			for (; temp != nullptr; temp = temp->next){
 				if (options[1] == temp->data->name && temp->data->Typeobj== ITEM){
+					if (options[1] == "money"){
+						printf("You can't!");
+						return;
+					}
 					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
 					world->player->list.pushback(temp->data);
 					//temp->data->list.erase(temp);
@@ -227,3 +233,34 @@ void Player::get(const Vector<mystring>& options){
 
 
 
+void Player::buy(const Vector<mystring>& options){
+	do{
+		if (count == 0){
+			printf("Hi what do you want to buy?\n");
+			printf("You can buy:\n potion\n");
+			if (options[0] == "buy" && options[1] == "potion"){
+				if (world->player->money < 15){
+					printf("you don't have money");
+					printf("I think you are lost, don't worry here is some money for you: 30$");
+					money += 30;
+					Dlist<Entity*>::DNode* temp = world->player->position->list.first;
+					for (; temp != nullptr; temp = temp->next){
+						if (temp->data->name == "money"){
+							world->player->list.pushback(temp->data);
+						}
+					}
+
+				}
+			}
+
+
+
+
+
+		}
+		else{
+
+		}
+		count++;
+	} while (other == 0);
+}

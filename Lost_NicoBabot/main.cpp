@@ -45,14 +45,29 @@ int main(){
 					command[charcommandnum + 1] = '\0';
 				
 					charcommandnum++;
+
+					if (command[charcommandnum - 1] == '\b'){
+						if (charcommandnum>1){
+							charcommandnum--;
+							charcommandnum--;
+						}
+						else{
+							charcommandnum--;
+						}
+
+					}
 					if (command[charcommandnum - 1] == '\r'){
 					
 						command[charcommandnum - 1] = '\0';
 						charcommandnum = 0;
 						option = command;
 						Vector<mystring> tokoption = option.Tokenize(" ", command);
+						
 						if (tokoption.size() >= 1){
 							world->movement(tokoption);
+						}
+						if (world->player->position == (Room*)world->entities[4]){
+							world->player->buy(tokoption);
 						}
 						if (world->player->position == world->thug->position){
 							printf("TAKE CARE THERE IS A THUG IN THIS ROOM\n");

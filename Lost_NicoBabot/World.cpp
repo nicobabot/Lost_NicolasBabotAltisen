@@ -35,7 +35,7 @@ void World::createworld(){
 	//room 3
 	entities.pushback(new Room("House 2", "An old man explain information about the family of the house three.The family three controls the city and may have the key to unlock the doors that are next to his house. And the old man will offer to the boy a wrench and he will say : the streets are dangerous if a young boy goes alone.", ROOM));
 	//room 4
-	entities.pushback(new Room("Shop", "The seller gives you money because he is sad because you are lost.", ROOM));
+	entities.pushback(new Room("Shop", " ", ROOM));
 	//room 5
 	entities.pushback(new Room("Cinema", "If you buy my ticket i will tell you where is the house 3 where you can find the key to enter to your house.", ROOM));
 	//room 6

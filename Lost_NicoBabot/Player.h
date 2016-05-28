@@ -16,7 +16,9 @@ public:
 	void put(const Vector<mystring>& options);
 	void unequip(const Vector<mystring>& options);
 	void get(const Vector<mystring>& options);
-
-
+	void buy(const Vector<mystring>& options);
+	int count = 0;
+	int money = 0;
+	int other = 0;
 };
 #endif
