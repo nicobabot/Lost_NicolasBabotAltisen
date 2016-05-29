@@ -3,7 +3,7 @@
 #include"Entity.h"
 #include"Room.h"
 #define NUM_ITEM 7
-enum Items{ LADDER = 45, WRENCH, MONEY, TICKET, KEY, MAP, BOX };
+enum Items{ LADDER = 45, WRENCH, MONEY, TICKET, KEY, MAP, BOX, POTION };
 class Item: public Entity{
 public:
 	Room *itempos=nullptr;

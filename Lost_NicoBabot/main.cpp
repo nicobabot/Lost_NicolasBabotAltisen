@@ -66,12 +66,6 @@ int main(){
 						if (tokoption.size() >= 1){
 							world->movement(tokoption);
 						}
-						if (world->player->position == (Room*)world->entities[4]){
-							world->player->buy(tokoption);
-						}
-						if (world->player->position == world->thug->position){
-							printf("TAKE CARE THERE IS A THUG IN THIS ROOM\n");
-						}
 						if (world->q != 0 || world->player->position == world->entities[8]){
 							printf("THANK YOU FOR PLAYING THE GAME\n");
 							system("pause");

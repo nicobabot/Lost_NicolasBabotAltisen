@@ -17,15 +17,19 @@ if (options.size() > 1){
 			Dlist<Entity*>::DNode* temp = world->player->position->list.first;
 			for (; temp != nullptr; temp = temp->next){
 				if (options[1] == temp->data->name && temp->data->Typeobj== ITEM){
+					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
 					if (options[1] == "money"){
-						printf("You can't!");
+						money += 20;
+						printf("Now you have %i $!", money);
 						return;
 					}
-					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
 					world->player->list.pushback(temp->data);
 					//temp->data->list.erase(temp);
 					world->player->position->list.erase(temp);
 					return;
+				}
+				else{
+					printf("You should say an item in the game");
 				}
 			}
 		}
@@ -234,33 +238,60 @@ void Player::get(const Vector<mystring>& options){
 
 
 void Player::buy(const Vector<mystring>& options){
-	do{
-		if (count == 0){
-			printf("Hi what do you want to buy?\n");
-			printf("You can buy:\n potion\n");
-			if (options[0] == "buy" && options[1] == "potion"){
-				if (world->player->money < 15){
-					printf("you don't have money");
-					printf("I think you are lost, don't worry here is some money for you: 30$");
-					money += 30;
-					Dlist<Entity*>::DNode* temp = world->player->position->list.first;
-					for (; temp != nullptr; temp = temp->next){
-						if (temp->data->name == "money"){
-							world->player->list.pushback(temp->data);
-						}
-					}
-
+	bool havemoney = false;
+	if (options.size() >= 2){
+		if (position == (Room*)world->entities[4]){
+			Dlist<Entity*>::DNode* temp = world->player->list.first;
+			Dlist<Entity*>::DNode* temp2 = world->player->position->list.first;
+			for (; temp != nullptr; temp = temp->next){
+				if (temp->data->name == "money"){
+					havemoney = true;
 				}
 			}
+			if (havemoney){
+				printf("A potion costs 10 $");
+				if (options[0] == "buy" && options[1] == "potion"){
+					if (money > 10){
+						money -= 10;
+						printf("You bought one potion");
 
-
-
-
-
+						for (; temp2 != nullptr; temp2 = temp2->next){
+							if (temp2->data->name == "potion"){
+								world->player->list.pushback(temp2->data);
+								world->player->position->list.erase(temp2);
+								world->maxinventory++;
+								return;
+							}
+						}
+					}
+				}
+			}
+			else{
+				printf("You don't have money\n");
+				printf("I am sad for you, have this money\n");
+				printf("You get 20$\n");
+				money += 20;
+				world->maxinventory++;
+				world->player->list.pushback(temp2->data);
+				return;
+			}
 		}
-		else{
+	}
+}
+		
 
-		}
-		count++;
-	} while (other == 0);
+void Player::attack(const Vector<mystring>& options){
+
+	if (options.size() >= 2){
+			if (options[1]==world->thug->name){
+				printf("You hit the thug for %i", damage);
+				world->thug->health -= damage;
+				return;
+			}
+			else{
+				printf("The character isn't here");
+			}
+			
+	}
+
 }

@@ -8,6 +8,7 @@
 #include"Thug.h"
 
 
+
 World::World(){
 	
 }
@@ -182,6 +183,10 @@ void World::createworld(){
 
 	entities.pushback(new Thug("thug", "A guy that wants to kick you", 100, 30, 90, (Room*)entities[6]));
 	thug =(Thug*)entities[53];
+
+
+	entities.pushback(new Item("potion", "With this you can recover 20 of live. YOU ONLY CAN USE IT WHEN YOU ARE FIGHTING", (Room*)entities[4], false, false, false, ITEM));
+	entities[4]->list.pushback(entities[54]);
 }
 
 void World::movement(const Vector<mystring>& move){
@@ -196,11 +201,12 @@ void World::movement(const Vector<mystring>& move){
 		if (player->position == (Room*)entities[8]){
 			return;
 		}
+		if (thug->state != FIGHT){
 		printf("\nWhere do you want to go?\n");
 
 		char direction1[50];
 		
-
+		
 			system("cls");
 			//-------------------------------------------------------------------------------------------------------------North
 			if (move.size() == 2 && move[0] == "go" && move[1] == "north" || move.size() == 2 && move[0] == "go" && move[1] == "n" || move.size() == 1 && move[0] == "n" || move.size() == 1 && move[0] == "north"){
@@ -360,7 +366,7 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
 										player->position = ((Room*)entities[j]);
 										item->itemsroom();
-										
+
 										break;
 									}
 								}
@@ -369,7 +375,7 @@ void World::movement(const Vector<mystring>& move){
 					}
 				}
 			}
-		
+
 			else if (move.size() == 1 && (move[0] == "h" || move[0] == "help")){//help
 				help();
 			}
@@ -426,10 +432,19 @@ void World::movement(const Vector<mystring>& move){
 				player->get(move);//if the user wants to get something from the box
 
 			}
+			else if (move.size() >= 2 && (move[0] == "buy" || move[1] == "potion")){//if the player wants to quit
+				player->buy(move);
+			}
+		}
+		else if (move.size() >= 2 && (move[0] == "attack" || move[1] == "thug")){
+			player->attack(move);
+		}
 			
 			else{
 				printf("What?\n");//unknown command
-				item->itemsroom();
+				if (thug->state != FIGHT){
+					item->itemsroom();
+				}
 			}
 			
 
@@ -840,8 +855,10 @@ void World::movement(const Vector<mystring>& move){
 				printf("You have %s\n", tempor->data->name);
 				i++;
 			}
+			printf("You have %i$", player->money);
 			if (i ==0){
 				printf("You don't have nothing in the inventary\n");
+				printf("You have: %i$", player->money);
 			}
 
 		}
