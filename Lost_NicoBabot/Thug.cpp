@@ -22,7 +22,7 @@ void Thug::Update(){
 
 
 void Thug::movementenemy(){
-	int i = (rand() % 3) + 4;
+	int i = (rand() % 2) + 5;
 	world->thug->position = (Room*)world->entities[i];
 	if (world->player->position == world->thug->position){
 		state = FIGHT;
@@ -34,7 +34,7 @@ void Thug::fight(){
 		if (timenow >= timing + DELAY){
 			timing = timenow;
 			printf("Thug hit you for %i of damage\n", damage);
-			world->player->health -= damage;
+			//world->player->health -= damage;
 			if (world->player->health <= 0){
 				state = DISAPPEAR;
 			}

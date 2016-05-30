@@ -6,7 +6,7 @@
 #include "conio.h"
 #include <Windows.h>
 #define COMMANDBUFFER 50
-
+#define DELAY 5000
 
 
 void Player::pick(const Vector<mystring>& options){
@@ -42,9 +42,6 @@ if (options.size() > 1){
 					//temp->data->list.erase(temp);
 					world->player->position->list.erase(temp);
 					return;
-				}
-				else{
-					printf("You should say an item in the game");
 				}
 			}
 		}
@@ -264,19 +261,26 @@ void Player::buy(const Vector<mystring>& options){
 				}
 			}
 			if (havemoney){
-				printf("A potion costs 10 $");
-				if (options[0] == "buy" && options[1] == "potion"){
+				for (; temp2->next != nullptr; temp2 = temp2->next){
+					printf("A %s costs 10 $", temp2->data->name.C_Str());
+				}
+				if (options[0] == "buy" && options[1] == temp2->data->name){
+					if (options[1] == "money"){
+						printf("You can't buy money");
+						return;
+					}
 					if (money > 10){
 						money -= 10;
-						printf("You bought one potion");
+						printf("You bought %s", temp2->data->name.C_Str());
 
 						for (; temp2 != nullptr; temp2 = temp2->next){
-							if (temp2->data->name == "potion"){
+							if (temp2->data->name == options[1]){
 								world->player->list.pushback(temp2->data);
 								world->player->position->list.erase(temp2);
 								world->maxinventory++;
 								return;
 							}
+							
 						}
 					}
 				}
@@ -296,17 +300,104 @@ void Player::buy(const Vector<mystring>& options){
 		
 
 void Player::attack(const Vector<mystring>& options){
-
+	Actualtime = GetTickCount();
 	if (options.size() >= 2){
-			if (options[1]==world->thug->name){
+		if (options[1] == world->thug->name && options[0] == "attack"){
 				printf("You hit the thug for %i", damage);
 				world->thug->health -= damage;
 				return;
 			}
+			else if (options[0] == "kick" && options[1] == world->thug->name && Actualtime >= SpecialAttackTimer+DELAY){
+				SpecialAttackTimer = Actualtime;
+				world->thug->health -= damage+20;
+				printf("You use special attack,you do %i of damage and now you have %i s of cooldown", damage + 20, (DELAY / 1000) - ((Actualtime - SpecialAttackTimer)/1000));
+				return;
+			}
+			else if (options[0] == "kick" && options[1] == world->thug->name && Actualtime < SpecialAttackTimer + DELAY){
+				printf("THIS ATTACK IS IN COOLDOWN");
+			
+			}
+			
 			else{
 				printf("The character isn't here");
 			}
-			
 	}
 
 }
+
+void Player::use(const Vector<mystring>& options){
+	if (options.size() >= 2){
+		if (world->thug->state == FIGHT){
+			Dlist<Entity*>::DNode* temp = world->player->list.first;
+			for (; temp != nullptr; temp = temp->next){
+				if (options[1]=="potion" && temp->data->name == "potion" && temp->data->Typeobj == ITEM){
+					if (health += 20 < 100){
+						health += 20;
+					}
+					else{
+						health = 100;
+					}
+					printf("You use potion and heal 20 hp, now you have %i", health);
+					world->player->list.erase(temp);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Player::sell(const Vector<mystring>& options){
+
+	bool havemoney = false;
+	if (options.size() >= 2){
+		if (position == (Room*)world->entities[4]){
+			Dlist<Entity*>::DNode* temp = world->player->list.first;
+			Dlist<Entity*>::DNode* temp2 = world->player->position->list.first;
+			for (; temp != nullptr; temp = temp->next){
+				if (temp->data->name == options[1]){
+					printf("You sell %s for 10$", temp->data->name.C_Str());
+					money += 10;
+					world->player->position->list.pushback(temp->data);
+					world->player->list.erase(temp);
+					return;
+				}
+
+			}
+		}
+	}
+}
+			/*if (havemoney){
+				printf("A potion costs 10 $");
+				if (options[0] == "buy" && options[1] == "potion"){
+					if (money > 10){
+						money -= 10;
+						printf("You bought one potion");
+
+						for (; temp2 != nullptr; temp2 = temp2->next){
+							if (temp2->data->name == "potion"){
+								world->player->list.pushback(temp2->data);
+								world->maxinventory++;
+								return;
+							}
+						}
+					}
+				}
+			}
+			else{
+				printf("You don't have money\n");
+				printf("I am sad for you, have this money\n");
+				printf("You get 20$\n");
+				money += 20;
+				world->maxinventory++;
+				world->player->list.pushback(temp2->data);
+				return;
+			}
+		}
+	}*/
+
+
+
+
+
+
+

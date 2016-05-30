@@ -435,6 +435,12 @@ void World::movement(const Vector<mystring>& move){
 			else if (move.size() >= 2 && (move[0] == "buy" || move[1] == "potion")){//if the player wants to quit
 				player->buy(move);
 			}
+
+			else if (move.size() >= 2 && (move[0] == "sell" && move[1] == "ladder" || move[0] == "sell" && move[1] == "wrench" || move[0] == "sell" && move[1] == "money" || move[0] == "sell" && move[1] == "ticket" || move[0] == "sell" && move[1] == "key" || move[0] == "sell" && move[1] == "map")){
+
+				player->sell(move);//if the user wants to equip an item to use it
+			}
+
 			else{
 				printf("What?\n");//unknown command
 				if (thug->state != FIGHT){
@@ -442,8 +448,11 @@ void World::movement(const Vector<mystring>& move){
 				}
 			}
 		}
-		else if (move.size() >= 2 && (move[0] == "attack" || move[1] == "thug")){
+		else if (move.size() >= 2 && (move[0] == "attack" && move[1] == "thug" || move[0] == "kick" && move[1] == "thug")){
 			player->attack(move);
+		}
+		else if (move.size() >= 2 && (move[0] == "use" && move[1] == "potion")){//if the player wants to quit
+			player->use(move);
 		}
 			
 			
