@@ -119,6 +119,9 @@ void Player::unequip(const Vector<mystring>& options){
 			}
 		}
 	}
+	else{
+		printf("You don't have any item");
+	}
 }
 
 
