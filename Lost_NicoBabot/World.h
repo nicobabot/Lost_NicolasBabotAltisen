@@ -15,17 +15,13 @@ public:
 	int q = 0;
 	int maxinventory = 0;
 	int maxbox = 0;
-	int maxequiped=0;
+	
 	Player *player = nullptr;
 	Thug *thug = nullptr;
 	Item *box = nullptr;
 	Item *item=nullptr;
 	Vector<Entity*> entities;
-	/*
-	Vector<Room*> room;
-	Vector<Exit*> exit;
-	Vector<Item*> items;
-	*/
+
 public:
 	World();
 	void movement(const Vector<mystring>&);
@@ -35,7 +31,7 @@ public:
 	void Open(const Vector<mystring>&);
 	void Close(const Vector<mystring>&);
 	void inventory();
-	//void update();
+
 	
 	
 	

@@ -4,7 +4,7 @@
 class Room;
 class Entity;
 class Creature;
-enum StateThug{ MOVING, ASKING, FIGHT, DEAD };
+enum StateThug{ MOVING, ASKING, FIGHT, DEAD, DISAPPEAR };
 class Thug : public Creature{
 public:
 	StateThug state;

@@ -62,15 +62,10 @@ int main(){
 						charcommandnum = 0;
 						option = command;
 						Vector<mystring> tokoption = option.Tokenize(" ", command);
-						
 						if (tokoption.size() >= 1){
 							world->movement(tokoption);
 						}
-						if (world->q != 0 || world->player->position == world->entities[8]){
-							printf("THANK YOU FOR PLAYING THE GAME\n");
-							system("pause");
-							return 0;
-						}
+						
 						//tokoption.clean();
 					}
 					/*else if (key == '\b' && charcommandnum > 0){
@@ -83,6 +78,12 @@ int main(){
 					charcommandnum = 0;
 				}
 			}
+			if (world->q != 0 || world->player->position == world->entities[8] || world->player->pdead == true){
+				printf("THANK YOU FOR PLAYING THE GAME\n");
+				system("pause");
+				return 0;
+			}
+
 		}
 	}
 	system("pause");

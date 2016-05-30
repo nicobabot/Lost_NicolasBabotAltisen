@@ -435,17 +435,17 @@ void World::movement(const Vector<mystring>& move){
 			else if (move.size() >= 2 && (move[0] == "buy" || move[1] == "potion")){//if the player wants to quit
 				player->buy(move);
 			}
-		}
-		else if (move.size() >= 2 && (move[0] == "attack" || move[1] == "thug")){
-			player->attack(move);
-		}
-			
 			else{
 				printf("What?\n");//unknown command
 				if (thug->state != FIGHT){
 					item->itemsroom();
 				}
 			}
+		}
+		else if (move.size() >= 2 && (move[0] == "attack" || move[1] == "thug")){
+			player->attack(move);
+		}
+			
 			
 
 	

@@ -1,21 +1,20 @@
 #include<time.h>
 #include"World.h"
 #include<Windows.h>
-#define DELAY 2500
+#define DELAY 3000
 void Thug::Update(){
 	timenow = GetTickCount();
 	switch (state){
 	case MOVING:
 		movementenemy();
 		break;
-	case ASKING:
-		ask();
-		break;
 	case FIGHT:
 		fight();
 		break;
 	case DEAD:
 		enemydead();
+		break;
+	case DISAPPEAR:
 		break;
 	}
 	
@@ -30,39 +29,31 @@ void Thug::movementenemy(){
 	}
 }
 
-void Thug::ask(){
-	printf("Hi give me the money!");
-	
-
-
-
-
-
-}
-
 void Thug::fight(){
 	if (health>0){
 		if (timenow >= timing + DELAY){
 			timing = timenow;
-			printf("Thug hit you for %i of damge\n", damage);
+			printf("Thug hit you for %i of damage\n", damage);
 			world->player->health -= damage;
-			state = FIGHT;
-
-
-
+			if (world->player->health <= 0){
+				state = DISAPPEAR;
+			}
 		}
-	}
+		}
 	else{
 		state = DEAD;
+	}
 	}
 	
 
 
-
-}
 
 void Thug::enemydead(){
 	
 	printf("The thug is dead");
-	//position = nullptr;
+	state = DISAPPEAR;
+
+	
+	
 }
+

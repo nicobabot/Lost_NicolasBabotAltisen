@@ -17,12 +17,27 @@ if (options.size() > 1){
 			Dlist<Entity*>::DNode* temp = world->player->position->list.first;
 			for (; temp != nullptr; temp = temp->next){
 				if (options[1] == temp->data->name && temp->data->Typeobj== ITEM){
-					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
 					if (options[1] == "money"){
 						money += 20;
 						printf("Now you have %i $!", money);
 						return;
 					}
+					if (options[1] == "ticket"){
+						Dlist<Entity*>::DNode* temp3 = world->player->list.first;
+						for (; temp3 != nullptr; temp3 = temp3->next){
+							if (temp3->data->name == "money"){
+								printf("I give you the ticket but i get your money");
+								printf("If you go south you will find a park, then at the east there is a house. There you can pick one key that will let you enter to your house");
+								world->player->money = 0;
+								world->player->list.erase(temp3);
+								world->player->list.pushback(temp->data);
+								return;
+							}
+						}
+						printf("you don't have money, you can't pick the ticket");
+						return;
+					}
+					printf("%s\n %s\n", temp->data->name.C_Str(), temp->data->descrip.C_Str());
 					world->player->list.pushback(temp->data);
 					//temp->data->list.erase(temp);
 					world->player->position->list.erase(temp);
@@ -68,11 +83,11 @@ void Player::equip(const Vector<mystring>& options){
 	if (world->player->list.first != nullptr){
 		Dlist<Entity*>::DNode* temp = world->player->list.first;
 		for (; temp != nullptr; temp = temp->next){
-			if (options[1] == world->player->list.first->data->name && ((Item*)temp->data)->equipped == false && world->maxequiped == 0){//if the item isn't equipped and is in the inventory
+			if (options[1] == temp->data->name && ((Item*)temp->data)->equipped == false && world->player->maxequiped == 0){//if the item isn't equipped and is in the inventory
 				((Item*)temp->data)->equipped = true;
 				printf("You have equiped %s\n", temp->data->name.C_Str());
 				world->maxinventory--;
-				world->maxequiped++;//maximum equiped
+				world->player->maxequiped++;//maximum equiped
 				if ((temp->data->name.C_Str() == (world->entities[46]->name.C_Str()))){
 					world->player->damage += 30;
 					printf("You have %i of damage", world->player->damage);
@@ -93,10 +108,10 @@ void Player::unequip(const Vector<mystring>& options){
 	if (equipedlist.first != nullptr){
 		Dlist<Entity*>::DNode* temp = equipedlist.first;
 		for (; temp != nullptr; temp = temp->next){
-			if (((Item*)temp->data)->equipped == true && world->maxequiped == 1){
+			if (((Item*)temp->data)->equipped == true && world->player->maxequiped == 1 && options[1] == temp->data->name){
 				((Item*)temp->data)->equipped == false;
 				world->maxinventory++;
-				world->maxequiped--;//maximum equiped
+				world->player->maxequiped--;//maximum equiped
 				world->player->list.pushback(temp->data);
 				printf("You unequip: %s", temp->data->name.C_Str());
 				equipedlist.erase(temp);

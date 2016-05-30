@@ -21,5 +21,14 @@ public:
 	int count = 0;
 	int money = 0;
 	int other = 0;
+	int maxequiped = 0;
+	bool pdead = false;
+	void Update(){
+		if (health <= 0){
+			printf("You are dead, next try!");
+			pdead = true;
+		}
+	}
+	
 };
 #endif
