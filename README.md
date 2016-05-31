@@ -34,6 +34,22 @@ There is a function that is printng all time what is in the room an then the use
  
  To take the ticket of the cinema you have to pick the money, if you don't have the money you can't take the ticket. My zork have a easter egg that if the user realize that can take the box to the cinema will be able to pick the ticket without having the money.
  
+Now all entities have a list and the program use kbhit.
+
+Now I have implemented buy and sell, the commands to buy are: buy ____ from seller.  &&  sell ____ to seller
+
+You start with 0$ and the npc of the shop gives you 20$. If you go another time to the shop and you have 0$ the seller gives you more money.
+
+Now there is an enemy that is the thug when the fight begin the user can use: attack thug, kick thug this is the special attack that have 5 seconds of cooldown.
+
+I implement the command "use" because when you are fighting you can use potion to heal you.
+
+At the start there's a guy and if player put talk can talk with the guy.
+
+Road to dinish the game:
+You have to pick ladder and equip it. Then go to school, say pass south and go to the house 2 and pick wrench that increse your damage you go east and you will find shop, there you can buy potion for use at the fight. Finally you have to arrive to house 3 pick and equip key then open east door and win.
+
+ 
 
 Nicolas Babot, Bachelor's Degree in Video Game Design and Development of CITM Terrassa, Spain.
 

@@ -8,7 +8,6 @@ public:
 	Player(const char* name, const char* descrip, const int health, const int damage, const int accuracy, Room* pos) : Creature(name, descrip, health, damage, accuracy, PLAYER, pos){
 
 	}
-	//Room *playerposit = nullptr;
 	Dlist<Entity*> equipedlist;
 	void pick(const Vector<mystring>&)const;
 	void drop(const Vector<mystring>&)const;
