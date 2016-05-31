@@ -12,7 +12,10 @@ int main(){
 	ReportMemoryLeaks();
 	world = new World;
 	world->help();
+	
 	printf("\n");
+	printf("\n");
+	printf("Hi my name is Pepe\n");
 	mystring option;
 	char command[COMMANDBUFFER];
 	unsigned int charcommandnum = 0;
@@ -61,7 +64,9 @@ int main(){
 						command[charcommandnum - 1] = '\0';
 						charcommandnum = 0;
 						option = command;
+						world->option2 = command;
 						Vector<mystring> tokoption = option.Tokenize(" ", command);
+						
 						if (tokoption.size() >= 1){
 							world->movement(tokoption);
 						}

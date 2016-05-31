@@ -8,6 +8,8 @@
 #include"Thug.h"
 #include"Vector.h"
 #include"item.h"
+#include"TalkingNPC.h"
+#include"Seller.h"
 #define ROOMNUM 9
 #define EXITNUM 36
 class World{
@@ -20,8 +22,10 @@ public:
 	Thug *thug = nullptr;
 	Item *box = nullptr;
 	Item *item=nullptr;
+	Person *guy = nullptr;
+	Seller *seller = nullptr;
 	Vector<Entity*> entities;
-
+	mystring option2;
 public:
 	World();
 	void movement(const Vector<mystring>&);

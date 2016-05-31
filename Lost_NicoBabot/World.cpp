@@ -12,17 +12,11 @@
 World::World(){
 	
 }
-World::~World(){/*
-	for (int i = 0; i < EXITNUM; i++){
-		delete exit[i];
+World::~World(){
+	for (int i = 0; i < entities.size(); i++){
+		delete entities[i];
 	}
-	for (int i = 0; i < ROOMNUM; i++){
-		delete room[i];
-	}
-	for (int i = 0; i < NUM_ITEM; i++){
-		delete items[i];
-	}*/
-	//delete player;//free memory
+	
 }
 
 void World::createworld(){
@@ -160,7 +154,7 @@ void World::createworld(){
 	//-------
 	//item 47 (3)
 	entities.pushback(new Item("money", "With this money you can buy somthing", (Room*)entities[4], false, false, false, ITEM));
-	entities[4]->list.pushback(entities[47]);
+	//entities[4]->list.pushback(entities[47]);
 	//-------
 	//item 48 (4)
 	entities.pushback(new Item("ticket", "If you have this ticket means that you have some information about house 3", (Room*)entities[5], false, false, false, ITEM));
@@ -186,7 +180,16 @@ void World::createworld(){
 
 
 	entities.pushback(new Item("potion", "With this you can recover 20 of live. YOU ONLY CAN USE IT WHEN YOU ARE FIGHTING", (Room*)entities[4], false, false, false, ITEM));
-	entities[4]->list.pushback(entities[54]);
+
+
+	entities.pushback(new Person("Person", "A nice person in the city", 100000, 0, 0, (Room*)entities[0]));
+	guy = (Person*)entities[53];
+
+
+	entities.pushback(new Person("Seller", "Person that sells objects", 100000, 0, 0, (Room*)entities[4]));
+	seller = (Seller*)entities[56];
+	entities[56]->list.pushback(entities[54]);
+	entities[56]->list.pushback(entities[47]);
 }
 
 void World::movement(const Vector<mystring>& move){
@@ -364,6 +367,14 @@ void World::movement(const Vector<mystring>& move){
 										printf("%s\n", ((Exit*)entities[i])->name.C_Str());//print the exit
 										printf("%s\n", (Room*)entities[j]->name.C_Str());//print the room
 										printf("%s\n", (Room*)entities[j]->descrip.C_Str());//print the description of the room
+										if (player->position == (Room*)entities[3]){
+											printf("%s\n", seller->name.C_Str());
+											printf("%s\n", seller->descrip.C_Str());
+											Dlist<Entity*>::DNode* temp = seller->list.first;
+											for (; temp != nullptr; temp = temp->next){
+												printf("Have this objects :%s\n", temp->data->name.C_Str());
+											}
+										}
 										player->position = ((Room*)entities[j]);
 										item->itemsroom();
 
@@ -439,6 +450,10 @@ void World::movement(const Vector<mystring>& move){
 			else if (move.size() >= 2 && (move[0] == "sell" && move[1] == "ladder" || move[0] == "sell" && move[1] == "wrench" || move[0] == "sell" && move[1] == "money" || move[0] == "sell" && move[1] == "ticket" || move[0] == "sell" && move[1] == "key" || move[0] == "sell" && move[1] == "map")){
 
 				player->sell(move);//if the user wants to equip an item to use it
+			}
+			else if (move.size() == 1 && (move[0] == "talk")){
+
+		
 			}
 
 			else{

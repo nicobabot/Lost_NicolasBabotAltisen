@@ -2,7 +2,7 @@
 #define _Entity_
 #include"MyString.h"
 #include"Dlist.h"
-enum TYPE{ EXIT, ROOM, PLAYER, THUG, ITEM };
+enum TYPE{ EXIT, ROOM, PLAYER, THUG, ITEM, PERSON, SELLER };
 class Entity{
 	
 public:

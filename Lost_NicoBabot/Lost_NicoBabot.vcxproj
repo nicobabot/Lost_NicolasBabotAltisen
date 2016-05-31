@@ -65,6 +65,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Seller.cpp" />
+    <ClCompile Include="TalkingNPC.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -77,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="Seller.h" />
+    <ClInclude Include="TalkingNPC.h" />
     <ClInclude Include="Dlist.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Entity.h" />
