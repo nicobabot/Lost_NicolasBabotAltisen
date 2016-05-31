@@ -13,7 +13,6 @@ public:
 	}
 	void Update();
 	void movementenemy();
-	void ask();
 	void fight();
 	void enemydead();
 };

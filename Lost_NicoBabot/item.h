@@ -17,7 +17,7 @@ public:
 	int nequip = 0;
 public:
 	Item(char* name, char* description, Room* position, bool invent, bool equiped, bool inbox, TYPE type);
-	void itemsroom();
+	void itemsroom()const;
 	void map()const;
 	~Item();
 

@@ -10,12 +10,12 @@ public:
 	}
 	//Room *playerposit = nullptr;
 	Dlist<Entity*> equipedlist;
-	void pick(const Vector<mystring>&);
-	void drop(const Vector<mystring>&);
+	void pick(const Vector<mystring>&)const;
+	void drop(const Vector<mystring>&)const;
 	void equip(const Vector<mystring>& options);
-	void put(const Vector<mystring>& options);
+	void put(const Vector<mystring>& options)const;
 	void unequip(const Vector<mystring>& options);
-	void get(const Vector<mystring>& options);
+	void get(const Vector<mystring>& options)const;
 	void buy(const Vector<mystring>& options);
 	void attack(const Vector<mystring>& options);
 	void use(const Vector<mystring>& options);

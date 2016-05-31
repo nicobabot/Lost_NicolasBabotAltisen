@@ -20,7 +20,6 @@ int main(){
 	char command[COMMANDBUFFER];
 	unsigned int charcommandnum = 0;
 	char key;
-	int x = 0;
 	unsigned int initialtime = 0;
 	unsigned int currenttime = 0;
 	world->createworld();
@@ -71,12 +70,9 @@ int main(){
 							world->movement(tokoption);
 						}
 						
-						//tokoption.clean();
+
 					}
-					/*else if (key == '\b' && charcommandnum > 0){
-						charcommandnum--;
-						charcommandnum--;
-					}*/
+					
 				}
 				else{
 					command[charcommandnum - 1] = '\0';

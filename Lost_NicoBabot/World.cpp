@@ -443,11 +443,11 @@ void World::movement(const Vector<mystring>& move){
 				player->get(move);//if the user wants to get something from the box
 
 			}
-			else if (move.size() >= 2 && (move[0] == "buy" || move[1] == "potion")){//if the player wants to quit
+			else if (move.size() >= 4 && (move[0] == "buy" || move[1] == "potion" && move[2] == "from" && move[3] == "seller")){//if the player wants to quit
 				player->buy(move);
 			}
 
-			else if (move.size() >= 2 && (move[0] == "sell" && move[1] == "ladder" || move[0] == "sell" && move[1] == "wrench" || move[0] == "sell" && move[1] == "money" || move[0] == "sell" && move[1] == "ticket" || move[0] == "sell" && move[1] == "key" || move[0] == "sell" && move[1] == "map")){
+			else if (move.size() >= 4 && (move[0] == "sell" && move[1] == "ladder" && move[2] == "to" && move[3] == "seller" || move[0] == "sell" && move[1] == "wrench" && move[2] == "to" && move[3] == "seller" || move[0] == "sell" && move[1] == "money" && move[2] == "to" && move[3] == "seller" || move[0] == "sell" && move[1] == "ticket" && move[2] == "to" && move[3] == "seller" || move[0] == "sell" && move[1] == "key" && move[2] == "to" && move[3] == "seller" || move[0] == "sell" && move[1] == "map"&& move[2] == "to" && move[3] == "seller")){
 
 				player->sell(move);//if the user wants to equip an item to use it
 			}
@@ -646,7 +646,7 @@ void World::movement(const Vector<mystring>& move){
 											if (((Exit*)entities[j])->destiny->name == ((Exit*)entities[i])->origin->name){
 												((Exit*)entities[j])->closed = false;
 												printf("The door is opened.\n");
-												break;
+												return;
 											}
 										}
 									}
@@ -871,7 +871,7 @@ void World::movement(const Vector<mystring>& move){
 		
 
 	
-		void World::inventory(){
+		void World::inventory()const{
 			int i=0;
 			int temp = 0;
 			Dlist<Entity*>::DNode* tempor = nullptr;
