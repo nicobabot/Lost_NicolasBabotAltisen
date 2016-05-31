@@ -466,9 +466,9 @@ void World::movement(const Vector<mystring>& move){
 		else if (move.size() >= 2 && (move[0] == "attack" && move[1] == "thug" || move[0] == "kick" && move[1] == "thug")){
 			player->attack(move);
 		}
-		else if (move.size() >= 2 && (move[0] == "use" && move[1] == "potion")){//if the player wants to quit
+	/*	else if (move.size() >= 2 && (move[0] == "use" && move[1] == "potion")){//if the player wants to quit
 			player->use(move);
-		}
+		}*/
 			
 			
 

@@ -30,10 +30,18 @@ void Thug::movementenemy(){
 }
 
 void Thug::fight(){
+	mystring option;
+	char playeropattack[12] = "attack thug";
+	Vector<mystring> playerattackt = option.Tokenize(" ", playeropattack);
 	if (health>0){//if thug have more than 0 health
 		if (timenow >= timing + DELAY){//timing of attack
 			timing = timenow;
+			world->player->health -= damage;
 			printf("Thug hit you for %i of damage\n", damage);
+
+			if (world->player->attakingplayer == true){
+				world->player->attack(playerattackt);
+			}
 			if (world->player->health <= 0){//if the player die
 				state = DISAPPEAR;
 			}
@@ -50,6 +58,7 @@ void Thug::fight(){
 void Thug::enemydead(){
 	
 	printf("The thug is dead");
+	world->player->attakingplayer = false;
 	state = DISAPPEAR;
 
 	

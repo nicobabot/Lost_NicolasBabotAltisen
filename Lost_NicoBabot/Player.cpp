@@ -240,10 +240,14 @@ void Player::buy(const Vector<mystring>& options){
 
 void Player::attack(const Vector<mystring>& options){
 	Actualtime = GetTickCount();
+
 	if (options.size() >= 2){
+	
 		if (options[1] == world->thug->name && options[0] == "attack"){//simple attack
-				printf("You hit the thug for %i", damage);
+			
+			printf("You hit the thug for %i", damage);
 				world->thug->health -= damage;
+				attakingplayer = true;
 				return;
 			}
 			else if (options[0] == "kick" && options[1] == world->thug->name && Actualtime >= SpecialAttackTimer+DELAY){//special attack
@@ -256,6 +260,26 @@ void Player::attack(const Vector<mystring>& options){
 				printf("THIS ATTACK IS IN COOLDOWN");
 			
 			}
+			else if (options[1] == "use" && options[0] == "potion"){
+				if (options.size() >= 2){
+					if (world->thug->state == FIGHT){//you only can use it if you are fighting
+						Dlist<Entity*>::DNode* temp = world->player->list.first;//iterador
+						for (; temp != nullptr; temp = temp->next){
+							if (options[1] == "potion" && temp->data->name == "potion" && temp->data->Typeobj == ITEM){//if the user said potion
+								if (health += 20 < 100){//if the potion heal more than the live
+									health += 20;
+								}
+								else{
+									health = 100;
+								}
+								printf("You use potion and heal 20 hp, now you have %i", health);
+								world->player->list.erase(temp);
+								break;
+							}
+						}
+					}
+				}
+			}
 			
 			else{
 				printf("The character isn't here");
@@ -264,7 +288,7 @@ void Player::attack(const Vector<mystring>& options){
 
 }
 
-void Player::use(const Vector<mystring>& options){
+/*void Player::use(const Vector<mystring>& options){
 	if (options.size() >= 2){
 		if (world->thug->state == FIGHT){//you only can use it if you are fighting
 			Dlist<Entity*>::DNode* temp = world->player->list.first;//iterador
@@ -283,7 +307,7 @@ void Player::use(const Vector<mystring>& options){
 			}
 		}
 	}
-}
+}*/
 
 void Player::sell(const Vector<mystring>& options){
 
