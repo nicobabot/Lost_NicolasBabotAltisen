@@ -46,6 +46,10 @@ I implement the command "use" because when you are fighting you can use potion t
 
 At the start there's a guy and if player put talk can talk with the guy.
 
+You can pick all the items because are part of the game.
+
+There's a easter egg that if the user see it can put all the things in the box.
+
 Road to dinish the game:
 You have to pick ladder and equip it. Then go to school, say pass south and go to the house 2 and pick wrench that increse your damage you go east and you will find shop, there you can buy potion for use at the fight. Finally you have to arrive to house 3 pick and equip key then open east door and win.
 
